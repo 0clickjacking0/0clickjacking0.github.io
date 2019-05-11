@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="想要搭建hexo博客的小伙伴可以去看下超详细Hexo+Github博客搭建小白教程，写的很详细。下面我会讲一下我在建博客的途中遇到的那些坑，希望看到这篇博客的小伙伴们吸取一下我的教训，少走一些弯路。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于hexo+NEXT博客的几个坑">
+<meta property="og:url" content="https://xianyu123.me/2018/10/07/关于hexo-NEXT博客的几个坑/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="想要搭建hexo博客的小伙伴可以去看下超详细Hexo+Github博客搭建小白教程，写的很详细。下面我会讲一下我在建博客的途中遇到的那些坑，希望看到这篇博客的小伙伴们吸取一下我的教训，少走一些弯路。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/20181007%E7%94%A8%E6%88%B7%E5%90%8D.png">
+<meta property="og:image" content="http://images.xianyu123.club/20181007NEXT.jpg">
+<meta property="og:image" content="http://images.xianyu123.club/20181007CNAME.jpg">
+<meta property="og:image" content="http://images.xianyu123.club/20181007ping.png">
+<meta property="og:image" content="http://images.xianyu123.club/20181007%E8%A7%A3%E6%9E%90.png">
+<meta property="og:image" content="http://images.xianyu123.club/20181017hexo%E9%83%A8%E7%BD%B2%E6%8A%A5%E9%94%99.png">
+<meta property="og:image" content="http://images.xianyu123.club/20181018hosts%E4%BF%AE%E6%94%B9.png">
+<meta property="og:image" content="http://images.xianyu123.club/20181024%E4%B9%B1%E7%A0%81.png">
+<meta property="og:image" content="http://images.xianyu123.club/20181024%E8%A7%A3%E5%86%B3%E4%B9%B1%E7%A0%81.png">
+<meta property="og:updated_time" content="2019-05-11T12:52:58.626Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于hexo+NEXT博客的几个坑">
+<meta name="twitter:description" content="想要搭建hexo博客的小伙伴可以去看下超详细Hexo+Github博客搭建小白教程，写的很详细。下面我会讲一下我在建博客的途中遇到的那些坑，希望看到这篇博客的小伙伴们吸取一下我的教训，少走一些弯路。">
+<meta name="twitter:image" content="http://images.xianyu123.club/20181007%E7%94%A8%E6%88%B7%E5%90%8D.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xianyu123.me/2018/10/07/关于hexo-NEXT博客的几个坑/">
+
+
+
+
+
+
+  <title>关于hexo+NEXT博客的几个坑 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2018/10/07/关于hexo-NEXT博客的几个坑/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于hexo+NEXT博客的几个坑</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-07T13:14:02+08:00">
+                2018-10-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog搭建/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog搭建</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/07/关于hexo-NEXT博客的几个坑/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/07/关于hexo-NEXT博客的几个坑/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/07/关于hexo-NEXT博客的几个坑/" class="leancloud_visitors" data-flag-title="关于hexo+NEXT博客的几个坑">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>想要搭建hexo博客的小伙伴可以去看下<a href="https://zhuanlan.zhihu.com/p/35668237" target="_blank" rel="noopener">超详细Hexo+Github博客搭建小白教程</a>，写的很详细。下面我会讲一下我在建博客的途中遇到的那些坑，希望看到这篇博客的小伙伴们吸取一下我的教训，少走一些弯路。</p>
+<a id="more"></a>
+<h1 id="搭建hexo-next博客时遇到的坑"><a href="#搭建hexo-next博客时遇到的坑" class="headerlink" title="搭建hexo+next博客时遇到的坑"></a>搭建hexo+next博客时遇到的坑</h1><p>花了1天1个晚上才搭建出这个博客，遇到了挺多的坑，不过可以让我更进一步了解hexo,还是很不错的。</p>
+<h2 id="坑1-Github新建项目时"><a href="#坑1-Github新建项目时" class="headerlink" title="坑1.Github新建项目时"></a>坑1.Github新建项目时</h2><p><img src="http://images.xianyu123.club/20181007%E7%94%A8%E6%88%B7%E5%90%8D.png" alt><br><code>Repository name</code>填入的是<code>github用户名.github.io</code></p>
+<h2 id="坑2-config-yml配置文件"><a href="#坑2-config-yml配置文件" class="headerlink" title="坑2._config.yml配置文件"></a>坑2._config.yml配置文件</h2><p>_config.yml配置文件的语法非常严格，<code>:</code>后面要一定要加上一个空格<br><img src="http://images.xianyu123.club/20181007NEXT.jpg" alt></p>
+<h2 id="坑3-添加CNAME"><a href="#坑3-添加CNAME" class="headerlink" title="坑3.添加CNAME"></a>坑3.添加CNAME</h2><p>在博客文件根目录下的<code>source</code>文件夹下创建一个文件名为<code>CNAME</code>的文件，记住，是没有后缀名的！！文件内容就是域名，格式如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.xxx.com</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://images.xianyu123.club/20181007CNAME.jpg" alt></p>
+<h2 id="坑4-域名转跳"><a href="#坑4-域名转跳" class="headerlink" title="坑4.域名转跳"></a>坑4.域名转跳</h2><p>因为的觉得github项目上的域名太长了，不好记，然后我就去Godaddy买了给域名，在这里遇到了很大的困难，最后终于解决了。</p>
+<p>具体做法:</p>
+<ol>
+<li>添加类型<code>A</code>,名称为<code>@</code>，值就是你<code>ping 你github用户名.github.io的地址</code><br>自 2018 年 5 月 1 日，Github 支持自定义域名的 HTTPS 请求了。<br>详情见:<a href="https://blog.github.com/2018-05-01-github-pages-custom-domains-https/" target="_blank" rel="noopener">Custom domains on GitHub Pages gain support for HTTPS</a><br>配置也相当简单，只需要更新 DNS 配置里的 A 记录，将其指向以下4个 IP 地址中的至少一个。</li>
+</ol>
+<ul>
+<li>185.199.108.153</li>
+<li>185.199.109.153</li>
+<li>185.199.110.153</li>
+<li>185.199.111.153</li>
+</ul>
+<p><img src="http://images.xianyu123.club/20181007ping.png" alt></p>
+<ol start="2">
+<li>添加类型<code>CNAME</code>,名称<code>你购买的域名</code>，值就是你<code>github博客的地址</code><br>TTL都设置600s就好了<br><img src="http://images.xianyu123.club/20181007%E8%A7%A3%E6%9E%90.png" alt></li>
+</ol>
+<h2 id="坑5-Git部署时报错The-file-will-have-its-original-line-endings-in-your-working-directory"><a href="#坑5-Git部署时报错The-file-will-have-its-original-line-endings-in-your-working-directory" class="headerlink" title="坑5.Git部署时报错The file will have its original line endings in your working directory"></a>坑5.Git部署时报错The file will have its original line endings in your working directory</h2><p>解决方法:</p>
+<ol>
+<li>在根目录下右键<code>Git Bash Here</code></li>
+<li>输入<code>git config --global core.autocrlf false</code></li>
+</ol>
+<h2 id="坑6-hexo-d报致命错误fatal-HttpRequestException-encountered-▒▒▒▒▒▒▒▒ʱ▒▒▒▒"><a href="#坑6-hexo-d报致命错误fatal-HttpRequestException-encountered-▒▒▒▒▒▒▒▒ʱ▒▒▒▒" class="headerlink" title="坑6.hexo d报致命错误fatal: HttpRequestException encountered.    ▒▒▒▒▒▒▒▒ʱ▒▒▒▒"></a>坑6.hexo d报致命错误fatal: HttpRequestException encountered.    ▒▒▒▒▒▒▒▒ʱ▒▒▒▒</h2><p><img src="http://images.xianyu123.club/20181017hexo%E9%83%A8%E7%BD%B2%E6%8A%A5%E9%94%99.png" alt></p>
+<p>解决方案:</p>
+<ol>
+<li><p>在hexo配置文件下的<code>_config.yml</code>中的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git </span><br><span class="line">  repo: https://github.com/你GitHub注册用户名/你GitHub注册用户名.github.io.git </span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>改成下面的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git </span><br><span class="line">  repo: git@github.com:你GitHub注册用户名/你GitHub注册用户名.github.io.git </span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="坑7-hexo-d-遇到Waring-Permanently-added-the-RSA-host-key-for-IP-address-‘192-30-252-128’-to-the-list-of-known-host"><a href="#坑7-hexo-d-遇到Waring-Permanently-added-the-RSA-host-key-for-IP-address-‘192-30-252-128’-to-the-list-of-known-host" class="headerlink" title="坑7.hexo d 遇到Waring:Permanently added the RSA host key for IP address ‘192.30.252.128’ to the list of known host"></a>坑7.hexo d 遇到Waring:Permanently added the RSA host key for IP address ‘192.30.252.128’ to the list of known host</h2><p>解决方法:</p>
+<ul>
+<li><p>Windows的用户在<code>C:\Windows\System32\drivers\etc\hosts</code>中添加如下的内容</p>
+<p><img src="http://images.xianyu123.club/20181018hosts%E4%BF%AE%E6%94%B9.png" alt></p>
+</li>
+<li><p>Ubuntu用户可以参考这篇文章<a href="https://blog.csdn.net/zhoucheng05_13/article/details/52831703" target="_blank" rel="noopener">Ubuntu解决上述问题</a></p>
+</li>
+</ul>
+<h2 id="坑8-文章底部增加版权信息乱码"><a href="#坑8-文章底部增加版权信息乱码" class="headerlink" title="坑8.文章底部增加版权信息乱码"></a>坑8.文章底部增加版权信息乱码</h2><p>类似下面这种情况</p>
+<p><img src="http://images.xianyu123.club/20181024%E4%B9%B1%E7%A0%81.png" alt></p>
+<p>解决方法：</p>
+<p>在<code>\themes\next\layout\_macro</code>目录下的<code>my-copyright.swig</code>文件中，把文件编码修改为<code>UTF-8</code>就可以解决了。</p>
+<p><img src="http://images.xianyu123.club/20181024%E8%A7%A3%E5%86%B3%E4%B9%B1%E7%A0%81.png" alt></p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/10/07/关于hexo-NEXT博客的几个坑/">关于hexo+NEXT博客的几个坑</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2018年10月07日 - 13:14</p>
+  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>原始链接:</span><a href="/2018/10/07/关于hexo-NEXT博客的几个坑/" title="关于hexo+NEXT博客的几个坑">https://xianyu123.me/2018/10/07/关于hexo-NEXT博客的几个坑/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2018/10/07/关于hexo-NEXT博客的几个坑/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/13/关于站内搜索的一些配置/" rel="prev" title="关于站内搜索配置时遇到的一些问题">
+                关于站内搜索配置时遇到的一些问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建hexo-next博客时遇到的坑"><span class="nav-number">1.</span> <span class="nav-text">搭建hexo+next博客时遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#坑1-Github新建项目时"><span class="nav-number">1.1.</span> <span class="nav-text">坑1.Github新建项目时</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑2-config-yml配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">坑2._config.yml配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑3-添加CNAME"><span class="nav-number">1.3.</span> <span class="nav-text">坑3.添加CNAME</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑4-域名转跳"><span class="nav-number">1.4.</span> <span class="nav-text">坑4.域名转跳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑5-Git部署时报错The-file-will-have-its-original-line-endings-in-your-working-directory"><span class="nav-number">1.5.</span> <span class="nav-text">坑5.Git部署时报错The file will have its original line endings in your working directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑6-hexo-d报致命错误fatal-HttpRequestException-encountered-▒▒▒▒▒▒▒▒ʱ▒▒▒▒"><span class="nav-number">1.6.</span> <span class="nav-text">坑6.hexo d报致命错误fatal: HttpRequestException encountered.    ▒▒▒▒▒▒▒▒ʱ▒▒▒▒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑7-hexo-d-遇到Waring-Permanently-added-the-RSA-host-key-for-IP-address-‘192-30-252-128’-to-the-list-of-known-host"><span class="nav-number">1.7.</span> <span class="nav-text">坑7.hexo d 遇到Waring:Permanently added the RSA host key for IP address ‘192.30.252.128’ to the list of known host</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#坑8-文章底部增加版权信息乱码"><span class="nav-number">1.8.</span> <span class="nav-text">坑8.文章底部增加版权信息乱码</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>

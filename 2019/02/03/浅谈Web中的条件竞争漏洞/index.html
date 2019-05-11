@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="Web中的条件竞争漏洞学习合上吧，没有新姿势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈Web中的条件竞争漏洞">
+<meta property="og:url" content="https://xianyu123.me/2019/02/03/浅谈Web中的条件竞争漏洞/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="Web中的条件竞争漏洞学习合上吧，没有新姿势。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/chrome_process.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/race_condition1.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/race_condition3.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/race_condition4.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/race_condition2.png?imageslim">
+<meta property="og:updated_time" content="2019-05-11T12:52:58.629Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈Web中的条件竞争漏洞">
+<meta name="twitter:description" content="Web中的条件竞争漏洞学习合上吧，没有新姿势。">
+<meta name="twitter:image" content="http://images.xianyu123.club/chrome_process.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xianyu123.me/2019/02/03/浅谈Web中的条件竞争漏洞/">
+
+
+
+
+
+
+  <title>浅谈Web中的条件竞争漏洞 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/02/03/浅谈Web中的条件竞争漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈Web中的条件竞争漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-03T10:14:10+08:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Security</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/03/浅谈Web中的条件竞争漏洞/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/03/浅谈Web中的条件竞争漏洞/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/02/03/浅谈Web中的条件竞争漏洞/" class="leancloud_visitors" data-flag-title="浅谈Web中的条件竞争漏洞">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Web中的条件竞争漏洞学习<br>合上吧，没有新姿势。</p>
+<a id="more"></a>
+<h1 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h1><p>在Windows操作系统中，一个程序只对应一个进程，里面可以有一个或多个线程。</p>
+<p>线程是操作系统能够进行运算调度的最小单位。，比如一个word2013是一个进程，里面的保存就是一个线程，打印功能又是另外一个线程，等等。</p>
+<p>再举一个例子，这里的Google Chrome就是一个进程，并且开了的43个就是子线程，加上一个主线程，对于进程Google Chrome来说，一共有44个线程，通俗讲即浏览器中开了44个标签页</p>
+<p><img src="http://images.xianyu123.club/chrome_process.png?imageslim" alt></p>
+<p>在UINX操作系统中，则没有线程概念，一个进程中（父进程）可以有多个子进程（多级嵌套）</p>
+<p>如果你还是有点不明白的话请阅读这篇文章，<a href="http://www.ruanyifeng.com/blog/2013/04/processes_and_threads.html" target="_blank" rel="noopener">进程与线程的一个简单解释</a></p>
+<h1 id="漏洞成因"><a href="#漏洞成因" class="headerlink" title="漏洞成因"></a>漏洞成因</h1><p>讲解了进程和线程的概念之后，我们来讲解条件竞争漏洞的成因</p>
+<p>开发者在进行代码开发时常常倾向于认为代码会以线性的方式执行，而且他们忽视了并行服务器会并发执行多个线程，这就会导致意想不到的结果。</p>
+<p>线程同步机制确保两个及以上的并发进程或线程不同时执行某些特定的程序段，也被称之为临界区（critical section）,如果没有应用好同步技术则会发生“竞争条件”问题。我理解的就是一个独木桥，两个（可以更多）跑的一样快的人一起通过，无法预测谁通过了独木桥，这里就存在竞争。</p>
+<h1 id="案例分析"><a href="#案例分析" class="headerlink" title="案例分析"></a>案例分析</h1><p>现在我们模拟一个<code>my用户</code>转账给<code>Jack用户的操作</code>，<code>my用户</code>的余额是1，<code>Jack用户</code>的余额是999，转账的条件是<code>my</code>只能转1块钱给<code>Jack</code>。</p>
+<p>前端水平很渣很渣，各位大佬轻喷。。。</p>
+<p><img src="http://images.xianyu123.club/race_condition1.png?imageslim" alt></p>
+<p>后端代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">//连接数据库的函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">conn</span><span class="params">()</span></span>&#123;</span><br><span class="line">	$dns = <span class="string">"mysql:host=localhost;dbname=test"</span>;</span><br><span class="line">	<span class="comment">//连接数据库</span></span><br><span class="line">	$db = <span class="keyword">new</span> PDO($dns, <span class="string">"root"</span>, <span class="string">"root"</span>);</span><br><span class="line">	<span class="keyword">return</span> $db;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$db = conn();</span><br><span class="line"><span class="comment">//查询my的money</span></span><br><span class="line">$sql = <span class="string">'select money from te_money where id = "my";'</span>;</span><br><span class="line">$money_my = $db-&gt;query($sql);</span><br><span class="line"><span class="keyword">foreach</span>($money_my <span class="keyword">as</span> $row1)</span><br><span class="line"><span class="comment">//查询Jack的money</span></span><br><span class="line">$sql = <span class="string">'select money from te_money where id = "Jack";'</span>;</span><br><span class="line">$money_jack = $db-&gt;query($sql);</span><br><span class="line"><span class="keyword">foreach</span>($money_jack <span class="keyword">as</span> $row2)</span><br><span class="line">$add_money = @$_POST[<span class="string">'add_money'</span>];</span><br><span class="line"><span class="keyword">if</span>($add_money &lt; <span class="number">0</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;script type='text/javascript'&gt;alert('转账金额必须大于0')&lt;/script&gt;"</span>;</span><br><span class="line">	Header(<span class="string">"refresh:0.1;url='./test.php'"</span>);</span><br><span class="line">	<span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line">$over_my = $row1[<span class="string">'money'</span>] - $add_money;</span><br><span class="line"><span class="comment">//判断转账的钱扣除后my的余额是否为负数</span></span><br><span class="line"><span class="keyword">if</span>($over_my &lt; <span class="number">0</span>)&#123;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">"&lt;script type='text/javascript'&gt;alert('余额不足')&lt;/script&gt;"</span>;</span><br><span class="line">	Header(<span class="string">"refresh:0.1;url='./test.php'"</span>);</span><br><span class="line">	<span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//更新my的余额</span></span><br><span class="line">$sql = <span class="string">'update te_money set money='</span>.$over_my.<span class="string">' where id="my";'</span>;</span><br><span class="line">$db-&gt;exec($sql);</span><br><span class="line"><span class="comment">//更新Jack的余额</span></span><br><span class="line">$over_jack = $row2[<span class="string">'money'</span>]+$add_money;</span><br><span class="line">$sql1 = <span class="string">'update te_money set money='</span>.$over_jack.<span class="string">' where id="Jack";'</span>;</span><br><span class="line">$db-&gt;exec($sql1);</span><br><span class="line"></span><br><span class="line"><span class="comment">//转账完成之后要查询对应的余额</span></span><br><span class="line"><span class="comment">//查询my的money</span></span><br><span class="line">$sql = <span class="string">'select money from te_money where id = "my";'</span>;</span><br><span class="line">$money_my = $db-&gt;query($sql);</span><br><span class="line"><span class="keyword">foreach</span>($money_my <span class="keyword">as</span> $row1)</span><br><span class="line"><span class="comment">//查询Jack的money</span></span><br><span class="line">$sql = <span class="string">'select money from te_money where id = "Jack";'</span>;</span><br><span class="line">$money_jack = $db-&gt;query($sql);</span><br><span class="line"><span class="keyword">foreach</span>($money_jack <span class="keyword">as</span> $row2)</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> threading</span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'http://127.0.0.2:82/vulnerability/race_condition/test.php'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">money</span><span class="params">()</span>:</span></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'add_money'</span>:<span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">    r = requests.post(url=url,data=data)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multithreading</span><span class="params">()</span>:</span></span><br><span class="line">    threads = []</span><br><span class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">50</span>):</span><br><span class="line">        t = threading.Thread(target=money)</span><br><span class="line">        t.start()</span><br><span class="line">        threads.append(t)</span><br><span class="line">    <span class="keyword">for</span> thread <span class="keyword">in</span> threads:</span><br><span class="line">        thread.join()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    multithreading()</span><br></pre></td></tr></table></figure>
+<p>用py模拟转账，发现一直是如下情况，明明多线程会出现<code>my</code>账号负数的呀，而且我的网络状况也算稳定</p>
+<p><img src="http://images.xianyu123.club/race_condition3.png?imageslim" alt></p>
+<p>后来意识到我在写代码的时候判断了余额小于0就<code>exit()</code></p>
+<p><img src="http://images.xianyu123.club/race_condition4.png?imageslim" alt></p>
+<p>在去掉了<code>exit()</code>后发现<code>my</code>的余额出现了负数</p>
+<p><img src="http://images.xianyu123.club/race_condition2.png?imageslim" alt></p>
+<p>因为这个漏洞很受环境因素的影响，比如网络延迟、服务器的处理能力等，所以只执行一次可能并不会成功，条件竞争漏洞有时很难通过黑盒/灰盒的方法来进行挖掘。</p>
+<p>可能的场景：签到、积分、抽奖、优惠券、订单生成/取消等</p>
+<h1 id="CTF中的条件竞争漏洞"><a href="#CTF中的条件竞争漏洞" class="headerlink" title="CTF中的条件竞争漏洞"></a>CTF中的条件竞争漏洞</h1><p>moctf中的题目<a href="http://119.23.73.3:5006/web2/index2.php" target="_blank" rel="noopener">没时间解释了</a></p>
+<p>具体参考<a href="https://xianyu123.me/2018/11/10/MOCTF_Web_writeup/">moctf_wp_没时间解释了</a></p>
+<p>这题就是需要我们一边不停上传，一边不停地访问上传成功的文件，然后就可以做出题目了。</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="http://seaii-blog.com/index.php/2017/04/26/49.html" target="_blank" rel="noopener">Web中的条件竞争漏洞</a></p>
+<p><a href="https://www.freebuf.com/articles/network/107077.html" target="_blank" rel="noopener">测试Web应用程序中的竞争条件</a></p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/02/03/浅谈Web中的条件竞争漏洞/">浅谈Web中的条件竞争漏洞</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2019年02月03日 - 10:14</p>
+  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>原始链接:</span><a href="/2019/02/03/浅谈Web中的条件竞争漏洞/" title="浅谈Web中的条件竞争漏洞">https://xianyu123.me/2019/02/03/浅谈Web中的条件竞争漏洞/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/02/03/浅谈Web中的条件竞争漏洞/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/30/Bugku-Web-writeup-下/" rel="next" title="Bugku-Web-writeup(下)">
+                <i class="fa fa-chevron-left"></i> Bugku-Web-writeup(下)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/03/ubuntu-server彩色终端配置/" rel="prev" title="ubuntu server终端内置颜色开启">
+                ubuntu server终端内置颜色开启 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#进程和线程"><span class="nav-number">1.</span> <span class="nav-text">进程和线程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞成因"><span class="nav-number">2.</span> <span class="nav-text">漏洞成因</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#案例分析"><span class="nav-number">3.</span> <span class="nav-text">案例分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTF中的条件竞争漏洞"><span class="nav-number">4.</span> <span class="nav-text">CTF中的条件竞争漏洞</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>

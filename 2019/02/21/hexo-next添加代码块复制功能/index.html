@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="hexo next（5.1.3+）添加代码块复制功能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo next添加代码块复制功能">
+<meta property="og:url" content="https://xianyu123.me/2019/02/21/hexo-next添加代码块复制功能/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="hexo next（5.1.3+）添加代码块复制功能">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-11T12:52:58.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hexo next添加代码块复制功能">
+<meta name="twitter:description" content="hexo next（5.1.3+）添加代码块复制功能">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xianyu123.me/2019/02/21/hexo-next添加代码块复制功能/">
+
+
+
+
+
+
+  <title>hexo next添加代码块复制功能 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/02/21/hexo-next添加代码块复制功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hexo next添加代码块复制功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-21T22:30:23+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Blog搭建/" itemprop="url" rel="index">
+                    <span itemprop="name">Blog搭建</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/21/hexo-next添加代码块复制功能/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/21/hexo-next添加代码块复制功能/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/02/21/hexo-next添加代码块复制功能/" class="leancloud_visitors" data-flag-title="hexo next添加代码块复制功能">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>hexo next（5.1.3+）添加代码块复制功能</p>
+<a id="more"></a>
+<h2 id="1-下载插件clipboard-js"><a href="#1-下载插件clipboard-js" class="headerlink" title="1.下载插件clipboard.js"></a>1.下载插件<a href="https://github.com/zenorocha/clipboard.js" target="_blank" rel="noopener">clipboard.js</a></h2><p>如果next版本是<code>4.+</code>的，需要下载<code>1.71</code>左右的版本</p>
+<p>如果next版本是<code>5.1+</code>的需要下载<code>2.0+</code>的版本，我下载的是<code>2.04</code>版本</p>
+<p>如果next版本是<code>6.0+</code>的应该是自带复制功能的</p>
+<h2 id="2-打开themes-next-source-lib-新建文件夹clipboard"><a href="#2-打开themes-next-source-lib-新建文件夹clipboard" class="headerlink" title="2.打开themes/next/source/lib/,新建文件夹clipboard"></a>2.打开<code>themes/next/source/lib/</code>,新建文件夹<code>clipboard</code></h2><h2 id="3-把下载clipboard-js下的dist文件夹下的clipboard-min-js复制到clipboard文件夹下"><a href="#3-把下载clipboard-js下的dist文件夹下的clipboard-min-js复制到clipboard文件夹下" class="headerlink" title="3.把下载clipboard.js下的dist文件夹下的clipboard.min.js复制到clipboard文件夹下"></a>3.把下载<code>clipboard.js</code>下的<code>dist</code>文件夹下的<code>clipboard.min.js</code>复制到<code>clipboard</code>文件夹下</h2><h2 id="4-打开themes-next-source-js-src-新建文件custom-js-代码如下"><a href="#4-打开themes-next-source-js-src-新建文件custom-js-代码如下" class="headerlink" title="4. 打开themes/next/source/js/src/,新建文件custom.js,代码如下:"></a>4. 打开<code>themes/next/source/js/src/</code>,新建文件<code>custom.js</code>,代码如下:</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此函数用于创建复制按钮</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createCopyBtns</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> $codeArea = $(<span class="string">"figure"</span>);</span><br><span class="line">    <span class="comment">//查看页面是否具有代码区域，没有代码块则不创建 复制按钮</span></span><br><span class="line">    <span class="keyword">if</span> ($codeArea.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">//复制成功后将要干的事情</span></span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">changeToSuccess</span>(<span class="params">item</span>) </span>&#123;</span><br><span class="line">             $imgOK = $(<span class="string">"#copyBtn"</span>).find(<span class="string">"#imgSuccess"</span>);</span><br><span class="line">                <span class="keyword">if</span> ($imgOK.css(<span class="string">"display"</span>) == <span class="string">"none"</span>) &#123;</span><br><span class="line">                    $imgOK.css(&#123;</span><br><span class="line">                        opacity: <span class="number">0</span>,</span><br><span class="line">                        display: <span class="string">"block"</span></span><br><span class="line">                    &#125;);</span><br><span class="line">                    $imgOK.animate(&#123;</span><br><span class="line">                        opacity: <span class="number">1</span></span><br><span class="line">                    &#125;, <span class="number">1000</span>);</span><br><span class="line">                    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                        $imgOK.animate(&#123;</span><br><span class="line">                            opacity: <span class="number">0</span></span><br><span class="line">                        &#125;, <span class="number">2000</span>);</span><br><span class="line">                    &#125;, <span class="number">2000</span>);</span><br><span class="line">                    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                        $imgOK.css(<span class="string">"display"</span>, <span class="string">"none"</span>);</span><br><span class="line">                    &#125;, <span class="number">4000</span>);</span><br><span class="line">                &#125;;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="comment">//创建 全局复制按钮，仅有一组。包含：复制按钮，复制成功回应按钮</span></span><br><span class="line">        <span class="comment">//值得注意的是：1.按钮默认隐藏，2.位置使用绝对位置 position: absolute; (position: fixed 也可以，需要修改代码)</span></span><br><span class="line">        $(<span class="string">".post-body"</span>).before(<span class="string">'&lt;div id="copyBtn" style="opacity: 0; position: absolute;top:0px;left:0px;display: none;line-height: 1; font -size:1.5em"&gt;&lt;span id="imgCopy" &gt;&lt;i class="fa fa-paste fa-fw"&gt;&lt;/i&gt;&lt;/span&gt;&lt;span id="imgSuccess" style="display: none ;"&gt;&lt;i class="fa fa-check-circle fa-fw" aria-hidden="true"&gt;&lt;/i&gt;&lt;/span&gt;'</span>);</span><br><span class="line">        <span class="comment">//创建 复制 插件，绑定单机时间到 指定元素，支援JQuery</span></span><br><span class="line">        <span class="keyword">var</span> clipboard = <span class="keyword">new</span> ClipboardJS(<span class="string">'#copyBtn'</span>, &#123;</span><br><span class="line">            target: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">//返回需要复制的元素内容</span></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">document</span>.querySelector(<span class="string">"[copyFlag]"</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            isSupported: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                <span class="comment">//支援复制内容</span></span><br><span class="line">                <span class="keyword">return</span> <span class="built_in">document</span>.querySelector(<span class="string">"[copyFlag]"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//复制成功事件绑定</span></span><br><span class="line">        clipboard.on(<span class="string">'success'</span>,</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                <span class="comment">//清除内容被选择状态</span></span><br><span class="line">                e.clearSelection();</span><br><span class="line">                changeToSuccess(e);</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="comment">//复制失败绑定事件</span></span><br><span class="line">        clipboard.on(<span class="string">'error'</span>,</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.error(<span class="string">'Action:'</span>, e.action);</span><br><span class="line">                <span class="built_in">console</span>.error(<span class="string">'Trigger:'</span>, e.trigger);</span><br><span class="line">            &#125;);</span><br><span class="line">        <span class="comment">//滑鼠 在复制按钮上滑动和离开后渐变显示/隐藏效果</span></span><br><span class="line">        $(<span class="string">"#copyBtn"</span>).hover(</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                $(<span class="keyword">this</span>).stop();</span><br><span class="line">                $(<span class="keyword">this</span>).css(<span class="string">"opacity"</span>, <span class="number">1</span>);</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                $(<span class="keyword">this</span>).animate(&#123;</span><br><span class="line">                    opacity: <span class="number">0</span></span><br><span class="line">                &#125;, <span class="number">2000</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//感应滑鼠是否在代码区</span></span><br><span class="line">$(<span class="string">"figure"</span>).hover(</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//-------滑鼠活动在代码块内</span></span><br><span class="line">        <span class="comment">//移除之前含有复制标志代码块的 copyFlag</span></span><br><span class="line">        $(<span class="string">"[copyFlag]"</span>).removeAttr(<span class="string">"copyFlag"</span>);</span><br><span class="line">        <span class="comment">//在新的（当前滑鼠所在代码区）代码块插入标志：copyFlag</span></span><br><span class="line">        $(<span class="keyword">this</span>).find(<span class="string">".code"</span>).attr(<span class="string">"copyFlag"</span>, <span class="number">1</span>);</span><br><span class="line">        <span class="comment">//获取复制按钮</span></span><br><span class="line">        $copyBtn = $(<span class="string">"#copyBtn"</span>);</span><br><span class="line">        <span class="keyword">if</span> ($copyBtn.lenght != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">//获取到按钮的前提下进行一下操作</span></span><br><span class="line">            <span class="comment">//停止按钮动画效果</span></span><br><span class="line">            <span class="comment">//设置为 显示状态</span></span><br><span class="line">            <span class="comment">//修改 复制按钮 位置到 当前代码块开始部位</span></span><br><span class="line">            <span class="comment">//设置代码块 左侧位置</span></span><br><span class="line">            $copyBtn.stop();</span><br><span class="line">            $copyBtn.css(<span class="string">"opacity"</span>, <span class="number">0.8</span>);</span><br><span class="line">            $copyBtn.css(<span class="string">"display"</span>, <span class="string">"block"</span>);</span><br><span class="line">            $copyBtn.css(<span class="string">"top"</span>, <span class="built_in">parseInt</span>($copyBtn.css(<span class="string">"top"</span>)) + $(<span class="keyword">this</span>).offset().top - $copyBtn.offset().top + <span class="number">3</span>);</span><br><span class="line">            $copyBtn.css(<span class="string">"left"</span>,$(<span class="keyword">this</span>).offset().left -$copyBtn.width() - <span class="number">3</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">//-------滑鼠离开代码块</span></span><br><span class="line">        <span class="comment">//设置复制按钮可见度 2秒内到 0</span></span><br><span class="line">        $(<span class="string">"#copyBtn"</span>).animate(&#123;</span><br><span class="line">            opacity: <span class="number">0</span></span><br><span class="line">        &#125;, <span class="number">2000</span>);</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br><span class="line"><span class="comment">//页面载入完成后，创建复制按钮</span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  createCopyBtns();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="5-打开themes-next-layout-custom-新建文件custom-swig，代码如下"><a href="#5-打开themes-next-layout-custom-新建文件custom-swig，代码如下" class="headerlink" title="5.打开themes/next/layout/_custom/,新建文件custom.swig，代码如下:"></a>5.打开<code>themes/next/layout/_custom/</code>,新建文件<code>custom.swig</code>，代码如下:</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"/lib/clipboard/clipboard.min.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"/js/src/custom.js"</span>&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="6-修改文件themes-next-layout-layout-swig-在标签-lt-body-gt-上面插入代码"><a href="#6-修改文件themes-next-layout-layout-swig-在标签-lt-body-gt-上面插入代码" class="headerlink" title="6.修改文件themes/next/layout/_layout.swig,在标签&lt;/body&gt;上面插入代码:"></a>6.修改文件<code>themes/next/layout/_layout.swig</code>,在标签<code>&lt;/body&gt;</code>上面插入代码:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% include &apos;_custom/custom.swig&apos; %&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://ppundsh.github.io/posts/8e7e/" target="_blank" rel="noopener">Flymia的HEXO添加複製功能</a></p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/02/21/hexo-next添加代码块复制功能/">hexo next添加代码块复制功能</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2019年02月21日 - 22:30</p>
+  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>原始链接:</span><a href="/2019/02/21/hexo-next添加代码块复制功能/" title="hexo next添加代码块复制功能">https://xianyu123.me/2019/02/21/hexo-next添加代码块复制功能/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/02/21/hexo-next添加代码块复制功能/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/04/浅谈sql约束攻击/" rel="next" title="浅谈sql约束攻击">
+                <i class="fa fa-chevron-left"></i> 浅谈sql约束攻击
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/22/hexo-next添加统计文章阅读量功能/" rel="prev" title="hexo next添加统计文章阅读量功能">
+                hexo next添加统计文章阅读量功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-下载插件clipboard-js"><span class="nav-number">1.</span> <span class="nav-text">1.下载插件clipboard.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-打开themes-next-source-lib-新建文件夹clipboard"><span class="nav-number">2.</span> <span class="nav-text">2.打开themes/next/source/lib/,新建文件夹clipboard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-把下载clipboard-js下的dist文件夹下的clipboard-min-js复制到clipboard文件夹下"><span class="nav-number">3.</span> <span class="nav-text">3.把下载clipboard.js下的dist文件夹下的clipboard.min.js复制到clipboard文件夹下</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-打开themes-next-source-js-src-新建文件custom-js-代码如下"><span class="nav-number">4.</span> <span class="nav-text">4. 打开themes/next/source/js/src/,新建文件custom.js,代码如下:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-打开themes-next-layout-custom-新建文件custom-swig，代码如下"><span class="nav-number">5.</span> <span class="nav-text">5.打开themes/next/layout/_custom/,新建文件custom.swig，代码如下:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-修改文件themes-next-layout-layout-swig-在标签-lt-body-gt-上面插入代码"><span class="nav-number">6.</span> <span class="nav-text">6.修改文件themes/next/layout/_layout.swig,在标签&lt;/body&gt;上面插入代码:</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number"></span> <span class="nav-text">Reference</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>

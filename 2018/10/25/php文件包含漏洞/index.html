@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="php文件包含漏洞学习合上吧，没有新姿势。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈php文件包含漏洞">
+<meta property="og:url" content="https://xianyu123.me/2018/10/25/php文件包含漏洞/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="php文件包含漏洞学习合上吧，没有新姿势。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/include.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/require.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/LFI示例.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/RFI示例.png?imageslim">
+<meta property="og:updated_time" content="2019-05-11T12:52:58.624Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈php文件包含漏洞">
+<meta name="twitter:description" content="php文件包含漏洞学习合上吧，没有新姿势。">
+<meta name="twitter:image" content="http://images.xianyu123.club/include.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xianyu123.me/2018/10/25/php文件包含漏洞/">
+
+
+
+
+
+
+  <title>浅谈php文件包含漏洞 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2018/10/25/php文件包含漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">浅谈php文件包含漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-25T21:07:29+08:00">
+                2018-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Security</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/25/php文件包含漏洞/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/25/php文件包含漏洞/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/25/php文件包含漏洞/" class="leancloud_visitors" data-flag-title="浅谈php文件包含漏洞">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>php文件包含漏洞学习<br>合上吧，没有新姿势。</p>
+<a id="more"></a>
+<h1 id="导致文件包含漏洞的函数"><a href="#导致文件包含漏洞的函数" class="headerlink" title="导致文件包含漏洞的函数"></a>导致文件包含漏洞的函数</h1><ul>
+<li>include()</li>
+<li>include_once()</li>
+<li>require()</li>
+<li>require_once()</li>
+</ul>
+<p><code>include()</code>找不到被包含的文件时只会产生警告<code>(E_WARNING)</code>，脚本将继续执行。<code>include_once()</code>和<code>include()</code>语句类似，唯一区别是如果该文件中的代码已经被包含，则不会再次包含。</p>
+<p><img src="http://images.xianyu123.club/include.png?imageslim" alt></p>
+<p><code>require()</code>找不到被包含的文件时会产生致命错误<code>(E_COMPILE_ERROR)</code>，并停止脚本。<code>require_once()</code>和<code>require()</code>语句类似，唯一区别是如果该文件中的代码已经被包含，则不会再次包含。</p>
+<p><img src="http://images.xianyu123.club/require.png?imageslim" alt></p>
+<h2 id="本地文件包含"><a href="#本地文件包含" class="headerlink" title="本地文件包含"></a>本地文件包含</h2><p>能够打开并包含本地文件的漏洞，被称为本地文件包含漏洞(Local File Inclusion，简称LFI)。</p>
+<p><img src="http://images.xianyu123.club/LFI示例.png?imageslim" alt></p>
+<h2 id="远程文件包含"><a href="#远程文件包含" class="headerlink" title="远程文件包含"></a>远程文件包含</h2><p>如果PHP的配置选项<code>allow_url_include</code>为<code>ON</code>的话，则<code>include/require</code>函数是可以加载远程文件的，这种漏洞呗称为远程文件包含漏洞(Remote File Inclusion，简称RFI)。</p>
+<p>在<code>php.ini</code>中，只有下面两个配置同时为<code>On</code>才能远程包含文件成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">allow_url_fopen = On    （默认开启）</span><br><span class="line"></span><br><span class="line">allow_url_include = On  （php5.2后默认关闭）</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/RFI示例.png?imageslim" alt></p>
+<p>要想成功利用文件包含漏洞，需要满足下面两个条件:</p>
+<ol>
+<li>文件包含的函数通过动态变量的方式引入需要包含的文件</li>
+<li>用户能控制该动态变量</li>
+</ol>
+<h2 id="其他文件操作函数"><a href="#其他文件操作函数" class="headerlink" title="其他文件操作函数"></a>其他文件操作函数</h2><p>除了<code>include()</code>等4个函数外，PHP中能够对文件进行操作的函数都有可能出现漏洞。虽然大多数情况下不能执行PHP代码，但能够读取敏感文件带来的后果也是比较严重的。</p>
+<ul>
+<li><p>fopen()</p>
+</li>
+<li><p>readfile()</p>
+</li>
+<li><p>file_get_contents()</p>
+</li>
+<li><p>file()</p>
+</li>
+<li><p>fread()</p>
+<p>……..</p>
+</li>
+</ul>
+<h1 id="本地文件包含利用"><a href="#本地文件包含利用" class="headerlink" title="本地文件包含利用"></a>本地文件包含利用</h1><h2 id="1-包含用户上传的文件"><a href="#1-包含用户上传的文件" class="headerlink" title="1. 包含用户上传的文件"></a>1. 包含用户上传的文件</h2><h2 id="2-使用PHP封装协议"><a href="#2-使用PHP封装协议" class="headerlink" title="2. 使用PHP封装协议"></a>2. 使用PHP封装协议</h2><p>PHP带有很多内置URL风格的封装协议，这类协议与<code>fopen()</code>、<code>copy()</code>、<code>file_exists</code>等文件系统函数所提供的功能类似。常见的协议如下，更多协议请参照<a href="http://php.net/manual/zh/wrappers.php" target="_blank" rel="noopener">php支持的协议和封装协议</a></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>file://</td>
+<td>访问本地文件系统</td>
+</tr>
+<tr>
+<td>http://</td>
+<td>访问HTTP(s)网址</td>
+</tr>
+<tr>
+<td>ftp://</td>
+<td>访问FTP（s）URLs</td>
+</tr>
+<tr>
+<td>php://</td>
+<td>访问输入/输出流(I/O streams)</td>
+</tr>
+<tr>
+<td>zlib://</td>
+<td>压缩流</td>
+</tr>
+<tr>
+<td>data://</td>
+<td>数据(RFC2397)</td>
+</tr>
+<tr>
+<td>ssh2://</td>
+<td>Secure Shell 2</td>
+</tr>
+<tr>
+<td>expect://</td>
+<td>处理交互式的流</td>
+</tr>
+<tr>
+<td>glob://</td>
+<td>查找匹配的文件路径</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-包含Session文件"><a href="#3-包含Session文件" class="headerlink" title="3. 包含Session文件"></a>3. 包含Session文件</h2><h2 id="4-包含日志文件，比如Web-Server的acess-log"><a href="#4-包含日志文件，比如Web-Server的acess-log" class="headerlink" title="4. 包含日志文件，比如Web Server的acess log"></a>4. 包含日志文件，比如Web Server的acess log</h2><h2 id="5-包含-proc-self-environ文件"><a href="#5-包含-proc-self-environ文件" class="headerlink" title="5. 包含/proc/self/environ文件"></a>5. 包含/proc/self/environ文件</h2><h2 id="6-包含上传的临时文件-RFC1867"><a href="#6-包含上传的临时文件-RFC1867" class="headerlink" title="6. 包含上传的临时文件(RFC1867)"></a>6. 包含上传的临时文件(RFC1867)</h2><h2 id="7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><a href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析" class="headerlink" title="7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"></a>7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</h2><h1 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li>《白帽子讲Web安全》</li>
+<li><a href="https://chybeta.github.io/2017/10/08/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">Chybeta:php文件包含漏洞</a></li>
+<li><a href="http://phplaber.iteye.com/blog/1702044" target="_blank" rel="noopener">phplaber:远程文件包含</a></li>
+<li>《Web安全深度剖析》</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2018/10/25/php文件包含漏洞/">浅谈php文件包含漏洞</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2018年10月25日 - 21:07</p>
+  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>原始链接:</span><a href="/2018/10/25/php文件包含漏洞/" title="浅谈php文件包含漏洞">https://xianyu123.me/2018/10/25/php文件包含漏洞/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2018/10/25/php文件包含漏洞/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/13/关于站内搜索的一些配置/" rel="next" title="关于站内搜索配置时遇到的一些问题">
+                <i class="fa fa-chevron-left"></i> 关于站内搜索配置时遇到的一些问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/31/Kali-Linux-rarcrack安装及使用/" rel="prev" title="Kali Linux rarcrack安装及使用">
+                Kali Linux rarcrack安装及使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导致文件包含漏洞的函数"><span class="nav-number">1.</span> <span class="nav-text">导致文件包含漏洞的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地文件包含"><span class="nav-number">1.1.</span> <span class="nav-text">本地文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">1.2.</span> <span class="nav-text">远程文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他文件操作函数"><span class="nav-number">1.3.</span> <span class="nav-text">其他文件操作函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地文件包含利用"><span class="nav-number">2.</span> <span class="nav-text">本地文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-包含用户上传的文件"><span class="nav-number">2.1.</span> <span class="nav-text">1. 包含用户上传的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用PHP封装协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用PHP封装协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-包含Session文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 包含Session文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-包含日志文件，比如Web-Server的acess-log"><span class="nav-number">2.4.</span> <span class="nav-text">4. 包含日志文件，比如Web Server的acess log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-包含-proc-self-environ文件"><span class="nav-number">2.5.</span> <span class="nav-text">5. 包含/proc/self/environ文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-包含上传的临时文件-RFC1867"><span class="nav-number">2.6.</span> <span class="nav-text">6. 包含上传的临时文件(RFC1867)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><span class="nav-number">2.7.</span> <span class="nav-text">7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御方法"><span class="nav-number">3.</span> <span class="nav-text">防御方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>

