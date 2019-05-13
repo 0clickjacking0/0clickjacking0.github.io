@@ -405,24 +405,14 @@
 
       
         
-          
-            <a id="more"></a>
-<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>如果没有安装过brew，请参考<a href="https://www.jianshu.com/p/ab50ea8b13d6" target="_blank" rel="noopener">Mac OS下brew的安装和使用</a></p>
-<h3 id="1-停止本地Apache服务"><a href="#1-停止本地Apache服务" class="headerlink" title="1. 停止本地Apache服务"></a>1. 停止本地Apache服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl stop</span><br></pre></td></tr></table></figure>
-<h3 id="2-安装nginx"><a href="#2-安装nginx" class="headerlink" title="2. 安装nginx"></a>2. 安装nginx</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
-<h3 id="3-启动nginx"><a href="#3-启动nginx" class="headerlink" title="3. 启动nginx"></a>3. 启动nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
-<h3 id="4-访问nginx"><a href="#4-访问nginx" class="headerlink" title="4. 访问nginx"></a>4. 访问nginx</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">打开浏览器,输入如下网址,正确的情况就可以看到如下的截图.</span><br><span class="line">http://127.0.0.1:8080</span><br></pre></td></tr></table></figure>
-<p><img src="http://images.xianyu123.club/nginx_mac.png" alt></p>
-<h3 id="5-文件说明"><a href="#5-文件说明" class="headerlink" title="5. 文件说明"></a>5. 文件说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">通过上面的步骤,就表示nginx已经完成了.这里有几个文件,我们需要关注一下.</span><br><span class="line"></span><br><span class="line">/usr/local/etc/nginx/nginx.conf （配置文件路径）</span><br><span class="line"></span><br><span class="line">/usr/local/var/www （服务器默认路径）</span><br><span class="line"></span><br><span class="line">/usr/local/Cellar/nginx/1.8.0 （安装路径)</span><br></pre></td></tr></table></figure>
-<h3 id="6"><a href="#6" class="headerlink" title="6."></a>6.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1.去掉nginx.conf中如下代码中的注释(在去掉之前最好备份一份 cp nginx.conf nginx.conf.bak)</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">    fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">    fastcgi_index  index.php;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</span><br><span class="line">    include        fastcgi_params;</span><br><span class="line">&#125;</span><br><span class="line">该段代码的主要意思就是让nginx能够解析到php,不然你去访问php的文件,nginx会默认下载该php文件</span><br><span class="line"></span><br><span class="line">2.修改1中的部分配置</span><br><span class="line">原配置中的值为/scripts$fastcgi_script_name, 需要修改为$document_root$fastcgi_script_name</span><br><span class="line">该代码主要的意思就是让nginx能够识别到nginx配置文件中的root项.不然会报not find file错误信息.</span><br><span class="line"></span><br><span class="line">3.然后重启nginx服务</span><br><span class="line">nginx -s reload</span><br><span class="line"></span><br><span class="line">4.配置php-fpm文件</span><br><span class="line">sudo cp /private/etc/php-fpm.conf.default /private/etc/php-fpm.conf</span><br><span class="line">修改我们新复制的php-fpm.conf文件中的如下配置项目.修改为下面的示例,记得把前面的分号去掉，默认是注释的</span><br><span class="line">pid=/usr/var/run/php-fpm.pid</span><br><span class="line">error_log=/usr/var/log/php-fpm.log</span><br><span class="line"></span><br><span class="line">5.启动php-fpm服务</span><br><span class="line">sudo php-fpm</span><br></pre></td></tr></table></figure>
-<p>启动服务的时候可能会遇到下面的问题,反正我是遇到了(下面的路径根据你图片指示的路径来定,可能有的环境路径不一致).解决办法是</p>
-<p><img src="http://images.xianyu123.club/nginx_mac_error.jpeg" alt></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /data/server/php7/etc/php-fpm.d/www.conf.default /data/server/php7/etc/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
-<p>然后在启动一次,即可</p>
-<p>在修改服务器默认路径需要用绝对路径，不能用<code>～</code>的相对路径</p>
-<h3 id="7-测试"><a href="#7-测试" class="headerlink" title="7. 测试"></a>7. 测试</h3><p>在服务器目录下新建一个php文件，内容为<code>&lt;?php phpinfo(); ?&gt;</code>，访问这个文件，如果出现的是<code>phpinfo</code>的页面代表成功了</p>
-
-          
+          <p>mac下搭建nginx+php-fpm的笔记</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/05/13/mac下搭建nginx-php-fpm/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
