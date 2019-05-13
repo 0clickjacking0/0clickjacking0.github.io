@@ -81,23 +81,20 @@
 
 
 
-<meta name="description" content="约束攻击，学习姿势">
+<meta name="description" content="安装步骤如果没有安装过brew，请参考Mac OS下brew的安装和使用 1. 停止本地Apache服务1sudo apachectl stop 2. 安装nginx1brew install nginx 3. 启动nginx1sudo nginx -s reload 4. 访问nginx12打开浏览器,输入如下网址,正确的情况就可以看到如下的截图.http://127.0.0.1:8080">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈sql约束攻击">
-<meta property="og:url" content="https://xianyu123.me/2019/02/04/浅谈sql约束攻击/index.html">
+<meta property="og:title" content="mac下搭建nginx+php-fpm">
+<meta property="og:url" content="https://xianyu123.me/2019/05/13/mac下搭建nginx-php-fpm/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
-<meta property="og:description" content="约束攻击，学习姿势">
+<meta property="og:description" content="安装步骤如果没有安装过brew，请参考Mac OS下brew的安装和使用 1. 停止本地Apache服务1sudo apachectl stop 2. 安装nginx1brew install nginx 3. 启动nginx1sudo nginx -s reload 4. 访问nginx12打开浏览器,输入如下网址,正确的情况就可以看到如下的截图.http://127.0.0.1:8080">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images.xianyu123.club/constraint1.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_1.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_2.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_3.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_4.png?imageslim">
-<meta property="og:updated_time" content="2019-05-11T12:52:58.628Z">
+<meta property="og:image" content="http://images.xianyu123.club/nginx_mac.png">
+<meta property="og:image" content="http://images.xianyu123.club/nginx_mac_error.jpeg">
+<meta property="og:updated_time" content="2019-05-13T13:18:59.970Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈sql约束攻击">
-<meta name="twitter:description" content="约束攻击，学习姿势">
-<meta name="twitter:image" content="http://images.xianyu123.club/constraint1.png?imageslim">
+<meta name="twitter:title" content="mac下搭建nginx+php-fpm">
+<meta name="twitter:description" content="安装步骤如果没有安装过brew，请参考Mac OS下brew的安装和使用 1. 停止本地Apache服务1sudo apachectl stop 2. 安装nginx1brew install nginx 3. 启动nginx1sudo nginx -s reload 4. 访问nginx12打开浏览器,输入如下网址,正确的情况就可以看到如下的截图.http://127.0.0.1:8080">
+<meta name="twitter:image" content="http://images.xianyu123.club/nginx_mac.png">
 
 
 
@@ -127,14 +124,14 @@
 
 
 
-  <link rel="canonical" href="https://xianyu123.me/2019/02/04/浅谈sql约束攻击/">
+  <link rel="canonical" href="https://xianyu123.me/2019/05/13/mac下搭建nginx-php-fpm/">
 
 
 
 
 
 
-  <title>浅谈sql约束攻击 | xianyu123's Blog</title>
+  <title>mac下搭建nginx+php-fpm | xianyu123's Blog</title>
   
 
 
@@ -301,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/02/04/浅谈sql约束攻击/">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/05/13/mac下搭建nginx-php-fpm/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xianyu123">
@@ -318,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈sql约束攻击</h1>
+          <h1 class="post-title" itemprop="name headline">mac下搭建nginx+php-fpm</h1>
         
 
         <div class="post-meta">
@@ -330,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-04T16:13:03+08:00">
-                2019-02-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-13T14:31:20+08:00">
+                2019-05-13
               </time>
             
 
@@ -353,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
-                    <span itemprop="name">Web Security</span>
+                  <a href="/categories/Mac/" itemprop="url" rel="index">
+                    <span itemprop="name">Mac</span>
                   </a>
                 </span>
 
@@ -371,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/04/浅谈sql约束攻击/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/04/浅谈sql约束攻击/" itemprop="commentCount"></span>
+                <a href="/2019/05/13/mac下搭建nginx-php-fpm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/05/13/mac下搭建nginx-php-fpm/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -380,7 +377,7 @@
 
           
           
-             <span id="/2019/02/04/浅谈sql约束攻击/" class="leancloud_visitors" data-flag-title="浅谈sql约束攻击">
+             <span id="/2019/05/13/mac下搭建nginx-php-fpm/" class="leancloud_visitors" data-flag-title="mac下搭建nginx+php-fpm">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -411,27 +408,21 @@
       
 
       
-        <p>约束攻击，学习姿势</p>
-<a id="more"></a>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在bugku做ctf题目的时候，发现了约束攻击这种手法，于是上google学习了新的姿势。感谢作者Dhaval Kapil的文章<a href="https://dhavalkapil.com/blogs/SQL-Attack-Constraint-Based/" target="_blank" rel="noopener">SQL Attack (Constraint-based)</a></p>
-<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>数据库字符串比较：数据库在进行字符串比较是会将两个字符串长度保持一致，短的字符串增加长度。假设A字符串为<code>hello</code>，B字符串为<code>hell</code>，数据库会把字符串B变成<code>hell</code>，增加一个空格以保持两个字符串长度一致</p>
-<p><strong>INSERT截断</strong>：这是数据库的另一个特性，当设计一个字段时，我们都必须对其设定一个最大长度，比如CHAR(10)，VARCHAR(20)等等。但是当实际插入数据的长度超过限制时，数据库就会将其进行截断，只保留限定的长度。</p>
-<h1 id="具体场景"><a href="#具体场景" class="headerlink" title="具体场景"></a>具体场景</h1><p>我们来创建一个数据表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> te_constraint(</span><br><span class="line">username <span class="built_in">varchar</span>(<span class="number">10</span>),</span><br><span class="line">passwd <span class="built_in">varchar</span>(<span class="number">10</span>)</span><br><span class="line">)<span class="keyword">charset</span>=utf8;</span><br></pre></td></tr></table></figure>
-<p>然后向其中插入两组数据，第二组数据后面加入了6个空格</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> te_constraint <span class="keyword">values</span>(<span class="string">'admin'</span>,<span class="string">'123456'</span>),</span><br><span class="line">	(<span class="string">'admin           '</span>,<span class="string">'12345678'</span>);</span><br></pre></td></tr></table></figure>
-<p>然后我们发现查处了两组数据</p>
-<p><img src="http://images.xianyu123.club/constraint1.png?imageslim" alt></p>
-<h1 id="CTF中的约束攻击"><a href="#CTF中的约束攻击" class="headerlink" title="CTF中的约束攻击"></a>CTF中的约束攻击</h1><p>来自bugkuctf的<a href="http://123.206.31.85:49163/" target="_blank" rel="noopener">login1(SKCTF)</a></p>
-<p>首先我们没用账号，所以先注册一波账号。</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_1.png?imageslim" alt></p>
-<p>然后发现提示</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_2.png?imageslim" alt></p>
-<p>然后我们就去注册一个admin账户</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_3.png?imageslim" alt></p>
-<p>发现admin账户已经存在，如果是挖漏洞的话我会考虑弱口令，注入，xss，csrf等漏洞，这里的话已经知道是约束攻击，我们也不知道admin这个用户名长度是多少，就在admin后面加尽可能多的空格吧，如果不行就再多加一点空格，构造一个新的admin账户。</p>
-<p>然后注册成功，得到flag</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_4.png?imageslim" alt></p>
+        <a id="more"></a>
+<h2 id="安装步骤"><a href="#安装步骤" class="headerlink" title="安装步骤"></a>安装步骤</h2><p>如果没有安装过brew，请参考<a href="https://www.jianshu.com/p/ab50ea8b13d6" target="_blank" rel="noopener">Mac OS下brew的安装和使用</a></p>
+<h3 id="1-停止本地Apache服务"><a href="#1-停止本地Apache服务" class="headerlink" title="1. 停止本地Apache服务"></a>1. 停止本地Apache服务</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl stop</span><br></pre></td></tr></table></figure>
+<h3 id="2-安装nginx"><a href="#2-安装nginx" class="headerlink" title="2. 安装nginx"></a>2. 安装nginx</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install nginx</span><br></pre></td></tr></table></figure>
+<h3 id="3-启动nginx"><a href="#3-启动nginx" class="headerlink" title="3. 启动nginx"></a>3. 启动nginx</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo nginx -s reload</span><br></pre></td></tr></table></figure>
+<h3 id="4-访问nginx"><a href="#4-访问nginx" class="headerlink" title="4. 访问nginx"></a>4. 访问nginx</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">打开浏览器,输入如下网址,正确的情况就可以看到如下的截图.</span><br><span class="line">http://127.0.0.1:8080</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/nginx_mac.png" alt></p>
+<h3 id="5-文件说明"><a href="#5-文件说明" class="headerlink" title="5. 文件说明"></a>5. 文件说明</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">通过上面的步骤,就表示nginx已经完成了.这里有几个文件,我们需要关注一下.</span><br><span class="line"></span><br><span class="line">/usr/local/etc/nginx/nginx.conf （配置文件路径）</span><br><span class="line"></span><br><span class="line">/usr/local/var/www （服务器默认路径）</span><br><span class="line"></span><br><span class="line">/usr/local/Cellar/nginx/1.8.0 （安装路径)</span><br></pre></td></tr></table></figure>
+<h3 id="6"><a href="#6" class="headerlink" title="6."></a>6.</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">1.去掉nginx.conf中如下代码中的注释(在去掉之前最好备份一份 cp nginx.conf nginx.conf.bak)</span><br><span class="line">location ~ \.php$ &#123;</span><br><span class="line">    fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">    fastcgi_index  index.php;</span><br><span class="line">    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</span><br><span class="line">    include        fastcgi_params;</span><br><span class="line">&#125;</span><br><span class="line">该段代码的主要意思就是让nginx能够解析到php,不然你去访问php的文件,nginx会默认下载该php文件</span><br><span class="line"></span><br><span class="line">2.修改1中的部分配置</span><br><span class="line">原配置中的值为/scripts$fastcgi_script_name, 需要修改为$document_root$fastcgi_script_name</span><br><span class="line">该代码主要的意思就是让nginx能够识别到nginx配置文件中的root项.不然会报not find file错误信息.</span><br><span class="line"></span><br><span class="line">3.然后重启nginx服务</span><br><span class="line">nginx -s reload</span><br><span class="line"></span><br><span class="line">4.配置php-fpm文件</span><br><span class="line">sudo cp /private/etc/php-fpm.conf.default /private/etc/php-fpm.conf</span><br><span class="line">修改我们新复制的php-fpm.conf文件中的如下配置项目.修改为下面的示例,记得把前面的分号去掉，默认是注释的</span><br><span class="line">pid=/usr/var/run/php-fpm.pid</span><br><span class="line">error_log=/usr/var/log/php-fpm.log</span><br><span class="line"></span><br><span class="line">5.启动php-fpm服务</span><br><span class="line">sudo php-fpm</span><br></pre></td></tr></table></figure>
+<p>启动服务的时候可能会遇到下面的问题,反正我是遇到了(下面的路径根据你图片指示的路径来定,可能有的环境路径不一致).解决办法是</p>
+<p><img src="http://images.xianyu123.club/nginx_mac_error.jpeg" alt></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp /data/server/php7/etc/php-fpm.d/www.conf.default /data/server/php7/etc/php-fpm.d/www.conf</span><br></pre></td></tr></table></figure>
+<p>然后在启动一次,即可</p>
+<p>在修改服务器默认路径需要用绝对路径，不能用<code>～</code>的相对路径</p>
+<h3 id="7-测试"><a href="#7-测试" class="headerlink" title="7. 测试"></a>7. 测试</h3><p>在服务器目录下新建一个php文件，内容为<code>&lt;?php phpinfo(); ?&gt;</code>，访问这个文件，如果出现的是<code>phpinfo</code>的页面代表成功了</p>
 
       
     </div>
@@ -448,12 +439,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/02/04/浅谈sql约束攻击/">浅谈sql约束攻击</a></p>
+  <p><span>本文标题:</span><a href="/2019/05/13/mac下搭建nginx-php-fpm/">mac下搭建nginx+php-fpm</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
-  <p><span>发布时间:</span>2019年02月04日 - 16:13</p>
-  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
-  <p><span>原始链接:</span><a href="/2019/02/04/浅谈sql约束攻击/" title="浅谈sql约束攻击">https://xianyu123.me/2019/02/04/浅谈sql约束攻击/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/02/04/浅谈sql约束攻击/" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年05月13日 - 14:31</p>
+  <p><span>最后更新:</span>2019年05月13日 - 21:18</p>
+  <p><span>原始链接:</span><a href="/2019/05/13/mac下搭建nginx-php-fpm/" title="mac下搭建nginx+php-fpm">https://xianyu123.me/2019/05/13/mac下搭建nginx-php-fpm/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/05/13/mac下搭建nginx-php-fpm/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -505,8 +496,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/03/ubuntu-server彩色终端配置/" rel="next" title="ubuntu server终端内置颜色开启">
-                <i class="fa fa-chevron-left"></i> ubuntu server终端内置颜色开启
+              <a href="/2019/05/11/换电脑后如何迁移hexo博客/" rel="next" title="换电脑后如何迁移hexo博客">
+                <i class="fa fa-chevron-left"></i> 换电脑后如何迁移hexo博客
               </a>
             
           </div>
@@ -514,10 +505,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/21/hexo-next添加代码块复制功能/" rel="prev" title="hexo next添加代码块复制功能">
-                hexo next添加代码块复制功能 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -684,7 +671,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">2.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体场景"><span class="nav-number">3.</span> <span class="nav-text">具体场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTF中的约束攻击"><span class="nav-number">4.</span> <span class="nav-text">CTF中的约束攻击</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装步骤"><span class="nav-number">1.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-停止本地Apache服务"><span class="nav-number">1.1.</span> <span class="nav-text">1. 停止本地Apache服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装nginx"><span class="nav-number">1.2.</span> <span class="nav-text">2. 安装nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-启动nginx"><span class="nav-number">1.3.</span> <span class="nav-text">3. 启动nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-访问nginx"><span class="nav-number">1.4.</span> <span class="nav-text">4. 访问nginx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-文件说明"><span class="nav-number">1.5.</span> <span class="nav-text">5. 文件说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6"><span class="nav-number">1.6.</span> <span class="nav-text">6.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-测试"><span class="nav-number">1.7.</span> <span class="nav-text">7. 测试</span></a></li></ol></li></ol></div>
             
 
           </div>
