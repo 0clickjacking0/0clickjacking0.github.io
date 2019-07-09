@@ -90,7 +90,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images.xianyu123.club/JWT1.png">
 <meta property="og:image" content="http://images.xianyu123.club/JWT2.png">
-<meta property="og:updated_time" content="2019-07-09T10:57:08.748Z">
+<meta property="og:updated_time" content="2019-07-09T11:22:45.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JWT(JSON Web Token) 攻击">
 <meta name="twitter:description" content="最近这次国赛遇到了json web token的题目，发现并不能很顺利的做出来，于是写下这篇学习笔记">
@@ -456,6 +456,10 @@
 <p>RSA公钥：<a href="http://demo.sjoerdlangkemper.nl/jwtdemo/public.pem" target="_blank" rel="noopener">http://demo.sjoerdlangkemper.nl/jwtdemo/public.pem</a></p>
 <p>这个例子的解法如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原headers:eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9</span></span><br><span class="line"><span class="comment"># 解码后:&#123;"typ": "JWT", "alg": "RS256"&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 原payloads：eyJpc3MiOiJodHRwOlwvXC9kZW1vLnNqb2VyZGxhbmdrZW1wZXIubmxcLyIsImlhdCI6MTU2MjY2NzkwMSwiZXhwIjoxNTYyNjY4MDIxLCJkYXRhIjp7ImhlbGxvIjoid29ybGQifX0</span></span><br><span class="line"><span class="comment"># 解码后:&#123;"iss": "http://demo.sjoerdlangkemper.nl/","iat": 1562667901,"exp": 1562668021,"data": &#123;"hello": "world"&#125;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 重新构造：</span></span><br><span class="line"><span class="keyword">import</span> jwt</span><br><span class="line"><span class="comment"># public.pem从上面的公钥地址下载，一般ctf比赛中都会有公钥泄漏可以下载的</span></span><br><span class="line">public = open(<span class="string">'public.pem'</span>, <span class="string">'r'</span>).read()</span><br><span class="line">print(jwt.encode(&#123;<span class="string">"data"</span>:<span class="string">"test"</span>&#125;, key=public, algorithm=<span class="string">'HS256'</span>))</span><br></pre></td></tr></table></figure>
+<p>如果遇到报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jwt.exceptions.InvalidKeyError: The specified key is an asymmetric key or x509 certificate and should not be used as an HMAC secret.</span><br></pre></td></tr></table></figure>
+<p>解决如下：</p>
+<p><code>pip3 install pyjwt==0.4.3</code></p>
 <p>如何把得出的值传入到可控的参数中，可以看到我们绕过了<code>RS256</code>算法，把它变成了<code>HS256</code>算法，且数据可控</p>
 <p><img src="http://images.xianyu123.club/JWT2.png" alt></p>
 <h2 id="4-HS256（对称加密）密钥破解"><a href="#4-HS256（对称加密）密钥破解" class="headerlink" title="4. HS256（对称加密）密钥破解"></a>4. HS256（对称加密）密钥破解</h2><p>如果HS256密钥强度较弱，则可以直接强制使用，通过爆破 HS256的秘钥可以完成该操作。难度比较低。</p>
@@ -493,7 +497,7 @@
   <p><span>本文标题:</span><a href="/2019/07/09/JWT-JSON-Web-Token-攻击/">JWT(JSON Web Token) 攻击</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2019年07月09日 - 12:26</p>
-  <p><span>最后更新:</span>2019年07月09日 - 18:57</p>
+  <p><span>最后更新:</span>2019年07月09日 - 19:22</p>
   <p><span>原始链接:</span><a href="/2019/07/09/JWT-JSON-Web-Token-攻击/" title="JWT(JSON Web Token) 攻击">https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/07/09/JWT-JSON-Web-Token-攻击/" aria-label="复制成功！"></i></span>
   </p>
