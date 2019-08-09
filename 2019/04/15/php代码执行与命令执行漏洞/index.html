@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="Mask&#39;s Blog">
 <meta property="og:description" content="php代码执行与命令执行漏洞 学习php代码执行与命令执行漏洞，没有新姿势">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-11T12:52:58.624Z">
+<meta property="og:updated_time" content="2019-08-01T08:33:08.995Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php代码执行与命令执行漏洞">
 <meta name="twitter:description" content="php代码执行与命令执行漏洞 学习php代码执行与命令执行漏洞，没有新姿势">
@@ -467,11 +467,16 @@
 <p>访问：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://xxx.com/test1.php?a=assert&amp;b=phpinfo();</span><br></pre></td></tr></table></figure>
 <h2 id="系统命令执行相关"><a href="#系统命令执行相关" class="headerlink" title="系统命令执行相关"></a>系统命令执行相关</h2><h3 id="system"><a href="#system" class="headerlink" title="system()"></a>system()</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string system( string $command[, int &amp;$return_var] )</span><br></pre></td></tr></table></figure>
+<p>command是要执行的命令。return_var，如果提供 return_var 参数， 则外部命令执行后的返回状态将会被设置到此变量中。</p>
 <h3 id="passthru"><a href="#passthru" class="headerlink" title="passthru()"></a>passthru()</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void passthru( string $command[, int &amp;$return_var] )</span><br></pre></td></tr></table></figure>
+<p>command是要执行的命令。return_var，如果提供 return_var 参数， Unix 命令的返回状态会被记录到此参数。</p>
 <h3 id="exec"><a href="#exec" class="headerlink" title="exec()"></a>exec()</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string exec( string $command[, <span class="keyword">array</span> &amp;$output[, int &amp;$return_var]] )</span><br></pre></td></tr></table></figure>
 <p>exec() 执行 command 参数所指定的命令。 其余参数，见<a href="http://php.net/manual/zh/function.exec.php" target="_blank" rel="noopener">文档</a></p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">echo</span> exec(<span class="string">"ls"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="pcntl-exec"><a href="#pcntl-exec" class="headerlink" title="pcntl_exec()"></a>pcntl_exec()</h3><h3 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h3><h3 id="popen"><a href="#popen" class="headerlink" title="popen()"></a>popen()</h3><h3 id="proc-open"><a href="#proc-open" class="headerlink" title="proc_open()"></a>proc_open()</h3><h3 id="反引号"><a href="#反引号" class="headerlink" title="`(反引号)"></a>`(反引号)</h3>
+<p>返回值是命令执行结果的最后一行内容。</p>
+<h3 id="pcntl-exec"><a href="#pcntl-exec" class="headerlink" title="pcntl_exec()"></a>pcntl_exec()</h3><h3 id="shell-exec"><a href="#shell-exec" class="headerlink" title="shell_exec()"></a>shell_exec()</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">string shell_exec ( string $cmd )</span><br></pre></td></tr></table></figure>
+<h3 id="popen"><a href="#popen" class="headerlink" title="popen()"></a>popen()</h3><h3 id="proc-open"><a href="#proc-open" class="headerlink" title="proc_open()"></a>proc_open()</h3><h3 id="反引号"><a href="#反引号" class="headerlink" title="`(反引号)"></a>`(反引号)</h3><p>在php中称之为执行运算符，PHP 将尝试将反引号中的内容作为 shell 命令来执行，并将其输出信息返回（即，可以赋给一个变量而不是简单地丢弃到标准输出，使用反引号运算符“`”的效果与函数 shell_exec() 相同。</p>
+
       
     </div>
     
@@ -490,7 +495,7 @@
   <p><span>本文标题:</span><a href="/2019/04/15/php代码执行与命令执行漏洞/">php代码执行与命令执行漏洞</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Mask 的个人博客">Mask</a></p>
   <p><span>发布时间:</span>2019年04月15日 - 21:17</p>
-  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>最后更新:</span>2019年08月01日 - 16:33</p>
   <p><span>原始链接:</span><a href="/2019/04/15/php代码执行与命令执行漏洞/" title="php代码执行与命令执行漏洞">https://xianyu123.me/2019/04/15/php代码执行与命令执行漏洞/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/04/15/php代码执行与命令执行漏洞/" aria-label="复制成功！"></i></span>
   </p>
@@ -636,7 +641,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -702,6 +707,10 @@
                 
                   <li class="links-of-blogroll-item">
                     <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="死肥宅" target="_blank">死肥宅</a>
                   </li>
                 
               </ul>

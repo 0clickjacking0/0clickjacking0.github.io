@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://images.xianyu123.club/hash_attack6.png">
 <meta property="og:image" content="http://images.xianyu123.club/hash_attack7.png">
 <meta property="og:image" content="http://images.xianyu123.club/hash_attack8.png">
-<meta property="og:updated_time" content="2019-07-13T10:33:35.318Z">
+<meta property="og:updated_time" content="2019-08-09T06:23:11.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hash扩展攻击">
 <meta name="twitter:description" content="这次国赛遇到了这个漏洞，以前看过这个漏洞，但没有吃透导致这次国赛没做出来，这次准备好好研究一下，写下这篇学习笔记">
@@ -453,6 +453,8 @@
 <p><img src="http://images.xianyu123.club/hash_attack7.png" alt></p>
 <p>然后用hashpump跑一下，得出了md5的值为<code>dca0083ab43d715a2eb8be1949b77469</code>，然后放入cookie中得到flag</p>
 <p><img src="http://images.xianyu123.club/hash_attack8.png" alt></p>
+<h2 id="CTF中的小技巧"><a href="#CTF中的小技巧" class="headerlink" title="CTF中的小技巧"></a>CTF中的小技巧</h2><p>用hashpump</p>
+<p>Input Signature: 这里写原始的md5，也就是上面的verify<br>Input Data: 这里写原始的值，也就是<code>md5($key.$text);</code>与<code>$key</code>拼接的后面的那串值<code>$text</code><br>Input Key Length: 这里写key的长度<br>Input Data to Add: 这里写你想要的text的值，比如这里<code>md5($key.&#39;admin&#39;);</code>，那么这里就填写<code>admin</code></p>
 <h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><ol>
 <li>可以将消息摘要的值再进行消息摘要，这样就可以避免用户控制message了。也就是<a href="https://en.wikipedia.org/wiki/HMAC" target="_blank" rel="noopener">HMAC</a>算法。该算法大概来说是这样：<code>MAC =hash(secret + hash(secret + message))</code>，而不是简单的对密钥连接message之后的值进行哈希摘要。具体HMAC的工作原理有些复杂，但你可以有个大概的了解。重点是，由于这种算法进行了双重摘要，密钥不再受本文中的长度扩展攻击影响。HMAC最先是在1996年被发表，之后几乎被添加到每一种编程语言的标准函数库中。</li>
 <li>将secret放置在消息末尾也能防止这种攻击。比如 hash(m+secret)，希望推导出 hash(m + secret||padding||m’)，由于自动附加secret在末尾的关系，会变成hash(m||padding||m’||secret)。现在的附加值可以看作是m’||secret，secret值不知道，从而导致附加字符串不可控，hash值也就不可控，因而防止了这种攻击。</li>
@@ -482,7 +484,7 @@
   <p><span>本文标题:</span><a href="/2019/07/09/hash扩展攻击/">hash扩展攻击</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Mask 的个人博客">Mask</a></p>
   <p><span>发布时间:</span>2019年07月09日 - 15:50</p>
-  <p><span>最后更新:</span>2019年07月13日 - 18:33</p>
+  <p><span>最后更新:</span>2019年08月09日 - 14:23</p>
   <p><span>原始链接:</span><a href="/2019/07/09/hash扩展攻击/" title="hash扩展攻击">https://xianyu123.me/2019/07/09/hash扩展攻击/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/07/09/hash扩展攻击/" aria-label="复制成功！"></i></span>
   </p>
@@ -545,6 +547,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/08/04/浅析SSRF原理及利用方式/" rel="prev" title="浅析SSRF原理及利用方式">
+                浅析SSRF原理及利用方式 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -624,7 +630,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -692,6 +698,10 @@
                     <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
                   </li>
                 
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="死肥宅" target="_blank">死肥宅</a>
+                  </li>
+                
               </ul>
             </div>
           
@@ -711,7 +721,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hash原理"><span class="nav-number">1.</span> <span class="nav-text">hash原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5加密过程"><span class="nav-number">2.</span> <span class="nav-text">MD5加密过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补位"><span class="nav-number">2.1.</span> <span class="nav-text">补位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补长度"><span class="nav-number">2.2.</span> <span class="nav-text">补长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算消息摘要"><span class="nav-number">2.3.</span> <span class="nav-text">计算消息摘要</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash长度扩展攻击的实现"><span class="nav-number">3.</span> <span class="nav-text">hash长度扩展攻击的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019年国赛华东南赛区分区赛"><span class="nav-number">3.1.</span> <span class="nav-text">2019年国赛华东南赛区分区赛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长度扩展"><span class="nav-number">3.2.</span> <span class="nav-text">长度扩展</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御"><span class="nav-number">4.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hash原理"><span class="nav-number">1.</span> <span class="nav-text">hash原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5加密过程"><span class="nav-number">2.</span> <span class="nav-text">MD5加密过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补位"><span class="nav-number">2.1.</span> <span class="nav-text">补位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补长度"><span class="nav-number">2.2.</span> <span class="nav-text">补长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算消息摘要"><span class="nav-number">2.3.</span> <span class="nav-text">计算消息摘要</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash长度扩展攻击的实现"><span class="nav-number">3.</span> <span class="nav-text">hash长度扩展攻击的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019年国赛华东南赛区分区赛"><span class="nav-number">3.1.</span> <span class="nav-text">2019年国赛华东南赛区分区赛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长度扩展"><span class="nav-number">3.2.</span> <span class="nav-text">长度扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF中的小技巧"><span class="nav-number">3.3.</span> <span class="nav-text">CTF中的小技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御"><span class="nav-number">4.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
