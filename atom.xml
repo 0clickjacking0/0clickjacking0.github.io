@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://xianyu123.me/"/>
-  <updated>2019-08-04T13:13:09.250Z</updated>
+  <updated>2019-08-09T06:23:11.045Z</updated>
   <id>https://xianyu123.me/</id>
   
   <author>
@@ -15,22 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>浅析SSRF原理及利用方式</title>
-    <link href="https://xianyu123.me/2019/08/04/%E6%B5%85%E6%9E%90SSRF%E5%8E%9F%E7%90%86%E5%8F%8A%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F/"/>
-    <id>https://xianyu123.me/2019/08/04/浅析SSRF原理及利用方式/</id>
-    <published>2019-08-04T06:38:45.000Z</published>
-    <updated>2019-08-04T13:13:09.250Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-      <category term="Web Security" scheme="https://xianyu123.me/categories/Web-Security/"/>
-    
-    
-  </entry>
   
   <entry>
     <title>hash扩展攻击</title>
@@ -403,6 +387,27 @@
     </summary>
     
       <category term="Linux" scheme="https://xianyu123.me/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈php反序列化漏洞</title>
+    <link href="https://xianyu123.me/2018/12/11/%E6%B5%85%E8%B0%88php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"/>
+    <id>https://xianyu123.me/2018/12/11/浅谈php反序列化漏洞/</id>
+    <published>2018-12-11T10:57:42.000Z</published>
+    <updated>2019-08-04T13:41:02.131Z</updated>
+    
+    <content type="html"><![CDATA[<p>php反序列化漏洞，也叫php对象注入</p><p>php反序列化漏洞学习<br>合上吧，没有新姿势。</p><a id="more"></a><h1 id="序列化与反序列化"><a href="#序列化与反序列化" class="headerlink" title="序列化与反序列化"></a>序列化与反序列化</h1><p>php中有两个函数<a href="http://php.net/manual/zh/function.serialize.php" target="_blank" rel="noopener">serialize()</a>和<a href="http://php.net/manual/zh/function.unserialize.php" target="_blank" rel="noopener">unserialize()</a></p><h2 id="serialize"><a href="#serialize" class="headerlink" title="serialize()"></a>serialize()</h2><p>把复杂的数据类型压缩到一个字符串中 数据类型可以是数组，字符串，对象等。测试代码如下</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $flag = <span class="string">'abc'</span>;</span><br><span class="line">    <span class="keyword">protected</span> $test = <span class="string">'kkk'</span>;</span><br><span class="line">    <span class="keyword">public</span> $test1 = <span class="string">'aaa'</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">set_flag</span><span class="params">($flag)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;flag = $flag;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">get_flag</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;flag;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">$obj = <span class="keyword">new</span> Test();</span><br><span class="line">$obj-&gt;set_flag(<span class="string">'fff'</span>);</span><br><span class="line">$data = serialize($obj);</span><br><span class="line"><span class="keyword">echo</span> $data;</span><br></pre></td></tr></table></figure><p>序列化打印的结果为</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">O:<span class="number">4</span>:<span class="string">"Test"</span>:<span class="number">3</span>:&#123;s:<span class="number">10</span>:<span class="string">"Testflag"</span>;s:<span class="number">3</span>:<span class="string">"fff"</span>;s:<span class="number">7</span>:<span class="string">"*test"</span>;s:<span class="number">3</span>:<span class="string">"kkk"</span>;s:<span class="number">5</span>:<span class="string">"test1"</span>;s:<span class="number">3</span>:<span class="string">"aaa"</span>;&#125;</span><br><span class="line">O:&lt;class_name_length&gt;:<span class="string">"&lt;class_name&gt;"</span>:&lt;number_of_properties&gt;:&#123;&lt;properties&gt;&#125;</span><br></pre></td></tr></table></figure><p><img src="http://images.xianyu123.club/反序列化1.png" alt></p><p>嗯，如果你发现这个问题，那么说明你认真地思考了，这其实涉及到了 PHP 的属性的访问权限问题，序列化为了能把整个类对象的各种信息完完整整的压缩，格式化，必然也会将属性的权限序列化进去，我们发现我定义的类的属性有三种 private protected 和 默认的 public(写不写都一样)，其中</p><p><strong>(1)Puiblic 权限：</strong></p><p>他的序列化规规矩矩，按照我们常规的思路，该是几个字符就是几个字符，你看<code>test1</code> 属性</p><p><strong>(2)Private 权限：</strong></p><p>该权限是私有权限，也就是说只能 test类使用，在序列化的时候一定要在 private 属性前面加上自己的名字，但是好像长度还是不对，还少了两个，怎么回事？</p><p>这样，我们将其序列化的结果存入一个文件中，我们使用<code>hexdump</code>看一下内部的结构</p><p><img src="http://images.xianyu123.club/serialize2.png" alt></p><p>我们看到 test 的前后出现了两个 %00 ，也就是空白符，在私有属性序列化的时候格式是</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%00类名%00属性名</span><br></pre></td></tr></table></figure><p><strong>(3)Protected 权限：</strong></p><p>我们看 hexdump 的结果</p><p><strong>如图所示：</strong></p><p><img src="http://images.xianyu123.club/反序列化3.png" alt></p><p>格式为</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%00*%00属性名</span><br></pre></td></tr></table></figure><h2 id="unserialize"><a href="#unserialize" class="headerlink" title="unserialize()"></a>unserialize()</h2><p>恢复原先被序列化的变量，测试代码如下：</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">xianyu</span></span>&#123;</span><br><span class="line"><span class="keyword">public</span> $test = <span class="string">'123'</span>;</span><br><span class="line">&#125;</span><br><span class="line">$class = <span class="string">'O:6:"xianyu":1:&#123;s:4:"test";s:3:"123";&#125;'</span>;</span><br><span class="line">$class_unser = unserialize($class);</span><br><span class="line">print_r($class_unser);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure><p>反序列化的打印结果如下</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xianyu Object ( [test] =&gt; <span class="number">123</span> )</span><br></pre></td></tr></table></figure><p><strong>反序列化的数据本质上来说是没有危害的</strong></p><p><strong>用户可控数据进行反序列化是存在危害的</strong></p><p>可以看到，反序列化的危害，关键还是在于可控或不可控。</p><h1 id="PHP（反）序列化有关的常用魔法函数"><a href="#PHP（反）序列化有关的常用魔法函数" class="headerlink" title="PHP（反）序列化有关的常用魔法函数"></a>PHP（反）序列化有关的常用魔法函数</h1><h2 id="construct"><a href="#construct" class="headerlink" title="__construct()"></a>__construct()</h2><p>创建一个新的类时，自动调用该方法</p><p><img src="http://images.xianyu123.club/construct.png?imageslim" alt></p><h2 id="destruct"><a href="#destruct" class="headerlink" title="__destruct()"></a>__destruct()</h2><p>当一个类被销毁时自动调用该方法</p><p><img src="http://images.xianyu123.club/destruct.png?imageslim" alt></p><h2 id="toString-NaN"><a href="#toString-NaN" class="headerlink" title="__toString()"></a>__toString()</h2><p>当把一个类当作字符串使用时就会自动调用该方法</p><p><img src="http://images.xianyu123.club/toString.png?imageslim" alt></p><h2 id="sleep"><a href="#sleep" class="headerlink" title="__sleep()"></a>__sleep()</h2><p>当调用<code>serialize()</code>函数时，PHP 将试图在序列动作之前调用该对象的成员函数 __sleep()。这样就允许对象在被序列化之前做任何清除操作</p><p><img src="http://images.xianyu123.club/sleep.png?imageslim" alt></p><h2 id="wakeup"><a href="#wakeup" class="headerlink" title="__wakeup"></a>__wakeup</h2><p>当使用 unserialize() 恢复对象时， 将调用 __wakeup() 成员函数<br>unserialize() 对单一的已序列化的变量进行操作，将其转换回 PHP 的值。返回的是转换之后的值，可为 integer、float、string、array 或 object。如果传递的字符串不可解序列化，则返回 FALSE。</p><p><img src="http://images.xianyu123.club/wakeup.png?imageslim" alt></p><h2 id="invoke"><a href="#invoke" class="headerlink" title="__invoke"></a>__invoke</h2><p>当把一个类当作函数使用时，就会自动调用该方法</p><p>仅在<code>php5.30+</code>支持</p><p><img src="http://images.xianyu123.club/invoke.png?imageslim" alt></p><p>更多关于php魔术方法的使用请参考<a href="http://php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">php魔术方法</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;php反序列化漏洞，也叫php对象注入&lt;/p&gt;
+&lt;p&gt;php反序列化漏洞学习&lt;br&gt;合上吧，没有新姿势。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Web Security" scheme="https://xianyu123.me/categories/Web-Security/"/>
     
     
   </entry>
