@@ -81,26 +81,17 @@
 
 
 
-<meta name="description" content="这次国赛遇到了这个漏洞，以前看过这个漏洞，但没有吃透导致这次国赛没做出来，这次准备好好研究一下，写下这篇学习笔记">
+<meta name="description" content="打省赛的时候遇到了，这里记录学习一下姿势">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hash扩展攻击">
-<meta property="og:url" content="https://xianyu123.me/2019/07/09/hash扩展攻击/index.html">
+<meta property="og:title" content="ssi漏洞小结">
+<meta property="og:url" content="https://xianyu123.me/2019/09/13/ssi漏洞小结/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
-<meta property="og:description" content="这次国赛遇到了这个漏洞，以前看过这个漏洞，但没有吃透导致这次国赛没做出来，这次准备好好研究一下，写下这篇学习笔记">
+<meta property="og:description" content="打省赛的时候遇到了，这里记录学习一下姿势">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack1.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack2.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack3.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack4.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack5.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack6.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack7.png">
-<meta property="og:image" content="http://images.xianyu123.club/hash_attack8.png">
-<meta property="og:updated_time" content="2019-08-09T06:23:11.045Z">
+<meta property="og:updated_time" content="2019-09-15T08:54:07.213Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hash扩展攻击">
-<meta name="twitter:description" content="这次国赛遇到了这个漏洞，以前看过这个漏洞，但没有吃透导致这次国赛没做出来，这次准备好好研究一下，写下这篇学习笔记">
-<meta name="twitter:image" content="http://images.xianyu123.club/hash_attack1.png">
+<meta name="twitter:title" content="ssi漏洞小结">
+<meta name="twitter:description" content="打省赛的时候遇到了，这里记录学习一下姿势">
 
 
 
@@ -130,14 +121,14 @@
 
 
 
-  <link rel="canonical" href="https://xianyu123.me/2019/07/09/hash扩展攻击/">
+  <link rel="canonical" href="https://xianyu123.me/2019/09/13/ssi漏洞小结/">
 
 
 
 
 
 
-  <title>hash扩展攻击 | xianyu123's Blog</title>
+  <title>ssi漏洞小结 | xianyu123's Blog</title>
   
 
 
@@ -304,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/07/09/hash扩展攻击/">
+    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/09/13/ssi漏洞小结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xianyu123">
@@ -321,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">hash扩展攻击</h1>
+          <h1 class="post-title" itemprop="name headline">ssi漏洞小结</h1>
         
 
         <div class="post-meta">
@@ -333,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-09T15:50:59+08:00">
-                2019-07-09
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-13T20:21:40+08:00">
+                2019-09-13
               </time>
             
 
@@ -374,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/07/09/hash扩展攻击/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/09/hash扩展攻击/" itemprop="commentCount"></span>
+                <a href="/2019/09/13/ssi漏洞小结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/13/ssi漏洞小结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -383,7 +374,7 @@
 
           
           
-             <span id="/2019/07/09/hash扩展攻击/" class="leancloud_visitors" data-flag-title="hash扩展攻击">
+             <span id="/2019/09/13/ssi漏洞小结/" class="leancloud_visitors" data-flag-title="ssi漏洞小结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -414,56 +405,86 @@
       
 
       
-        <p>这次国赛遇到了这个漏洞，以前看过这个漏洞，但没有吃透导致这次国赛没做出来，这次准备好好研究一下，写下这篇学习笔记</p>
+        <p>打省赛的时候遇到了，这里记录学习一下姿势</p>
 <a id="more"></a>
-<h1 id="hash原理"><a href="#hash原理" class="headerlink" title="hash原理"></a>hash原理</h1><p>首先要讲hash算法(例如md5)，但是也不需要太了解，只需要知道以下几点就可以了</p>
-<ol>
-<li><p>MD5加密过程中512比特（64字节）为一组，属于分组加密，而且在运算的过程中，将512比特分为32bit*16块，分块运算 </p>
-</li>
-<li><p>我们关键利用的是MD5的填充，对加密的字符串进行填充(比特第一位为1其余比特为0)，使之(二进制)补到448模512同余，即长度为512的倍数减64，最后的64位在补充为原来字符串的长度，这样刚好补满512位的倍数，如果当前明文正好是512bit倍数则再加上一个512bit的一组。 </p>
-</li>
-<li><p>MD5不管怎么加密，每一块加密得到的密文作为下一次加密的初始向量IV，这一点很关键！！！</p>
-</li>
-</ol>
-<p>下面已md5算法为代表简单讲解加密过程</p>
-<h1 id="MD5加密过程"><a href="#MD5加密过程" class="headerlink" title="MD5加密过程"></a>MD5加密过程</h1><p>比如计算字符串<code>xianyu123</code>，首先要把它变成十六进制，十六进制为<code>0x7869616e7975313233</code><br><img src="http://images.xianyu123.club/hash_attack1.png" alt></p>
-<h2 id="补位"><a href="#补位" class="headerlink" title="补位"></a>补位</h2><p>（1byte=8bit）消息必须进行补位，即使得其长度在对 512 取模后的值为 448。也就是说，<code>len(message) % 512 == 448</code>。当消息长度不满 448 bit 时<strong>（注意是位，而不是字符串长度）</strong>，消息长度达到 448 bit 即可。当然，如果消息长度已经达到 448 bit，也要进行补位。补位是必须的。<br>补位的方式的二进制表示是在消息的后面加上一个1，后面跟着无限个0，直到 <code>len(message) % 512 == 448</code>。在 16 进制下，我们需要在消息后补<code>80</code>，也就是 2 进制的<code>10000000</code>。我们把消息<code>xianyu123</code>进行补位到长度为56位的整数倍数</p>
-<p><img src="http://images.xianyu123.club/hash_attack2.png" alt></p>
-<h2 id="补长度"><a href="#补长度" class="headerlink" title="补长度"></a>补长度</h2><p>补位过后，第 57 个字节储存的是补位之前的消息长度。<code>xianyu123</code>是 9个字符串，也就是 9 个字节，72 bit。换算成 16 进制为<code>0x48</code>。其后跟着 7 个字节的 0x00，把消息补满 64 字节。</p>
-<p>长度是<a href="https://blog.csdn.net/github_35681219/article/details/52743048" target="_blank" rel="noopener">小端存储</a>的，也就是说高字节放在高地址中。</p>
-<p><strong>MD5中存储的都是小端方式！</strong><br><strong>MD5中存储的都是小端方式！</strong><br><strong>MD5中存储的都是小端方式！</strong><br>重要的事情说三遍，举个例子：假如我们这一块值为<code>0x12345678</code><br>那么在MD5运算时候存储的顺序是<code>0x78563412</code><br>这也是之所以后8字节为长度，而第1字节先有数据的原因</p>
-<p><img src="http://images.xianyu123.club/hash_attack3.png" alt></p>
-<h2 id="计算消息摘要"><a href="#计算消息摘要" class="headerlink" title="计算消息摘要"></a>计算消息摘要</h2><p>计算消息摘要必须用补位已经补长度完成之后的消息来进行运算，拿出 512 bit的消息（即64字节）。 计算消息摘要的时候，有一个初始的链变量，用来参与第一轮的运算。MD5 的初始链变量为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=0x67452301</span><br><span class="line">B=0xefcdab89</span><br><span class="line">C=0x98badcfe</span><br><span class="line">D=0x10325476</span><br></pre></td></tr></table></figure>
-<p>我们不需要关心计算细节，我们只需要知道经过一次消息摘要后，上面的链变量将会<strong>被新的值覆盖</strong>，而最后一轮产生的链变量经过高低位互换（如：aabbccdd -&gt; ddccbbaa）后就是我们计算出来的 md5 值。</p>
-<h1 id="hash长度扩展攻击的实现"><a href="#hash长度扩展攻击的实现" class="headerlink" title="hash长度扩展攻击的实现"></a>hash长度扩展攻击的实现</h1><h2 id="2019年国赛华东南赛区分区赛"><a href="#2019年国赛华东南赛区分区赛" class="headerlink" title="2019年国赛华东南赛区分区赛"></a>2019年国赛华东南赛区分区赛</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">include</span> <span class="string">"flag.php"</span>;</span><br><span class="line">$user=$_POST[<span class="string">'user'</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">encrypt</span><span class="params">($text)</span></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> $key;</span><br><span class="line">    <span class="keyword">return</span> md5($key.$text);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (encrypt($user)===$_COOKIE[<span class="string">'verify'</span>]) &#123;</span><br><span class="line">    <span class="keyword">if</span>(is_numeric(strpos($user,<span class="string">'root'</span>)))&#123;</span><br><span class="line">        <span class="keyword">die</span>($flag);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">die</span>(<span class="string">'not root！！！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>&#123;</span><br><span class="line">    setcookie(<span class="string">"verify"</span>,encrypt(<span class="string">"guest"</span>),time()+<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>);</span><br><span class="line">    setcookie(<span class="string">"len"</span>,strlen($key),time()+<span class="number">60</span>*<span class="number">60</span>*<span class="number">24</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//show_source(__FILE__);</span></span><br></pre></td></tr></table></figure>
-<p>这题和ISCC2018的那题一模一样</p>
-<p>我们虽然不知道<code>$key</code>的值，但是我们知道<code>$key</code>的长度，也知道<code>md5($key.&#39;guest&#39;)</code>的值。而我们得到的 hash 值正是最后一轮摘要后的经过高低位互换的链变量。<strong>在常规的摘要之后把我们控制的信息进行下一轮摘要，只需要知道上一轮消息产生的链变量</strong></p>
-<p><img src="http://images.xianyu123.club/hash_attack4.png" alt></p>
-<p>COOKIE中，<code>md5($key&#39;) = 8b3dd2057d3216ca78bf31ede947c0e3</code>，以及<code>$key</code>的长度为32。我们来进行哈希长度扩展攻击。</p>
-<h2 id="长度扩展"><a href="#长度扩展" class="headerlink" title="长度扩展"></a>长度扩展</h2><p>首先$key是32个未知位，这里就用问号代替，然后跟上<code>guest</code>，接着我们把消息补到448bit，也就是56byte。然后补长度，37byte=296bit，也就是十六进制的128，然后用小段方式存储</p>
-<p><img src="http://images.xianyu123.club/hash_attack5.png" alt></p>
-<p>然后跟上要附加的值<code>root</code></p>
-<p><img src="http://images.xianyu123.club/hash_attack6.png" alt></p>
-<p>然后去掉前面的假的 <code>$key</code>，得到最终的 <code>$username</code>。<br><code>guest\x80\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x28\x01\x00\x00\x00\x00\x00\x00root</code><br>urlencode之后为<br><code>guest%80%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%00%28%01%00%00%00%00%00%00root</code><br>带入enc函数返回的就是<code>md5($key+guest+root)</code>的值。<br>然后把<code>md5($key+guest)</code>值作为加密root的初始链变量。</p>
-<p>这里把原hash值（8b3dd2057d3216ca78bf31ede947c0e3）拆分为四组，即为：</p>
-<p><code>8b3dd205</code>,<code>7d3216ca</code>,<code>78bf31ed</code>,<code>e947c0e3</code></p>
-<p>在此将四组数值按照小端规则反序，可得如下四组</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">A=0x05d23d8b</span><br><span class="line">B=0xca16327d</span><br><span class="line">C=0xed31bf78</span><br><span class="line">D=0xe3c047e9</span><br></pre></td></tr></table></figure>
-<p><img src="http://images.xianyu123.club/hash_attack7.png" alt></p>
-<p>然后用hashpump跑一下，得出了md5的值为<code>dca0083ab43d715a2eb8be1949b77469</code>，然后放入cookie中得到flag</p>
-<p><img src="http://images.xianyu123.club/hash_attack8.png" alt></p>
-<h2 id="CTF中的小技巧"><a href="#CTF中的小技巧" class="headerlink" title="CTF中的小技巧"></a>CTF中的小技巧</h2><p>用hashpump</p>
-<p>Input Signature: 这里写原始的md5，也就是上面的verify<br>Input Data: 这里写原始的值，也就是<code>md5($key.$text);</code>与<code>$key</code>拼接的后面的那串值<code>$text</code><br>Input Key Length: 这里写key的长度<br>Input Data to Add: 这里写你想要的text的值，比如这里<code>md5($key.&#39;admin&#39;);</code>，那么这里就填写<code>admin</code></p>
-<h1 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h1><ol>
-<li>可以将消息摘要的值再进行消息摘要，这样就可以避免用户控制message了。也就是<a href="https://en.wikipedia.org/wiki/HMAC" target="_blank" rel="noopener">HMAC</a>算法。该算法大概来说是这样：<code>MAC =hash(secret + hash(secret + message))</code>，而不是简单的对密钥连接message之后的值进行哈希摘要。具体HMAC的工作原理有些复杂，但你可以有个大概的了解。重点是，由于这种算法进行了双重摘要，密钥不再受本文中的长度扩展攻击影响。HMAC最先是在1996年被发表，之后几乎被添加到每一种编程语言的标准函数库中。</li>
-<li>将secret放置在消息末尾也能防止这种攻击。比如 hash(m+secret)，希望推导出 hash(m + secret||padding||m’)，由于自动附加secret在末尾的关系，会变成hash(m||padding||m’||secret)。现在的附加值可以看作是m’||secret，secret值不知道，从而导致附加字符串不可控，hash值也就不可控，因而防止了这种攻击。</li>
-</ol>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这个漏洞是一个比较老的漏洞，因为今年的省赛遇到了，所以在这里记录学习一下。</p>
+<h1 id="关于SSI"><a href="#关于SSI" class="headerlink" title="关于SSI"></a>关于SSI</h1><p>SSI是英文”Server Side Includes”的缩写，翻译成中文就是服务器端包含的意思。</p>
+<p>SSI是嵌入HTML页面中的指令，在页面被提供时由服务器进行运算，以对现有HTML页面增加动态生成的内容，而无须通过CGI程序提供其整个页面，或者使用其他动态技术。</p>
+<p>从技术角度上来说，SSI就是在HTML文件中，可以通过注释行调用的命令或指针，即允许通过在HTML页面注入脚本或远程执行任意代码。</p>
+<h1 id="启用SSI"><a href="#启用SSI" class="headerlink" title="启用SSI"></a>启用SSI</h1><p><strong>示例：Nginx 配置SSI功能</strong></p>
+<p>在http段中加入下面几句即可：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ssi on;</span><br><span class="line">ssi_silent_errors off;</span><br><span class="line">ssi_types text/shtml;</span><br></pre></td></tr></table></figure>
+<p>默认Apache不开启SSI，SSI这种技术已经比较少用了。如果应用没有使用到SSI，关闭服务器对SSI的支持即可。</p>
+<p>IIS和Apache都可以开启SSI功能，具体可参考:<a href="http://m.jb51.net/article/25725.htm" target="_blank" rel="noopener">Apache、Nginx 服务配置服务器端包含（SSI）](http://m.jb51.net/article/25725.htm</a></p>
+<h1 id="SSI语法"><a href="#SSI语法" class="headerlink" title="SSI语法"></a>SSI语法</h1><h2 id="config指令：用于修改SSI的默认设置"><a href="#config指令：用于修改SSI的默认设置" class="headerlink" title="config指令：用于修改SSI的默认设置"></a>config指令：用于修改SSI的默认设置</h2><p>参数：<code>errmsg</code>,<code>timefmt</code>, <code>sizefmt</code></p>
+<p><strong>errmsg</strong>:设置默认的错误信息，该指令必须入在其它指令的前面</p>
+<p>eg：<code>&lt;!--#config errmsg=&quot;error!please email mamager!&quot;--&gt;</code></p>
+<p><strong>Timefmt</strong>:设置日期与时间的显示格式，需放在echo指令前</p>
+<p>eg：<code>&lt;!--#config timefmt=&quot;%A, %B %d, %Y&quot;--&gt;</code></p>
+<p>　<code>&lt;!--#echo var=&quot;last_modified&quot;--&gt;</code></p>
+<p><strong>Sizefmt</strong>:设置表示文件大小的单位。如bytes。该指令需要放在fsize指令前使用。</p>
+<p>eg：<code>&lt;!--#config sizefmt=&quot;bytes&quot;--&gt;</code></p>
+<p>　<code>&lt;!--#fsize file=&quot;head.html&quot;--&gt;</code></p>
+<h2 id="Include指令：用于将其它文档或元素包含在当前文档中"><a href="#Include指令：用于将其它文档或元素包含在当前文档中" class="headerlink" title="Include指令：用于将其它文档或元素包含在当前文档中"></a>Include指令：用于将其它文档或元素包含在当前文档中</h2><p>参数：<code>virtual</code> ，<code>file</code></p>
+<p><strong>virtual</strong>:给出到服务器端某个文档的虚拟路径</p>
+<p>eg：<code>&lt;!--include virtual=&quot;/includes/header.html&quot;--&gt;</code></p>
+<p><strong>file</strong>:给出到当前目录的相对路径，其中不能使用”../“，也不能使用绝对路径</p>
+<p>eg：<code>&lt;!--include file=&quot;header.html&quot;--&gt;</code></p>
+<p>这就要求每一个目录中都包含一个header.html文件。</p>
+<h2 id="exec指令：将某一外部程序的输出插入到页面中，执行CGI脚本或者shell命令"><a href="#exec指令：将某一外部程序的输出插入到页面中，执行CGI脚本或者shell命令" class="headerlink" title="exec指令：将某一外部程序的输出插入到页面中，执行CGI脚本或者shell命令"></a>exec指令：将某一外部程序的输出插入到页面中，执行CGI脚本或者shell命令</h2><p>参数：cmd，cgi</p>
+<p>cmd 常规应用程序：<code>&lt;!--#exec cmd=&quot;文件名称&quot;--&gt;</code></p>
+<p>cgi CGI脚本程序：<code>&lt;!--#exec cgi=&quot;文件名称&quot;--&gt;</code></p>
+<p>注意：这个指令相当方便,但是也存在安全问题。</p>
+<h2 id="echo：用于显示各种环境变量"><a href="#echo：用于显示各种环境变量" class="headerlink" title="echo：用于显示各种环境变量"></a>echo：用于显示各种环境变量</h2><p>参数：var</p>
+<p>eg：<code>&lt;!--#config timefmt=&quot;%A,the %d of %B,in the year %Y&quot;--&gt;</code></p>
+<p>　<code>&lt;!--#echo var=&quot;DATE_LOCAL&quot;--&gt;</code></p>
+<p>输出结果：<code>Saturday, the 15 of April, in the year 2000</code></p>
+<h2 id="以下是常见的服务器变量"><a href="#以下是常见的服务器变量" class="headerlink" title="以下是常见的服务器变量"></a>以下是常见的服务器变量</h2><p><code>DOCUMENT_NAME</code>：显示当前文档的名称</p>
+<p><code>DOCUMENT_URI</code>：显示当前文档的虚拟路径</p>
+<p><code>QUERY_STRING_UNESCAPED</code>：显示未经转义处理的由客户端发送的查询字串，其中所有的特殊字符前面都有转义符”\</p>
+<p><code>DATE_LOCAL</code>：显示服务器设定时区的日期和时间。用户可以结合config命令的timefmt参数，定制输出信息</p>
+<p><code>DATE_GMT</code>：功能与DATE_LOCAL一样，只不过返回的是以格林尼治标准时间为基准的日期</p>
+<p><code>LAST_MODIFIED</code>：显示当前文档的最后更新时间</p>
+<h2 id="除了SSI环境变量之外，echo命令还可以显示以下CGI环境变量"><a href="#除了SSI环境变量之外，echo命令还可以显示以下CGI环境变量" class="headerlink" title="除了SSI环境变量之外，echo命令还可以显示以下CGI环境变量"></a>除了SSI环境变量之外，echo命令还可以显示以下CGI环境变量</h2><p><code>SERVER_SOFTWARE</code>：显示服务器软件的名称和版本</p>
+<p><code>SERVER_NAME</code>：显示服务器的主机名称，DNS别名或IP地址</p>
+<p><code>SERVER_PROTOCOL</code>：显示客户端请求所使用的协议名称和版本，如HTTP/1.0</p>
+<p><code>SERVER_PORT</code>：显示服务器的响应端口</p>
+<p><code>REQUEST_METHOD</code>：显示客户端的文档请求方法，包括GET, HEAD, 和POST</p>
+<p><code>REMOTE_HOST</code>：显示发出请求信息的客户端主机名称</p>
+<p><code>REMOTE_ADDR</code>：显示发出请求信息的客户端IP地址</p>
+<p><code>AUTH_TYPE</code>：显示用户身份的验证方法</p>
+<p><code>REMOTE_USER</code>:显示访问受保护页面的用户所使用的帐号名称</p>
+<p>Fsize：显示指定文件的大小，可以结合config命令的sizefmt参数定制输出格式</p>
+<p>参数：file</p>
+<p>eg：<code>&lt;!--#fsize file=&quot;index_working.html&quot;--&gt;</code></p>
+<h2 id="Flastmod"><a href="#Flastmod" class="headerlink" title="Flastmod"></a>Flastmod</h2><p>显示指定文件的最后修改日期，可以结合config命令的timefmt参数控制输出格式</p>
+<p>参数：file</p>
+<p>eg：<code>&lt;!--#config timefmt=&quot;%A, the %d of %B, in the year %Y&quot;--&gt;</code></p>
+<p>　　<code>&lt;!--#flastmod file=&quot;file.html&quot;--&gt;</code></p>
+<h2 id="XSSI-Extended-SSI"><a href="#XSSI-Extended-SSI" class="headerlink" title="XSSI(Extended SSI)"></a>XSSI(Extended SSI)</h2><p>一组高级SSI指令,内置于Apache1.2或更高版本的mod-include模块之中。</p>
+<p><strong>#printenv</strong>：显示当前存在于WEB服务器环境中的所有环境变量。<br>语法：<code>&lt;!--#printenv--&gt;</code></p>
+<p><strong>#set</strong>：可给变量赋值,以用于后面的if语句。<br>语法：<code>&lt;!--#set var=&quot;变量名&quot; value=&quot;变量值&quot;--&gt;</code><br>eg：<br><code>&lt;!--#set var=&quot;color&quot; value=&quot;red&quot;--&gt;</code><br><code>&lt;!--#echo var=&quot;color&quot;--&gt;</code></p>
+<p><strong>#if</strong>：创建可以改变数据的页面,这些数据根据使用if语句时计算的要求予以显示。<br>语法：<br><code>&lt;!--#if expr=&quot;$变量名=&#39;变量值A&#39;&quot;--&gt;</code><br>  显示内容<br><code>&lt;!--#elif expr=&quot;$变量名=&#39;变量值B&#39;&quot;--&gt;</code><br>  显示内容<br><code>&lt;!--#else--&gt;</code><br>  显示内容<br><code>&lt;!--#endif--&gt;</code><br>eg：<br><code>&lt;!--#if expr=&quot;$color=&#39;red&#39;&quot;--&gt;</code><br>    红色<br><code>&lt;!--#elif expr=&quot;$color=&#39;blue&#39;&quot;--&gt;</code><br>    蓝色<br><code>&lt;!--#else--&gt;</code><br>    黑色<br><code>&lt;!--#endif--&gt;</code></p>
+<h2 id="SSI内置的变量"><a href="#SSI内置的变量" class="headerlink" title="SSI内置的变量"></a>SSI内置的变量</h2><p><code>AUTH_TYPE</code> ——针对用户的认证授权方式： BASIC ， FORM ， etc. 和 Tomcat 内的认证方式同步<br><code>CONTENT_LENGTH</code> ——从服务器表单传过来的数据长度，字符数目或者数据的字节数<br><code>CONTENT_TYPE</code> ——服务器访问呢数据的 MIME 类型，比如“ text/html ”<br><code>DATE_GMT</code> ——目前的时间格式方式使用 GMT<br><code>DATE_LOCAL</code> ——目前的时间格式方式设置成为本地时间格式<br><code>DOCUMENT_NAME</code> ——当前上下文环境的文件地址<br><code>DOCUMENT_URI</code> ——虚拟路径定义的文件地址<br><code>GATEWAY_INTERFACE</code> —— CGI 的版本定义：“ CGI/1.1 ”<br><code>HTTP_ACCEPT</code> ——一个客户端可以接受的 MIME 类型列表<br><code>HTTP_ACCEPT_ENCODING</code> ——客户端可以接受的压缩文件类型的列表<br><code>HTTP_ACCEPT_LANGUAGE</code> ——客户端可以支持的语言列表<br><code>HTTP_CONNECTION</code> ——管理客户端的连接：是“ Close ”还是“ Keep-Alive ”<br><code>HTTP_HOST</code> ——客户端请求的站点地址<br><code>HTTP_REFERER</code> ——客户端请求之前所在的 URL 地址<br><code>HTTP_USER_AGENT</code> ——客户使用的浏览器端的请求结果<br><code>LAST_MODIFIED</code> ——当前页面上一次访问和修改的时间<br><code>PATH_INFO</code> ——访问此 Servlet 的路径信息<br><code>PATH_TRANSLATED</code> —— PATH_INFO 提供的 translated 版本<br><code>QUERY_STRING</code> ——在 URL 地址 ? 之后的请求参数列表<br><code>QUERY_STRING_D</code> ——没有经过编码过的请求参数<br><code>REMOTE_ADDR</code> ——用户请求客户端 IP 地址<br><code>REMOTE_HOST</code> ——用户发送请求的主机名<br><code>REMOTE_PORT</code> ——用户发送请求的端口号<br><code>REMOTE_USER</code> ——认证授权需要的发送请求的用户名<br><code>REQUEST_METHOD</code> ——请求使用方法： GET 或者 POST<br><code>REQUEST_URI</code> ——客户端原来访问请求的 Web 页面的 URI 地址<br><code>SCRIPT_FILENAME</code> ——在服务器上当前页面的地址<br><code>SCRIPT_NAME</code> ——当前页面的名称<br><code>SERVER_ADDR</code> ——服务器所在的 IP 地址<br><code>SERVER_NAME</code> ——服务器的主机名或者 IP 地址<br><code>SERVER_PORT</code> ——服务器接受请求的端口号<br><code>SERVER_PROTOCOL</code> ——服务器处理请求的协议：“ HTTP/1.1 ”<br><code>SERVER_SOFTWARE</code> ——服务器响应客户端请求的名称和版本号</p>
+<h2 id="SSI中日期格式的定义"><a href="#SSI中日期格式的定义" class="headerlink" title="SSI中日期格式的定义"></a>SSI中日期格式的定义</h2><p><code>%a</code> 一周七天的缩写形式 Thu<br><code>%A</code> 一周七天 Thursday<br><code>%b</code> 月的缩写形式 Apr<br><code>%B</code> 月 April<br><code>%d</code> 一个月内的第几天 13<br><code>%D</code> mm/dd/yy日期格式 04/13/00<br><code>%H</code> 小时（24小时制，从00到23） 01<br><code>%I</code> 小时（12小时制，从00到11） 01<br><code>%j</code> 一年内的第几天，从01到365 104<br><code>%m</code> 一年内的第几个月，从01到12 04<br><code>%M</code> 一小时内的第几分钟，从00到59 10<br><code>%p</code> AM或PM AM<br><code>%r</code> 12小时制的当地时间，格式为 01:10:18 AM<br><code>%S</code> 一分钟内的第几秒，从00到59 18<br><code>%T</code> 24小时制的%H:%M:%S时间格式 01:10:18<br><code>%U</code> 一年内的第几个星期，从00到52，以星期天作为每个星期的第一天<br><code>%w</code> 一星期内的第一天，从0到6 4<br><code>%W</code> 一年内的第几个星期，从00到 53，以星期一作为每个星期的第一天<br><code>%y</code> 年的缩写形式，从00到99 00<br><code>%Y</code> 用四位数字表示一年 2000<br><code>%Z</code> 时区名称</p>
+<h1 id="SSI漏洞产生的条件"><a href="#SSI漏洞产生的条件" class="headerlink" title="SSI漏洞产生的条件"></a>SSI漏洞产生的条件</h1><p>用户存在可控输入，并且未过滤，并且还能回显嵌入到html中，如其中一条</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#exec cmd=&quot;&quot;...&quot;&quot;--&gt;（会执行给定的 shell 命令）</span><br></pre></td></tr></table></figure>
+<p>如果没有过滤吧<code>&lt;!#–</code>等敏感字符，就会造成系统命令执行，<br>通常存在XSS的地方如果开启了SSI服务，那么就会造成服务器注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--#include file=&quot;&quot;...&quot;&quot;--&gt;（会显示给定的文件）</span><br></pre></td></tr></table></figure>
+<p>但感觉这个漏洞在目前的状况来说就是绝迹了，因为apache和nginx都默认关闭了ssi，就算开启了ssi，也不一定有开启回显的，除非有哪个程序员真的自己作死，😂</p>
+<h1 id="SSI防护"><a href="#SSI防护" class="headerlink" title="SSI防护"></a>SSI防护</h1><ul>
+<li>关闭服务器SSI功能</li>
+<li>过滤相关SSI特殊字符（<code>&lt;,&gt;,#,-,&quot;,&#39;</code>）</li>
+</ul>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
-<li><a href="https://blog.csdn.net/syh_486_007/article/details/51228628" target="_blank" rel="noopener">hash哈希长度扩展攻击解析（记录一下，保证不忘）</a></li>
-<li><a href="https://www.smi1e.top/hello-world/" target="_blank" rel="noopener">Hash长度扩展攻击</a></li>
-<li><a href="https://blog.csdn.net/qq_35078631/article/details/70941204" target="_blank" rel="noopener">用MD5实现hash长度扩展攻击 By Assassin</a></li>
-<li><a href="https://xz.aliyun.com/t/2563" target="_blank" rel="noopener">哈希长度拓展攻击(Hash Length Extension Attacks)</a></li>
+<li><p><a href="[https://www.sherlocklee.top/2018/10/28/%E6%B3%A8%E5%85%A5/ssi%E6%BC%8F%E6%B4%9E/](https://www.sherlocklee.top/2018/10/28/注入/ssi漏洞/">ssi漏洞</a>)</p>
+</li>
+<li><p><a href="https://www.secpulse.com/archives/66934.html" target="_blank" rel="noopener">服务器端包含注入SSI分析总结</a></p>
+</li>
+<li><p><a href="[https://shuaizhupeiqi.github.io/2018/11/17/SSI%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%B3%A8%E5%85%A5/](https://shuaizhupeiqi.github.io/2018/11/17/SSI服务器注入/">SSI服务器注入</a>)</p>
+</li>
+<li><p><a href="https://www.cnblogs.com/wqhwe/p/5442612.html" target="_blank" rel="noopener">SSI指令</a></p>
+</li>
 </ol>
 
       
@@ -481,12 +502,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/07/09/hash扩展攻击/">hash扩展攻击</a></p>
+  <p><span>本文标题:</span><a href="/2019/09/13/ssi漏洞小结/">ssi漏洞小结</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
-  <p><span>发布时间:</span>2019年07月09日 - 15:50</p>
-  <p><span>最后更新:</span>2019年08月09日 - 14:23</p>
-  <p><span>原始链接:</span><a href="/2019/07/09/hash扩展攻击/" title="hash扩展攻击">https://xianyu123.me/2019/07/09/hash扩展攻击/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/07/09/hash扩展攻击/" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年09月13日 - 20:21</p>
+  <p><span>最后更新:</span>2019年09月15日 - 16:54</p>
+  <p><span>原始链接:</span><a href="/2019/09/13/ssi漏洞小结/" title="ssi漏洞小结">https://xianyu123.me/2019/09/13/ssi漏洞小结/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/09/13/ssi漏洞小结/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -538,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/09/JWT-JSON-Web-Token-攻击/" rel="next" title="JWT(JSON Web Token) 攻击">
-                <i class="fa fa-chevron-left"></i> JWT(JSON Web Token) 攻击
+              <a href="/2019/08/29/user-ini文件构成的PHP后门/" rel="next" title="user.ini文件构成的PHP后门">
+                <i class="fa fa-chevron-left"></i> user.ini文件构成的PHP后门
               </a>
             
           </div>
@@ -547,10 +568,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/29/user-ini文件构成的PHP后门/" rel="prev" title="user.ini文件构成的PHP后门">
-                user.ini文件构成的PHP后门 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -721,7 +738,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#hash原理"><span class="nav-number">1.</span> <span class="nav-text">hash原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MD5加密过程"><span class="nav-number">2.</span> <span class="nav-text">MD5加密过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#补位"><span class="nav-number">2.1.</span> <span class="nav-text">补位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#补长度"><span class="nav-number">2.2.</span> <span class="nav-text">补长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#计算消息摘要"><span class="nav-number">2.3.</span> <span class="nav-text">计算消息摘要</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hash长度扩展攻击的实现"><span class="nav-number">3.</span> <span class="nav-text">hash长度扩展攻击的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2019年国赛华东南赛区分区赛"><span class="nav-number">3.1.</span> <span class="nav-text">2019年国赛华东南赛区分区赛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#长度扩展"><span class="nav-number">3.2.</span> <span class="nav-text">长度扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CTF中的小技巧"><span class="nav-number">3.3.</span> <span class="nav-text">CTF中的小技巧</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御"><span class="nav-number">4.</span> <span class="nav-text">防御</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于SSI"><span class="nav-number">2.</span> <span class="nav-text">关于SSI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启用SSI"><span class="nav-number">3.</span> <span class="nav-text">启用SSI</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSI语法"><span class="nav-number">4.</span> <span class="nav-text">SSI语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#config指令：用于修改SSI的默认设置"><span class="nav-number">4.1.</span> <span class="nav-text">config指令：用于修改SSI的默认设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Include指令：用于将其它文档或元素包含在当前文档中"><span class="nav-number">4.2.</span> <span class="nav-text">Include指令：用于将其它文档或元素包含在当前文档中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exec指令：将某一外部程序的输出插入到页面中，执行CGI脚本或者shell命令"><span class="nav-number">4.3.</span> <span class="nav-text">exec指令：将某一外部程序的输出插入到页面中，执行CGI脚本或者shell命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#echo：用于显示各种环境变量"><span class="nav-number">4.4.</span> <span class="nav-text">echo：用于显示各种环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以下是常见的服务器变量"><span class="nav-number">4.5.</span> <span class="nav-text">以下是常见的服务器变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#除了SSI环境变量之外，echo命令还可以显示以下CGI环境变量"><span class="nav-number">4.6.</span> <span class="nav-text">除了SSI环境变量之外，echo命令还可以显示以下CGI环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Flastmod"><span class="nav-number">4.7.</span> <span class="nav-text">Flastmod</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSSI-Extended-SSI"><span class="nav-number">4.8.</span> <span class="nav-text">XSSI(Extended SSI)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSI内置的变量"><span class="nav-number">4.9.</span> <span class="nav-text">SSI内置的变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSI中日期格式的定义"><span class="nav-number">4.10.</span> <span class="nav-text">SSI中日期格式的定义</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSI漏洞产生的条件"><span class="nav-number">5.</span> <span class="nav-text">SSI漏洞产生的条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#SSI防护"><span class="nav-number">6.</span> <span class="nav-text">SSI防护</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">7.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
