@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="http://0clickjacking0.github.io/"/>
   <updated>2019-09-15T08:54:07.213Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>http://0clickjacking0.github.io/</id>
   
   <author>
     <name>xianyu123</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>ssi漏洞小结</title>
-    <link href="http://yoursite.com/2019/09/13/ssi%E6%BC%8F%E6%B4%9E%E5%B0%8F%E7%BB%93/"/>
-    <id>http://yoursite.com/2019/09/13/ssi漏洞小结/</id>
+    <link href="http://0clickjacking0.github.io/2019/09/13/ssi%E6%BC%8F%E6%B4%9E%E5%B0%8F%E7%BB%93/"/>
+    <id>http://0clickjacking0.github.io/2019/09/13/ssi漏洞小结/</id>
     <published>2019-09-13T12:21:40.000Z</published>
     <updated>2019-09-15T08:54:07.213Z</updated>
     
@@ -31,15 +31,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>user.ini文件构成的PHP后门</title>
-    <link href="http://yoursite.com/2019/08/29/user-ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8/"/>
-    <id>http://yoursite.com/2019/08/29/user-ini文件构成的PHP后门/</id>
+    <link href="http://0clickjacking0.github.io/2019/08/29/user-ini%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90%E7%9A%84PHP%E5%90%8E%E9%97%A8/"/>
+    <id>http://0clickjacking0.github.io/2019/08/29/user-ini文件构成的PHP后门/</id>
     <published>2019-08-29T06:09:08.000Z</published>
     <updated>2019-08-29T06:59:22.348Z</updated>
     
@@ -51,15 +51,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>hash扩展攻击</title>
-    <link href="http://yoursite.com/2019/07/09/hash%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB/"/>
-    <id>http://yoursite.com/2019/07/09/hash扩展攻击/</id>
+    <link href="http://0clickjacking0.github.io/2019/07/09/hash%E6%89%A9%E5%B1%95%E6%94%BB%E5%87%BB/"/>
+    <id>http://0clickjacking0.github.io/2019/07/09/hash扩展攻击/</id>
     <published>2019-07-09T07:50:59.000Z</published>
     <updated>2019-08-09T06:23:11.045Z</updated>
     
@@ -71,15 +71,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>JWT(JSON Web Token) 攻击</title>
-    <link href="http://yoursite.com/2019/07/09/JWT-JSON-Web-Token-%E6%94%BB%E5%87%BB/"/>
-    <id>http://yoursite.com/2019/07/09/JWT-JSON-Web-Token-攻击/</id>
+    <link href="http://0clickjacking0.github.io/2019/07/09/JWT-JSON-Web-Token-%E6%94%BB%E5%87%BB/"/>
+    <id>http://0clickjacking0.github.io/2019/07/09/JWT-JSON-Web-Token-攻击/</id>
     <published>2019-07-09T04:26:13.000Z</published>
     <updated>2019-07-09T11:22:45.464Z</updated>
     
@@ -91,15 +91,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>mac下安装多版本php和配置php-fpm的一些坑</title>
-    <link href="http://yoursite.com/2019/05/28/mac%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E7%89%88%E6%9C%ACphp%E5%92%8C%E9%85%8D%E7%BD%AEphp-fpm%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
-    <id>http://yoursite.com/2019/05/28/mac下安装多版本php和配置php-fpm的一些坑/</id>
+    <link href="http://0clickjacking0.github.io/2019/05/28/mac%E4%B8%8B%E5%AE%89%E8%A3%85%E5%A4%9A%E7%89%88%E6%9C%ACphp%E5%92%8C%E9%85%8D%E7%BD%AEphp-fpm%E7%9A%84%E4%B8%80%E4%BA%9B%E5%9D%91/"/>
+    <id>http://0clickjacking0.github.io/2019/05/28/mac下安装多版本php和配置php-fpm的一些坑/</id>
     <published>2019-05-28T11:01:50.000Z</published>
     <updated>2019-05-28T13:06:17.788Z</updated>
     
@@ -111,15 +111,15 @@
     
     </summary>
     
-      <category term="Mac" scheme="http://yoursite.com/categories/Mac/"/>
+      <category term="Mac" scheme="http://0clickjacking0.github.io/categories/Mac/"/>
     
     
   </entry>
   
   <entry>
     <title>mac下搭建nginx+php-fpm</title>
-    <link href="http://yoursite.com/2019/05/13/mac%E4%B8%8B%E6%90%AD%E5%BB%BAnginx-php-fpm/"/>
-    <id>http://yoursite.com/2019/05/13/mac下搭建nginx-php-fpm/</id>
+    <link href="http://0clickjacking0.github.io/2019/05/13/mac%E4%B8%8B%E6%90%AD%E5%BB%BAnginx-php-fpm/"/>
+    <id>http://0clickjacking0.github.io/2019/05/13/mac下搭建nginx-php-fpm/</id>
     <published>2019-05-13T06:31:20.000Z</published>
     <updated>2019-05-28T11:12:36.738Z</updated>
     
@@ -131,15 +131,15 @@
     
     </summary>
     
-      <category term="Mac" scheme="http://yoursite.com/categories/Mac/"/>
+      <category term="Mac" scheme="http://0clickjacking0.github.io/categories/Mac/"/>
     
     
   </entry>
   
   <entry>
     <title>换电脑后如何迁移hexo博客</title>
-    <link href="http://yoursite.com/2019/05/11/%E6%8D%A2%E7%94%B5%E8%84%91%E5%90%8E%E5%A6%82%E4%BD%95%E8%BF%81%E7%A7%BBhexo%E5%8D%9A%E5%AE%A2/"/>
-    <id>http://yoursite.com/2019/05/11/换电脑后如何迁移hexo博客/</id>
+    <link href="http://0clickjacking0.github.io/2019/05/11/%E6%8D%A2%E7%94%B5%E8%84%91%E5%90%8E%E5%A6%82%E4%BD%95%E8%BF%81%E7%A7%BBhexo%E5%8D%9A%E5%AE%A2/"/>
+    <id>http://0clickjacking0.github.io/2019/05/11/换电脑后如何迁移hexo博客/</id>
     <published>2019-05-11T13:46:05.000Z</published>
     <updated>2019-05-11T14:07:06.114Z</updated>
     
@@ -151,15 +151,15 @@
     
     </summary>
     
-      <category term="Blog搭建" scheme="http://yoursite.com/categories/Blog%E6%90%AD%E5%BB%BA/"/>
+      <category term="Blog搭建" scheme="http://0clickjacking0.github.io/categories/Blog%E6%90%AD%E5%BB%BA/"/>
     
     
   </entry>
   
   <entry>
     <title>Ubuntu16.04忘记登录密码的解决办法（虚拟机下处理方法相同）</title>
-    <link href="http://yoursite.com/2019/04/28/Ubuntu16-04%EF%BC%88%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%89%E5%BF%98%E8%AE%B0%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
-    <id>http://yoursite.com/2019/04/28/Ubuntu16-04（虚拟机）忘记登录密码的解决办法/</id>
+    <link href="http://0clickjacking0.github.io/2019/04/28/Ubuntu16-04%EF%BC%88%E8%99%9A%E6%8B%9F%E6%9C%BA%EF%BC%89%E5%BF%98%E8%AE%B0%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://0clickjacking0.github.io/2019/04/28/Ubuntu16-04（虚拟机）忘记登录密码的解决办法/</id>
     <published>2019-04-28T08:14:51.000Z</published>
     <updated>2019-05-11T12:52:58.625Z</updated>
     
@@ -171,15 +171,15 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+      <category term="Linux" scheme="http://0clickjacking0.github.io/categories/Linux/"/>
     
     
   </entry>
   
   <entry>
     <title>web常见源码泄露</title>
-    <link href="http://yoursite.com/2019/04/17/web%E5%B8%B8%E8%A7%81%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/"/>
-    <id>http://yoursite.com/2019/04/17/web常见源码泄露/</id>
+    <link href="http://0clickjacking0.github.io/2019/04/17/web%E5%B8%B8%E8%A7%81%E6%BA%90%E7%A0%81%E6%B3%84%E9%9C%B2/"/>
+    <id>http://0clickjacking0.github.io/2019/04/17/web常见源码泄露/</id>
     <published>2019-04-17T08:24:02.000Z</published>
     <updated>2019-05-22T02:06:44.182Z</updated>
     
@@ -191,15 +191,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>php代码执行与命令执行漏洞</title>
-    <link href="http://yoursite.com/2019/04/15/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/"/>
-    <id>http://yoursite.com/2019/04/15/php代码执行与命令执行漏洞/</id>
+    <link href="http://0clickjacking0.github.io/2019/04/15/php%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E4%B8%8E%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E/"/>
+    <id>http://0clickjacking0.github.io/2019/04/15/php代码执行与命令执行漏洞/</id>
     <published>2019-04-15T13:17:12.000Z</published>
     <updated>2019-08-01T08:33:08.995Z</updated>
     
@@ -212,15 +212,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>阿里云ubuntu16.04 搭建IPsec VPN遇到的坑（含docker搭建）</title>
-    <link href="http://yoursite.com/2019/03/22/%E9%98%BF%E9%87%8C%E4%BA%91ubuntu16-04-%E6%90%AD%E5%BB%BAIPsec-VPN/"/>
-    <id>http://yoursite.com/2019/03/22/阿里云ubuntu16-04-搭建IPsec-VPN/</id>
+    <link href="http://0clickjacking0.github.io/2019/03/22/%E9%98%BF%E9%87%8C%E4%BA%91ubuntu16-04-%E6%90%AD%E5%BB%BAIPsec-VPN/"/>
+    <id>http://0clickjacking0.github.io/2019/03/22/阿里云ubuntu16-04-搭建IPsec-VPN/</id>
     <published>2019-03-22T13:44:00.000Z</published>
     <updated>2019-05-11T12:52:58.629Z</updated>
     
@@ -232,15 +232,15 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+      <category term="Linux" scheme="http://0clickjacking0.github.io/categories/Linux/"/>
     
     
   </entry>
   
   <entry>
     <title>ctfd平台的搭建和优化</title>
-    <link href="http://yoursite.com/2019/03/19/ctfd%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BC%98%E5%8C%96/"/>
-    <id>http://yoursite.com/2019/03/19/ctfd平台的搭建和优化/</id>
+    <link href="http://0clickjacking0.github.io/2019/03/19/ctfd%E5%B9%B3%E5%8F%B0%E7%9A%84%E6%90%AD%E5%BB%BA%E5%92%8C%E4%BC%98%E5%8C%96/"/>
+    <id>http://0clickjacking0.github.io/2019/03/19/ctfd平台的搭建和优化/</id>
     <published>2019-03-19T06:35:07.000Z</published>
     <updated>2019-08-08T07:19:41.150Z</updated>
     
@@ -252,15 +252,15 @@
     
     </summary>
     
-      <category term="CTF" scheme="http://yoursite.com/categories/CTF/"/>
+      <category term="CTF" scheme="http://0clickjacking0.github.io/categories/CTF/"/>
     
     
   </entry>
   
   <entry>
     <title>hexo next添加统计文章阅读量功能</title>
-    <link href="http://yoursite.com/2019/02/22/hexo-next%E6%B7%BB%E5%8A%A0%E7%BB%9F%E8%AE%A1%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E5%8A%9F%E8%83%BD/"/>
-    <id>http://yoursite.com/2019/02/22/hexo-next添加统计文章阅读量功能/</id>
+    <link href="http://0clickjacking0.github.io/2019/02/22/hexo-next%E6%B7%BB%E5%8A%A0%E7%BB%9F%E8%AE%A1%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E5%8A%9F%E8%83%BD/"/>
+    <id>http://0clickjacking0.github.io/2019/02/22/hexo-next添加统计文章阅读量功能/</id>
     <published>2019-02-22T08:29:41.000Z</published>
     <updated>2019-05-11T12:52:58.621Z</updated>
     
@@ -272,15 +272,15 @@
     
     </summary>
     
-      <category term="Blog搭建" scheme="http://yoursite.com/categories/Blog%E6%90%AD%E5%BB%BA/"/>
+      <category term="Blog搭建" scheme="http://0clickjacking0.github.io/categories/Blog%E6%90%AD%E5%BB%BA/"/>
     
     
   </entry>
   
   <entry>
     <title>hexo next添加代码块复制功能</title>
-    <link href="http://yoursite.com/2019/02/21/hexo-next%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/"/>
-    <id>http://yoursite.com/2019/02/21/hexo-next添加代码块复制功能/</id>
+    <link href="http://0clickjacking0.github.io/2019/02/21/hexo-next%E6%B7%BB%E5%8A%A0%E4%BB%A3%E7%A0%81%E5%9D%97%E5%A4%8D%E5%88%B6%E5%8A%9F%E8%83%BD/"/>
+    <id>http://0clickjacking0.github.io/2019/02/21/hexo-next添加代码块复制功能/</id>
     <published>2019-02-21T14:30:23.000Z</published>
     <updated>2019-05-11T12:52:58.621Z</updated>
     
@@ -292,15 +292,15 @@
     
     </summary>
     
-      <category term="Blog搭建" scheme="http://yoursite.com/categories/Blog%E6%90%AD%E5%BB%BA/"/>
+      <category term="Blog搭建" scheme="http://0clickjacking0.github.io/categories/Blog%E6%90%AD%E5%BB%BA/"/>
     
     
   </entry>
   
   <entry>
     <title>浅谈sql约束攻击</title>
-    <link href="http://yoursite.com/2019/02/04/%E6%B5%85%E8%B0%88sql%E7%BA%A6%E6%9D%9F%E6%94%BB%E5%87%BB/"/>
-    <id>http://yoursite.com/2019/02/04/浅谈sql约束攻击/</id>
+    <link href="http://0clickjacking0.github.io/2019/02/04/%E6%B5%85%E8%B0%88sql%E7%BA%A6%E6%9D%9F%E6%94%BB%E5%87%BB/"/>
+    <id>http://0clickjacking0.github.io/2019/02/04/浅谈sql约束攻击/</id>
     <published>2019-02-04T08:13:03.000Z</published>
     <updated>2019-05-11T12:52:58.628Z</updated>
     
@@ -312,15 +312,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>ubuntu server终端内置颜色开启</title>
-    <link href="http://yoursite.com/2019/02/03/ubuntu-server%E5%BD%A9%E8%89%B2%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/"/>
-    <id>http://yoursite.com/2019/02/03/ubuntu-server彩色终端配置/</id>
+    <link href="http://0clickjacking0.github.io/2019/02/03/ubuntu-server%E5%BD%A9%E8%89%B2%E7%BB%88%E7%AB%AF%E9%85%8D%E7%BD%AE/"/>
+    <id>http://0clickjacking0.github.io/2019/02/03/ubuntu-server彩色终端配置/</id>
     <published>2019-02-03T10:06:41.000Z</published>
     <updated>2019-05-11T12:52:58.625Z</updated>
     
@@ -332,15 +332,15 @@
     
     </summary>
     
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
+      <category term="Linux" scheme="http://0clickjacking0.github.io/categories/Linux/"/>
     
     
   </entry>
   
   <entry>
     <title>浅谈Web中的条件竞争漏洞</title>
-    <link href="http://yoursite.com/2019/02/03/%E6%B5%85%E8%B0%88Web%E4%B8%AD%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E/"/>
-    <id>http://yoursite.com/2019/02/03/浅谈Web中的条件竞争漏洞/</id>
+    <link href="http://0clickjacking0.github.io/2019/02/03/%E6%B5%85%E8%B0%88Web%E4%B8%AD%E7%9A%84%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89%E6%BC%8F%E6%B4%9E/"/>
+    <id>http://0clickjacking0.github.io/2019/02/03/浅谈Web中的条件竞争漏洞/</id>
     <published>2019-02-03T02:14:10.000Z</published>
     <updated>2019-05-11T12:52:58.629Z</updated>
     
@@ -352,15 +352,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>浅谈mysql宽字节注入</title>
-    <link href="http://yoursite.com/2019/01/30/%E6%B5%85%E8%B0%88mysql%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/"/>
-    <id>http://yoursite.com/2019/01/30/浅谈mysql宽字节注入/</id>
+    <link href="http://0clickjacking0.github.io/2019/01/30/%E6%B5%85%E8%B0%88mysql%E5%AE%BD%E5%AD%97%E8%8A%82%E6%B3%A8%E5%85%A5/"/>
+    <id>http://0clickjacking0.github.io/2019/01/30/浅谈mysql宽字节注入/</id>
     <published>2019-01-30T08:58:18.000Z</published>
     <updated>2019-05-11T12:52:58.628Z</updated>
     
@@ -373,8 +373,8 @@
   
   <entry>
     <title>sql注入绕过技巧(积累中)</title>
-    <link href="http://yoursite.com/2019/01/29/sql%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7-%E7%A7%AF%E7%B4%AF%E4%B8%AD/"/>
-    <id>http://yoursite.com/2019/01/29/sql注入绕过技巧-积累中/</id>
+    <link href="http://0clickjacking0.github.io/2019/01/29/sql%E6%B3%A8%E5%85%A5%E7%BB%95%E8%BF%87%E6%8A%80%E5%B7%A7-%E7%A7%AF%E7%B4%AF%E4%B8%AD/"/>
+    <id>http://0clickjacking0.github.io/2019/01/29/sql注入绕过技巧-积累中/</id>
     <published>2019-01-29T08:26:59.000Z</published>
     <updated>2019-08-21T02:44:24.308Z</updated>
     
@@ -386,15 +386,15 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
   
   <entry>
     <title>mysql注入备忘录</title>
-    <link href="http://yoursite.com/2019/01/25/mysql%E6%B3%A8%E5%85%A5%E5%A4%87%E5%BF%98%E5%BD%95/"/>
-    <id>http://yoursite.com/2019/01/25/mysql注入备忘录/</id>
+    <link href="http://0clickjacking0.github.io/2019/01/25/mysql%E6%B3%A8%E5%85%A5%E5%A4%87%E5%BF%98%E5%BD%95/"/>
+    <id>http://0clickjacking0.github.io/2019/01/25/mysql注入备忘录/</id>
     <published>2019-01-25T13:57:42.000Z</published>
     <updated>2019-10-18T01:52:20.801Z</updated>
     
@@ -406,7 +406,7 @@
     
     </summary>
     
-      <category term="Web Security" scheme="http://yoursite.com/categories/Web-Security/"/>
+      <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
     
     
   </entry>
