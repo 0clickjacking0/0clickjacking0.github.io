@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
 <meta property="og:description" content="命令执行bypass的总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-21T05:45:53.172Z">
+<meta property="og:updated_time" content="2020-01-12T11:24:08.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="命令执行bypass的总结">
 <meta name="twitter:description" content="命令执行bypass的总结">
@@ -429,7 +429,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@c6017a98836f:/var<span class="comment"># strings 1.txt</span></span><br><span class="line">123456</span><br></pre></td></tr></table></figure>
 <h2 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h2><p><strong>sort命令</strong>是在Linux里非常有用，它将文件进行排序，并将排序结果标准输出。sort命令既可以从特定的文件，也可以从stdin中获取输入。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@9423a7551563:/<span class="comment"># sort 1.txt</span></span><br><span class="line">123</span><br><span class="line">456</span><br></pre></td></tr></table></figure>
-<h2 id="rev"><a href="#rev" class="headerlink" title="rev"></a>rev</h2><h2 id="od"><a href="#od" class="headerlink" title="od"></a>od</h2><p><strong>od命令</strong>用于输出文件的八进制、十六进制或其它格式编码的字节，通常用于显示或查看文件中不能直接显示在终端的字符。</p>
+<h2 id="rev"><a href="#rev" class="headerlink" title="rev"></a>rev</h2><p>每行都倒序输出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ubuntu@VM-0-16-ubuntu:~$ rev 1.php</span><br><span class="line">.atad fo setyb )48(65 )1.0.0.721( 1.0.0.721 GNIP</span><br><span class="line">sm 340.0=emit 46=ltt 1=qes_pmci :1.0.0.721 morf setyb 46</span><br><span class="line">sm 140.0=emit 46=ltt 2=qes_pmci :1.0.0.721 morf setyb 46</span><br></pre></td></tr></table></figure>
+<h2 id="od"><a href="#od" class="headerlink" title="od"></a>od</h2><p><strong>od命令</strong>用于输出文件的八进制、十六进制或其它格式编码的字节，通常用于显示或查看文件中不能直接显示在终端的字符。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@c6017a98836f:/var<span class="comment"># od 1.txt</span></span><br><span class="line">0000000 031061 032063 033065 032412 032465 033012 033066 000012</span><br><span class="line">0000017</span><br></pre></td></tr></table></figure>
 <h2 id="cut"><a href="#cut" class="headerlink" title="cut"></a>cut</h2><p><strong>cut命令</strong>用来显示行中的指定部分，删除文件中指定字段。cut经常用来显示文件的内容，类似于下的<a href="http://man.linuxde.net/type" target="_blank" rel="noopener">type</a>命令。</p>
 <h3 id="cut选项说明："><a href="#cut选项说明：" class="headerlink" title="cut选项说明："></a>cut选项说明：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">选项-b，以字节为单位进行分割，-b支持形如3-5的写法，而且多个定位之间用逗号隔开就成了,比如想提取第3，第4、第5和第8个字节，命令为 -b 3-5,8</span><br><span class="line"></span><br><span class="line">选项-c，以字符为单位进行分割。用法与-b类似</span><br><span class="line"></span><br><span class="line">选项-f，后面跟列号，比如-f 1，表示读取第一列的信息</span><br></pre></td></tr></table></figure>
@@ -467,7 +469,7 @@
   <p><span>本文标题:</span><a href="/2019/12/11/命令执行bypass的总结/">命令执行bypass的总结</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2019年12月11日 - 10:17</p>
-  <p><span>最后更新:</span>2019年12月21日 - 13:45</p>
+  <p><span>最后更新:</span>2020年01月12日 - 19:24</p>
   <p><span>原始链接:</span><a href="/2019/12/11/命令执行bypass的总结/" title="命令执行bypass的总结">http://0clickjacking0.github.io/2019/12/11/命令执行bypass的总结/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2019/12/11/命令执行bypass的总结/" aria-label="复制成功！"></i></span>
   </p>
