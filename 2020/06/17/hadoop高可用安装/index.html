@@ -81,13 +81,37 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="xianyu123&#39;s Blog">
-<meta property="og:url" content="http://0clickjacking0.github.io/index.html">
+<meta name="description" content="环境要求及软件系统环境：macos10.15.2 虚拟机：vmware fusion 专业版 11.5.1 镜像：CentOS-6.5-x86_64-minimal.iso 接下来将讲解如何从0开始安装 安装步骤创建虚拟机这里如果按照ppt中所说的选择Install system with basic video driver安装是无法跳转到安装页面的，我们只要选择Install or upgr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hadoop高可用安装">
+<meta property="og:url" content="http://0clickjacking0.github.io/2020/06/17/hadoop高可用安装/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="环境要求及软件系统环境：macos10.15.2 虚拟机：vmware fusion 专业版 11.5.1 镜像：CentOS-6.5-x86_64-minimal.iso 接下来将讲解如何从0开始安装 安装步骤创建虚拟机这里如果按照ppt中所说的选择Install system with basic video driver安装是无法跳转到安装页面的，我们只要选择Install or upgr">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/20200617093804.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617104832.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617104935.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617105627.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617105851.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617192033.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617192229.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617192533.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617111849.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617115739.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617120237.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617121346.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617212927.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617212837.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617212850.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617212210.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617204643.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617204700.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200617204709.png">
+<meta property="og:updated_time" content="2020-06-17T13:29:32.320Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="xianyu123&#39;s Blog">
+<meta name="twitter:title" content="hadoop高可用安装">
+<meta name="twitter:description" content="环境要求及软件系统环境：macos10.15.2 虚拟机：vmware fusion 专业版 11.5.1 镜像：CentOS-6.5-x86_64-minimal.iso 接下来将讲解如何从0开始安装 安装步骤创建虚拟机这里如果按照ppt中所说的选择Install system with basic video driver安装是无法跳转到安装页面的，我们只要选择Install or upgr">
+<meta name="twitter:image" content="http://images.xianyu123.club/20200617093804.png">
 
 
 
@@ -117,14 +141,14 @@
 
 
 
-  <link rel="canonical" href="http://0clickjacking0.github.io/">
+  <link rel="canonical" href="http://0clickjacking0.github.io/2020/06/17/hadoop高可用安装/">
 
 
 
 
 
 
-  <title>xianyu123's Blog</title>
+  <title>hadoop高可用安装 | xianyu123's Blog</title>
   
 
 
@@ -143,8 +167,7 @@
     
   
 
-  <div class="container sidebar-position-right 
-  page-home">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,9 +300,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -309,9 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/17/hadoop高可用安装/" itemprop="url">hadoop高可用安装</a></h1>
+          <h1 class="post-title" itemprop="name headline">hadoop高可用安装</h1>
         
 
         <div class="post-meta">
@@ -382,9 +403,7 @@
       
 
       
-        
-          
-            <a id="more"></a>
+        <a id="more"></a>
 <h1 id="环境要求及软件"><a href="#环境要求及软件" class="headerlink" title="环境要求及软件"></a>环境要求及软件</h1><p>系统环境：macos10.15.2</p>
 <p>虚拟机：vmware fusion 专业版 11.5.1</p>
 <p>镜像：CentOS-6.5-x86_64-minimal.iso</p>
@@ -609,8 +628,6 @@
 <p><img src="http://images.xianyu123.club/20200617204700.png" alt="3B704842-4B22-4861-B33A-9DCA52885F52"></p>
 <p><img src="http://images.xianyu123.club/20200617204709.png" alt="37779935-E4C8-46C1-85AD-A237DFBFD852"></p>
 
-          
-        
       
     </div>
     
@@ -619,6 +636,38 @@
 
 	<div>
       
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/06/17/hadoop高可用安装/">hadoop高可用安装</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2020年06月17日 - 09:33</p>
+  <p><span>最后更新:</span>2020年06月17日 - 21:29</p>
+  <p><span>原始链接:</span><a href="/2020/06/17/hadoop高可用安装/" title="hadoop高可用安装">http://0clickjacking0.github.io/2020/06/17/hadoop高可用安装/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/06/17/hadoop高可用安装/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
 </div>
 
 
@@ -631,6 +680,12 @@
 	
 	<div>
   
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
 </div>
 	
 	
@@ -638,546 +693,28 @@
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/" itemprop="url">java基本数据类型传递与引用传递区别的一些思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-09T11:01:51+08:00">
-                2020-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/" class="leancloud_visitors" data-flag-title="java基本数据类型传递与引用传递区别的一些思考">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
       
       
 
       
-        
-          <p>java基本数据类型传递与引用传递区别的一些思考</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/09/java基本数据类型传递与引用传递区别的一些思考/" rel="next" title="java基本数据类型传递与引用传递区别的一些思考">
+                <i class="fa fa-chevron-left"></i> java基本数据类型传递与引用传递区别的一些思考
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-	<div>
-      
-</div>
+          <span class="post-nav-divider"></span>
 
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/06/02/python将一组数分成每几个一组的一些思考/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/06/02/python将一组数分成每几个一组的一些思考/" itemprop="url">python将一组数分成每几个一组的一些思考</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-02T19:54:18+08:00">
-                2020-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/06/02/python将一组数分成每几个一组的一些思考/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/02/python将一组数分成每几个一组的一些思考/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/06/02/python将一组数分成每几个一组的一些思考/" class="leancloud_visitors" data-flag-title="python将一组数分成每几个一组的一些思考">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>python将一组数分成每几个一组的一些思考</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/06/02/python将一组数分成每几个一组的一些思考/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/05/20/macos设置开机启动任务/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/05/20/macos设置开机启动任务/" itemprop="url">macos设置开机启动任务</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T09:57:15+08:00">
-                2020-05-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index">
-                    <span itemprop="name">mac</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/05/20/macos设置开机启动任务/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/05/20/macos设置开机启动任务/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/05/20/macos设置开机启动任务/" class="leancloud_visitors" data-flag-title="macos设置开机启动任务">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>macos设置开机启动任务</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/05/20/macos设置开机启动任务/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -1187,1079 +724,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/03/29/MRCTF2020-web-部分/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/29/MRCTF2020-web-部分/" itemprop="url">MRCTF2020_web(部分)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-29T22:24:34+08:00">
-                2020-03-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/03/29/MRCTF2020-web-部分/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/29/MRCTF2020-web-部分/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/03/29/MRCTF2020-web-部分/" class="leancloud_visitors" data-flag-title="MRCTF2020_web(部分)">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>MRCTF2020_web(部分)</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/29/MRCTF2020-web-部分/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/03/04/mac下使用phpize安装php扩展/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/03/04/mac下使用phpize安装php扩展/" itemprop="url">mac下使用phpize安装php扩展</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-04T00:13:03+08:00">
-                2020-03-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index">
-                    <span itemprop="name">mac</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/03/04/mac下使用phpize安装php扩展/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/03/04/mac下使用phpize安装php扩展/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/03/04/mac下使用phpize安装php扩展/" class="leancloud_visitors" data-flag-title="mac下使用phpize安装php扩展">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>mac下使用phpize安装php扩展</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/03/04/mac下使用phpize安装php扩展/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/02/12/php无参数RCE小结/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/12/php无参数RCE小结/" itemprop="url">php无参数RCE小结</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-12T21:38:18+08:00">
-                2020-02-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
-                    <span itemprop="name">Web Security</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/02/12/php无参数RCE小结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/12/php无参数RCE小结/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/02/12/php无参数RCE小结/" class="leancloud_visitors" data-flag-title="php无参数RCE小结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$functions = get_defined_functions();</span><br><span class="line"><span class="comment">//print_r($functions);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($functions[<span class="string">'internal'</span>] <span class="keyword">as</span> $function_name)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">'/^[a-zA-Z]+$/'</span>,$function_name,$match))</span><br><span class="line">            <span class="keyword">echo</span> $match[<span class="number">0</span>].PHP_EOL;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/02/11/mac-phpstorm-php5-6-xdebug配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/11/mac-phpstorm-php5-6-xdebug配置/" itemprop="url">mac+phpstorm+php5.6+chrome+xdebug配置</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-11T10:52:31+08:00">
-                2020-02-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/mac/" itemprop="url" rel="index">
-                    <span itemprop="name">mac</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/02/11/mac-phpstorm-php5-6-xdebug配置/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/11/mac-phpstorm-php5-6-xdebug配置/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/02/11/mac-phpstorm-php5-6-xdebug配置/" class="leancloud_visitors" data-flag-title="mac+phpstorm+php5.6+chrome+xdebug配置">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>mac+phpstorm+php5.6+chrome+xdebug配置</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/02/11/mac-phpstorm-php5-6-xdebug配置/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/02/08/BJDCTF2020复现/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/08/BJDCTF2020复现/" itemprop="url">BJDCTF2020复现</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-08T12:59:43+08:00">
-                2020-02-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/02/08/BJDCTF2020复现/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/08/BJDCTF2020复现/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/02/08/BJDCTF2020复现/" class="leancloud_visitors" data-flag-title="BJDCTF2020复现">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>由于不是本校学生，所以我在<a href="https://buuoj.cn/challenge" target="_blank" rel="noopener">buuctf</a>复现了一波</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/02/08/BJDCTF2020复现/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/02/04/hgame2020-Level-Week3-Web-writeup/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/04/hgame2020-Level-Week3-Web-writeup/" itemprop="url">hgame2020-Level-Week3_Web_writeup</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-04T12:28:22+08:00">
-                2020-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CTF/" itemprop="url" rel="index">
-                    <span itemprop="name">CTF</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2020/02/04/hgame2020-Level-Week3-Web-writeup/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/02/04/hgame2020-Level-Week3-Web-writeup/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2020/02/04/hgame2020-Level-Week3-Web-writeup/" class="leancloud_visitors" data-flag-title="hgame2020-Level-Week3_Web_writeup">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>hgame2020-Level-Week3_Web_writeup</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/02/04/hgame2020-Level-Week3-Web-writeup/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
 
 
           </div>
@@ -2267,6 +736,13 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -2287,8 +763,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -2404,6 +889,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#环境要求及软件"><span class="nav-number">1.</span> <span class="nav-text">环境要求及软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装步骤"><span class="nav-number">2.</span> <span class="nav-text">安装步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建虚拟机"><span class="nav-number">2.1.</span> <span class="nav-text">创建虚拟机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础信息配置"><span class="nav-number">2.2.</span> <span class="nav-text">基础信息配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改主机名和hosts"><span class="nav-number">2.2.1.</span> <span class="nav-text">修改主机名和hosts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置静态IP"><span class="nav-number">2.2.2.</span> <span class="nav-text">设置静态IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使设置生效"><span class="nav-number">2.2.3.</span> <span class="nav-text">使设置生效</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证设置是否成功"><span class="nav-number">2.2.4.</span> <span class="nav-text">验证设置是否成功</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#利用Transmit工具上传文件"><span class="nav-number">2.3.</span> <span class="nav-text">利用Transmit工具上传文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jdk安装"><span class="nav-number">2.4.</span> <span class="nav-text">jdk安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装wget"><span class="nav-number">2.5.</span> <span class="nav-text">安装wget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换163源"><span class="nav-number">2.6.</span> <span class="nav-text">更换163源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更新时间"><span class="nav-number">2.7.</span> <span class="nav-text">更新时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装hadoop"><span class="nav-number">2.8.</span> <span class="nav-text">安装hadoop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置core-site-xml文件"><span class="nav-number">2.9.</span> <span class="nav-text">配置core-site.xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置hdfs-site-xml文件"><span class="nav-number">2.10.</span> <span class="nav-text">配置hdfs-site.xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置mapred-site-xml文件"><span class="nav-number">2.11.</span> <span class="nav-text">配置mapred-site.xml文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置slaves文件"><span class="nav-number">2.12.</span> <span class="nav-text">配置slaves文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置yarn-site-xml"><span class="nav-number">2.13.</span> <span class="nav-text">配置yarn-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#复制虚拟机"><span class="nav-number">2.14.</span> <span class="nav-text">复制虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#克隆虚拟机"><span class="nav-number">2.14.1.</span> <span class="nav-text">克隆虚拟机</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置SSH免密"><span class="nav-number">2.15.</span> <span class="nav-text">设置SSH免密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对所有节点进行免密"><span class="nav-number">2.16.</span> <span class="nav-text">对所有节点进行免密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装zookeeper"><span class="nav-number">2.17.</span> <span class="nav-text">安装zookeeper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动journalnode"><span class="nav-number">2.18.</span> <span class="nav-text">启动journalnode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化任一namenode"><span class="nav-number">2.19.</span> <span class="nav-text">格式化任一namenode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#给另一namenode同步数据"><span class="nav-number">2.20.</span> <span class="nav-text">给另一namenode同步数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#格式化zkfc"><span class="nav-number">2.21.</span> <span class="nav-text">格式化zkfc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动hdfs集群"><span class="nav-number">2.22.</span> <span class="nav-text">启动hdfs集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行wordcount测试"><span class="nav-number">2.23.</span> <span class="nav-text">运行wordcount测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在macos下配置hadoop的环境"><span class="nav-number">3.</span> <span class="nav-text">在macos下配置hadoop的环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载Hadoop源码"><span class="nav-number">3.1.</span> <span class="nav-text">下载Hadoop源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-Hadoop-环境变量"><span class="nav-number">3.2.</span> <span class="nav-text">添加 Hadoop 环境变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Haoop配置文件"><span class="nav-number">3.3.</span> <span class="nav-text">修改Haoop配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-hadoop-env-sh-文件"><span class="nav-number">3.4.</span> <span class="nav-text">修改 hadoop-env.sh 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改-core-site-xml-文件"><span class="nav-number">3.5.</span> <span class="nav-text">修改 core-site.xml 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件系统-hdfs-site-xml"><span class="nav-number">3.6.</span> <span class="nav-text">配置文件系统 hdfs-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置计算框架-mapred-site-xml"><span class="nav-number">3.7.</span> <span class="nav-text">配置计算框架 mapred-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置文件系统-yarn-site-xml"><span class="nav-number">3.8.</span> <span class="nav-text">配置文件系统 yarn-site.xml</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hadoop-namenode-格式化"><span class="nav-number">3.9.</span> <span class="nav-text">Hadoop namenode 格式化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动-Hadoop-集群"><span class="nav-number">3.10.</span> <span class="nav-text">启动 Hadoop 集群</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看进程是否启动"><span class="nav-number">3.11.</span> <span class="nav-text">查看进程是否启动</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -2533,6 +1034,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

