@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://images.xianyu123.club/require.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/LFI示例.png?imageslim">
 <meta property="og:image" content="http://images.xianyu123.club/RFI示例.png?imageslim">
-<meta property="og:updated_time" content="2019-08-22T07:36:41.000Z">
+<meta property="og:updated_time" content="2020-08-02T06:17:53.141Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈php文件包含漏洞">
 <meta name="twitter:description" content="php文件包含漏洞学习合上吧，没有新姿势。">
@@ -487,8 +487,21 @@
 <p>执行命令：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=data:text/plain,&lt;?php system(&apos;whoami&apos;);?&gt;</span><br></pre></td></tr></table></figure>
 <p>姿势二：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8%2b</span><br></pre></td></tr></table></figure>
-<h2 id="3-包含Session文件"><a href="#3-包含Session文件" class="headerlink" title="3. 包含Session文件"></a>3. 包含Session文件</h2><h2 id="4-包含日志文件，比如Web-Server的acess-log"><a href="#4-包含日志文件，比如Web-Server的acess-log" class="headerlink" title="4. 包含日志文件，比如Web Server的acess log"></a>4. 包含日志文件，比如Web Server的acess log</h2><h2 id="5-包含-proc-self-environ文件"><a href="#5-包含-proc-self-environ文件" class="headerlink" title="5. 包含/proc/self/environ文件"></a>5. 包含/proc/self/environ文件</h2><h2 id="6-包含上传的临时文件-RFC1867"><a href="#6-包含上传的临时文件-RFC1867" class="headerlink" title="6. 包含上传的临时文件(RFC1867)"></a>6. 包含上传的临时文件(RFC1867)</h2><h2 id="7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><a href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析" class="headerlink" title="7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"></a>7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</h2><h1 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index.php?file=data:text/plain;base64,PD9waHAgcGhwaW5mbygpOz8+</span><br></pre></td></tr></table></figure>
+<h2 id="3-包含Session文件"><a href="#3-包含Session文件" class="headerlink" title="3. 包含Session文件"></a>3. 包含Session文件</h2><p>利用条件：session文件路径已知，且其中内容部分可控。</p>
+<p>常见的php-session存放位置：</p>
+<ol>
+<li>/var/lib/php/sess_PHPSESSID</li>
+<li>/var/lib/php/sess_PHPSESSID</li>
+<li>/tmp/sess_PHPSESSID</li>
+<li>/tmp/sessions/sess_PHPSESSID</li>
+</ol>
+<h2 id="4-包含日志文件"><a href="#4-包含日志文件" class="headerlink" title="4. 包含日志文件"></a>4. 包含日志文件</h2><h3 id="Web-Server的日志"><a href="#Web-Server的日志" class="headerlink" title="Web Server的日志"></a>Web Server的日志</h3><p>利用条件： 需要知道服务器日志的存储路径，且日志文件可读。</p>
+<p>很多时候，web服务器会将请求写入到日志文件中，比如说apache。在用户发起请求时，会将请求写入<code>access.log</code>，当发生错误时将错误写入<code>error.log</code>。</p>
+<p>默认情况下，<code>apache</code>日志保存路径在<code>/var/log/apache2/</code></p>
+<p><code>nginx</code>日志保存在<code>/var/log/nginx</code></p>
+<h3 id="SSH-log"><a href="#SSH-log" class="headerlink" title="SSH log"></a>SSH log</h3><p>利用条件：需要知道ssh-log的位置，且可读。默认情况下为 /var/log/auth.log</p>
+<h2 id="5-包含-proc-self-environ文件"><a href="#5-包含-proc-self-environ文件" class="headerlink" title="5. 包含/proc/self/environ文件"></a>5. 包含/proc/self/environ文件</h2><h2 id="6-包含上传的临时文件-RFC1867"><a href="#6-包含上传的临时文件-RFC1867" class="headerlink" title="6. 包含上传的临时文件(RFC1867)"></a>6. 包含上传的临时文件(RFC1867)</h2><h2 id="7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><a href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析" class="headerlink" title="7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"></a>7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</h2><h1 id="防御方法"><a href="#防御方法" class="headerlink" title="防御方法"></a>防御方法</h1><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li>《白帽子讲Web安全》</li>
 <li><a href="https://chybeta.github.io/2017/10/08/php%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E/" target="_blank" rel="noopener">Chybeta:php文件包含漏洞</a></li>
 <li><a href="http://phplaber.iteye.com/blog/1702044" target="_blank" rel="noopener">phplaber:远程文件包含</a></li>
@@ -513,7 +526,7 @@
   <p><span>本文标题:</span><a href="/2018/10/25/php文件包含漏洞/">浅谈php文件包含漏洞</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2018年10月25日 - 21:07</p>
-  <p><span>最后更新:</span>2019年08月22日 - 15:36</p>
+  <p><span>最后更新:</span>2020年08月02日 - 14:17</p>
   <p><span>原始链接:</span><a href="/2018/10/25/php文件包含漏洞/" title="浅谈php文件包含漏洞">http://0clickjacking0.github.io/2018/10/25/php文件包含漏洞/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2018/10/25/php文件包含漏洞/" aria-label="复制成功！"></i></span>
   </p>
@@ -659,7 +672,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">50</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -751,6 +764,10 @@
                     <a href="http://flag0.com/" title="flag0师傅" target="_blank">flag0师傅</a>
                   </li>
                 
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jiang-niao.github.io/" title="JiangNiao" target="_blank">JiangNiao</a>
+                  </li>
+                
               </ul>
             </div>
           
@@ -770,7 +787,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导致文件包含漏洞的函数"><span class="nav-number">1.</span> <span class="nav-text">导致文件包含漏洞的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地文件包含"><span class="nav-number">1.1.</span> <span class="nav-text">本地文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">1.2.</span> <span class="nav-text">远程文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他文件操作函数"><span class="nav-number">1.3.</span> <span class="nav-text">其他文件操作函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地文件包含利用"><span class="nav-number">2.</span> <span class="nav-text">本地文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-包含用户上传的文件"><span class="nav-number">2.1.</span> <span class="nav-text">1. 包含用户上传的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-php伪协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. php伪协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php-input"><span class="nav-number">2.2.1.</span> <span class="nav-text">php://input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php-filter"><span class="nav-number">2.2.2.</span> <span class="nav-text">php://filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phar"><span class="nav-number">2.2.3.</span> <span class="nav-text">phar://</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">2.2.4.</span> <span class="nav-text">zip://</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-URI-schema"><span class="nav-number">2.2.5.</span> <span class="nav-text">data:URI schema</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-包含Session文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 包含Session文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-包含日志文件，比如Web-Server的acess-log"><span class="nav-number">2.4.</span> <span class="nav-text">4. 包含日志文件，比如Web Server的acess log</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-包含-proc-self-environ文件"><span class="nav-number">2.5.</span> <span class="nav-text">5. 包含/proc/self/environ文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-包含上传的临时文件-RFC1867"><span class="nav-number">2.6.</span> <span class="nav-text">6. 包含上传的临时文件(RFC1867)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><span class="nav-number">2.7.</span> <span class="nav-text">7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御方法"><span class="nav-number">3.</span> <span class="nav-text">防御方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#导致文件包含漏洞的函数"><span class="nav-number">1.</span> <span class="nav-text">导致文件包含漏洞的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#本地文件包含"><span class="nav-number">1.1.</span> <span class="nav-text">本地文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#远程文件包含"><span class="nav-number">1.2.</span> <span class="nav-text">远程文件包含</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他文件操作函数"><span class="nav-number">1.3.</span> <span class="nav-text">其他文件操作函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#本地文件包含利用"><span class="nav-number">2.</span> <span class="nav-text">本地文件包含利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-包含用户上传的文件"><span class="nav-number">2.1.</span> <span class="nav-text">1. 包含用户上传的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-php伪协议"><span class="nav-number">2.2.</span> <span class="nav-text">2. php伪协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#php-input"><span class="nav-number">2.2.1.</span> <span class="nav-text">php://input</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#php-filter"><span class="nav-number">2.2.2.</span> <span class="nav-text">php://filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#phar"><span class="nav-number">2.2.3.</span> <span class="nav-text">phar://</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zip"><span class="nav-number">2.2.4.</span> <span class="nav-text">zip://</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-URI-schema"><span class="nav-number">2.2.5.</span> <span class="nav-text">data:URI schema</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-包含Session文件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 包含Session文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-包含日志文件"><span class="nav-number">2.4.</span> <span class="nav-text">4. 包含日志文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web-Server的日志"><span class="nav-number">2.4.1.</span> <span class="nav-text">Web Server的日志</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSH-log"><span class="nav-number">2.4.2.</span> <span class="nav-text">SSH log</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-包含-proc-self-environ文件"><span class="nav-number">2.5.</span> <span class="nav-text">5. 包含/proc/self/environ文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-包含上传的临时文件-RFC1867"><span class="nav-number">2.6.</span> <span class="nav-text">6. 包含上传的临时文件(RFC1867)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析"><span class="nav-number">2.7.</span> <span class="nav-text">7. 包含其他应用创建的文件，比如数据库文件、缓存文件、应用日志等，需要具体情况具体分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#防御方法"><span class="nav-number">3.</span> <span class="nav-text">防御方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
