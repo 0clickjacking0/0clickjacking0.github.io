@@ -201,7 +201,7 @@
     <link href="http://0clickjacking0.github.io/2020/03/04/mac%E4%B8%8B%E4%BD%BF%E7%94%A8phpize%E5%AE%89%E8%A3%85php%E6%89%A9%E5%B1%95/"/>
     <id>http://0clickjacking0.github.io/2020/03/04/mac下使用phpize安装php扩展/</id>
     <published>2020-03-03T16:13:03.000Z</published>
-    <updated>2020-03-04T05:03:04.269Z</updated>
+    <updated>2020-08-24T02:37:17.722Z</updated>
     
     <content type="html"><![CDATA[<p>mac下使用phpize安装php扩展</p><a id="more"></a><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在PHP第一次编译的时候没有选择编译这个库，但是到后来又要用，pecl中又找不到对应的包，这时候我们只能编译源码来安装了</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>首先我们找到自己对应php版本的源码，<a href="https://www.php.net/releases/" target="_blank" rel="noopener">传送门</a></p><p>下载完成之后解压</p><p>这里我以5.6.40为例，进入到你想要安装库的目录，这里为以安装gd库来说明</p><p><img src="http://images.xianyu123.club/php_ext1.png" alt></p><p>gd扩展主要依赖zlib，freetype，libpng，libjpeg这4个库</p><p>所以我们先进行安装</p><p>依次执行命令</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">brew install zlib</span><br><span class="line">brew install freetype</span><br><span class="line">brew install libpng</span><br><span class="line">brew install libjpeg</span><br></pre></td></tr></table></figure><p>进入到对应的文件夹后，输入phpize，成功的话会显示对应的信息</p><p><img src="http://images.xianyu123.club/php_ext2.png" alt></p><p>执行即可，这里的二进制文件路径不一定跟我的一样，要写对路径，会出错</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./configure --with-php-config=/Users/xianyu123/.phpbrew/php/php-5.6.40/bin/php-config --with-jpeg-dir=/usr/local/opt/libjpeg --with-png-dir=/usr/local/opt/libpng --with-freetype-dir=/usr/local/opt/freetype --with-zlib-dir=/usr/local/opt/zlib</span><br></pre></td></tr></table></figure><p>其中–with-php-config是指向安装php后生成的一个配置工具,主要用于扩展的编译配置</p><p>其他的参数对应指向先前安装依赖的位置</p><p>然后执行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure><p>然后就会在自己的php扩展中出现<code>gd.so</code>，这说明我们安装成功了</p><p><img src="http://images.xianyu123.club/php_ext6.png" alt></p><p>我们只需要在php.ini中加入一行</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">extension=gd.so</span><br></pre></td></tr></table></figure><p>然后重启php-fpm即可完成</p>]]></content>
     
@@ -211,7 +211,7 @@
     
     </summary>
     
-      <category term="mac" scheme="http://0clickjacking0.github.io/categories/mac/"/>
+      <category term="PHP" scheme="http://0clickjacking0.github.io/categories/PHP/"/>
     
     
   </entry>
@@ -245,7 +245,7 @@
     <link href="http://0clickjacking0.github.io/2020/02/11/mac-phpstorm-php5-6-xdebug%E9%85%8D%E7%BD%AE/"/>
     <id>http://0clickjacking0.github.io/2020/02/11/mac-phpstorm-php5-6-xdebug配置/</id>
     <published>2020-02-11T02:52:31.000Z</published>
-    <updated>2020-08-24T02:34:15.836Z</updated>
+    <updated>2020-08-24T02:37:29.547Z</updated>
     
     <content type="html"><![CDATA[<p>mac+phpstorm+php5.6+chrome+xdebug配置</p><a id="more"></a><h2 id="0-环境说明"><a href="#0-环境说明" class="headerlink" title="0. 环境说明"></a>0. 环境说明</h2><p>macos15.2</p><p>php5.6</p><p>Phpstorm2018.2</p><p>nginx1.17</p><h2 id="1-安装xdebug"><a href="#1-安装xdebug" class="headerlink" title="1. 安装xdebug"></a>1. 安装xdebug</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pecl install xdebug-2.5.5</span><br></pre></td></tr></table></figure><h2 id="2-配置php-ini"><a href="#2-配置php-ini" class="headerlink" title="2. 配置php.ini"></a>2. 配置php.ini</h2><p>安装完成<code>xdebug</code>后会有提示语句</p><p><img src="http://images.xianyu123.club/xdebug2.png" alt></p><p>根据提示我们把下面这句话复制到<code>php.ini</code>中，因为我用的是phpbrew，所以路径可能有点不一样，大家根据自己实际<code>php.ini</code>的位置进行配置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zend_extension=/Users/xianyu123/.phpbrew/php/php-5.6.40/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so</span><br></pre></td></tr></table></figure><p>然后我们重启一下<code>php-fpm</code>，然后创建一个文件，内容如下，在网页端打开</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure><p>如果出现如下，则说明php端已经配置成功了</p><p><img src="http://images.xianyu123.club/xdebug1.png" alt></p><h2 id="3-配置phpstorm调试功能"><a href="#3-配置phpstorm调试功能" class="headerlink" title="3. 配置phpstorm调试功能"></a>3. 配置phpstorm调试功能</h2><p>先把下面的配置添加到<code>php.ini</code>中，然后重启php-fpm</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xdebug.remote_enable = 1</span><br><span class="line">xdebug.remote_handler = dbgp</span><br><span class="line">xdebug.remote_host = 127.0.0.1</span><br><span class="line">xdebug.remote_port = 9001</span><br><span class="line">xdebug.idekey = PHPSTORM</span><br></pre></td></tr></table></figure><p>然后在phpstorm的菜单栏<code>Preferences</code>中找到<code>Debug</code>，填写端口为<code>9001</code></p><p><img src="http://images.xianyu123.club/xdebug3.png" alt></p><p>然后填写</p><p>IDE key：刚才写入<code>php.ini)</code>中</p><p>host：127.0.0.1</p><p>port：项目运行端口，我是用82端口搭建的，有些师傅可能是80</p><p><img src="http://images.xianyu123.club/xdebug4.png" alt></p><p>然后在servers中配置信息</p><p>Name：随便取</p><p>Host：127.0.0.1</p><p>Port：按照你的项目运行端口</p><p>Debugger：按照下图的</p><p><img src="http://images.xianyu123.club/20200522195638.png" alt="image-20200211155643870"></p><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>打好断点，然后点击这个绿色的小虫子</p><p><img src="http://images.xianyu123.club/xdebug5.png" alt></p><p>按这个一步一步调试</p><p><img src="http://images.xianyu123.club/xdebug6.png" alt></p><p>出现这样说明配置成功了</p><p><img src="http://images.xianyu123.club/xdebug7.png" alt></p><h2 id="4-chrome调试配置"><a href="#4-chrome调试配置" class="headerlink" title="4. chrome调试配置"></a>4. chrome调试配置</h2><p>先下载扩展</p><p>右键扩展选项，在IDE key中选择phpstorm，然后保存，这里名字不能被修改，只能用<code>PHPSTORM</code></p><p><img src="http://images.xianyu123.club/xdebug8.png" alt></p><p>然后在网页打开php，选择debug</p><p><img src="http://images.xianyu123.club/xdebug9.png" alt></p><p>并且在phpstorm中开启这个电话按钮，变成绿色</p><p><img src="http://images.xianyu123.club/xdebug11.png" alt></p><p>然后在phpstorm中就有弹窗，选择同意，这样就可以快乐的调试了</p><p><img src="http://images.xianyu123.club/xdebug10.png" alt></p>]]></content>
     
@@ -255,7 +255,7 @@
     
     </summary>
     
-      <category term="macos" scheme="http://0clickjacking0.github.io/categories/macos/"/>
+      <category term="PHP" scheme="http://0clickjacking0.github.io/categories/PHP/"/>
     
     
   </entry>
@@ -390,7 +390,7 @@
     <link href="http://0clickjacking0.github.io/2020/01/14/%E8%A7%A3%E5%86%B3mac%E4%B8%8Bssh%E8%87%AA%E5%8A%A8%E4%B8%AD%E6%96%AD%E9%97%AE%E9%A2%98/"/>
     <id>http://0clickjacking0.github.io/2020/01/14/解决mac下ssh自动中断问题/</id>
     <published>2020-01-14T11:20:45.000Z</published>
-    <updated>2020-01-14T11:24:29.452Z</updated>
+    <updated>2020-08-24T02:38:00.387Z</updated>
     
     <content type="html"><![CDATA[<p>解决mac下ssh自动中断问题</p><a id="more"></a><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>mac下ssh连接之后，如果长时间没有操作，服务器会自动断开这个连接，也就是ssh客户端会卡住，不能输入。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在<code>~/.ssh/config</code>（如果没有<code>config</code>文件新建一个即可）中写入下面内容，保存即可</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerAliveInterval 30</span><br></pre></td></tr></table></figure><p>每隔30秒，mac客户端会主动向服务器发出一次请求。这样就可以解决这个问题了</p>]]></content>
     
@@ -400,7 +400,7 @@
     
     </summary>
     
-      <category term="mac" scheme="http://0clickjacking0.github.io/categories/mac/"/>
+      <category term="macos" scheme="http://0clickjacking0.github.io/categories/macos/"/>
     
     
   </entry>
@@ -410,7 +410,7 @@
     <link href="http://0clickjacking0.github.io/2020/01/14/mac%E4%B8%8B%E5%AE%89%E8%A3%85consolas%E5%AD%97%E4%BD%93/"/>
     <id>http://0clickjacking0.github.io/2020/01/14/mac下安装consolas字体/</id>
     <published>2020-01-14T10:30:31.000Z</published>
-    <updated>2020-01-16T12:44:51.780Z</updated>
+    <updated>2020-08-24T02:38:22.908Z</updated>
     
     <content type="html"><![CDATA[<p>mac下安装consolas字体</p><a id="more"></a><h2 id="安装过程"><a href="#安装过程" class="headerlink" title="安装过程"></a>安装过程</h2><ol><li><code>mkdir consolas</code></li><li><code>cd consolas</code></li><li><code>curl -LO https://sourceforge.net/projects/mscorefonts2/files/cabs/PowerPointViewer.exe</code></li><li><code>cabextract PowerPointViewer.exe</code></li><li><code>cabextract ppviewer.cab</code></li><li><code>open CONSOLA*.TTF</code></li></ol><p>然后就可以快乐的使用<code>consolas</code>字体啦</p>]]></content>
     
@@ -420,7 +420,7 @@
     
     </summary>
     
-      <category term="mac" scheme="http://0clickjacking0.github.io/categories/mac/"/>
+      <category term="macos" scheme="http://0clickjacking0.github.io/categories/macos/"/>
     
     
   </entry>
