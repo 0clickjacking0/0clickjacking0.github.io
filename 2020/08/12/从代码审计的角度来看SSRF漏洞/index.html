@@ -81,14 +81,17 @@
 
 
 
+<meta name="description" content="从代码审计的角度来看SSRF漏洞">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅析SSRF原理及利用方式">
-<meta property="og:url" content="http://0clickjacking0.github.io/2020/08/12/浅析SSRF原理及利用方式/index.html">
+<meta property="og:title" content="从代码审计的角度来看SSRF漏洞">
+<meta property="og:url" content="http://0clickjacking0.github.io/2020/08/12/从代码审计的角度来看SSRF漏洞/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="从代码审计的角度来看SSRF漏洞">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-08-12T09:18:36.671Z">
+<meta property="og:updated_time" content="2020-08-24T02:24:10.142Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅析SSRF原理及利用方式">
+<meta name="twitter:title" content="从代码审计的角度来看SSRF漏洞">
+<meta name="twitter:description" content="从代码审计的角度来看SSRF漏洞">
 
 
 
@@ -118,14 +121,14 @@
 
 
 
-  <link rel="canonical" href="http://0clickjacking0.github.io/2020/08/12/浅析SSRF原理及利用方式/">
+  <link rel="canonical" href="http://0clickjacking0.github.io/2020/08/12/从代码审计的角度来看SSRF漏洞/">
 
 
 
 
 
 
-  <title>浅析SSRF原理及利用方式 | xianyu123's Blog</title>
+  <title>从代码审计的角度来看SSRF漏洞 | xianyu123's Blog</title>
   
 
 
@@ -292,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/08/12/浅析SSRF原理及利用方式/">
+    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/08/12/从代码审计的角度来看SSRF漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xianyu123">
@@ -309,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅析SSRF原理及利用方式</h1>
+          <h1 class="post-title" itemprop="name headline">从代码审计的角度来看SSRF漏洞</h1>
         
 
         <div class="post-meta">
@@ -332,6 +335,28 @@
           </span>
 
           
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
+                    <span itemprop="name">Web Security</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -340,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2020/08/12/浅析SSRF原理及利用方式/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/12/浅析SSRF原理及利用方式/" itemprop="commentCount"></span>
+                <a href="/2020/08/12/从代码审计的角度来看SSRF漏洞/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/12/从代码审计的角度来看SSRF漏洞/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -349,7 +374,7 @@
 
           
           
-             <span id="/2020/08/12/浅析SSRF原理及利用方式/" class="leancloud_visitors" data-flag-title="浅析SSRF原理及利用方式">
+             <span id="/2020/08/12/从代码审计的角度来看SSRF漏洞/" class="leancloud_visitors" data-flag-title="从代码审计的角度来看SSRF漏洞">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -380,7 +405,15 @@
       
 
       
-        <a id="more"></a>
+        <p>从代码审计的角度来看SSRF漏洞</p>
+<a id="more"></a>
+<h1 id="漏洞简介"><a href="#漏洞简介" class="headerlink" title="漏洞简介"></a>漏洞简介</h1><p>SSRF(Server-side Request Forge, 服务端请求伪造)。<br>由攻击者构造的攻击链接传给服务端执行造成的漏洞，一般用来在外网探测或攻击内网服务。</p>
+<h1 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h1><h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p><code>file_get_contents()</code>、<code>fsockopen()</code>、<code>curl_exec()</code>、<code>fopen()</code>、<code>readfile()</code>等函数使用不当会造成SSRF漏洞</p>
+<h2 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h2><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ul>
+<li><a href="https://www.anquanke.com/post/id/145519" target="_blank" rel="noopener">浅析SSRF原理及利用方式</a></li>
+<li><a href="https://xz.aliyun.com/t/7405" target="_blank" rel="noopener">SSRF漏洞的利用与攻击内网应用实战</a></li>
+</ul>
+
       
     </div>
     
@@ -396,12 +429,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2020/08/12/浅析SSRF原理及利用方式/">浅析SSRF原理及利用方式</a></p>
+  <p><span>本文标题:</span><a href="/2020/08/12/从代码审计的角度来看SSRF漏洞/">从代码审计的角度来看SSRF漏洞</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2020年08月12日 - 17:18</p>
-  <p><span>最后更新:</span>2020年08月12日 - 17:18</p>
-  <p><span>原始链接:</span><a href="/2020/08/12/浅析SSRF原理及利用方式/" title="浅析SSRF原理及利用方式">http://0clickjacking0.github.io/2020/08/12/浅析SSRF原理及利用方式/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/08/12/浅析SSRF原理及利用方式/" aria-label="复制成功！"></i></span>
+  <p><span>最后更新:</span>2020年08月24日 - 10:24</p>
+  <p><span>原始链接:</span><a href="/2020/08/12/从代码审计的角度来看SSRF漏洞/" title="从代码审计的角度来看SSRF漏洞">http://0clickjacking0.github.io/2020/08/12/从代码审计的角度来看SSRF漏洞/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/08/12/从代码审计的角度来看SSRF漏洞/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -520,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -547,7 +589,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -641,6 +683,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞简介"><span class="nav-number">1.</span> <span class="nav-text">漏洞简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#漏洞利用"><span class="nav-number">2.</span> <span class="nav-text">漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PHP"><span class="nav-number">2.1.</span> <span class="nav-text">PHP</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.1.1.</span> <span class="nav-text">函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java"><span class="nav-number">2.2.</span> <span class="nav-text">Java</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
