@@ -81,23 +81,17 @@
 
 
 
-<meta name="description" content="约束攻击，学习姿势">
+<meta name="description" content="CTF中关于md5的一些总结">
 <meta property="og:type" content="article">
-<meta property="og:title" content="浅谈sql约束攻击">
-<meta property="og:url" content="http://0clickjacking0.github.io/2019/02/04/浅谈sql约束攻击/index.html">
+<meta property="og:title" content="CTF中关于md5的一些总结">
+<meta property="og:url" content="http://0clickjacking0.github.io/2020/08/24/CTF中关于md5的一些总结/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
-<meta property="og:description" content="约束攻击，学习姿势">
+<meta property="og:description" content="CTF中关于md5的一些总结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://images.xianyu123.club/constraint1.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_1.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_2.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_3.png?imageslim">
-<meta property="og:image" content="http://images.xianyu123.club/bugku_skctf1_4.png?imageslim">
-<meta property="og:updated_time" content="2019-05-11T12:52:58.000Z">
+<meta property="og:updated_time" content="2020-08-25T14:36:24.818Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈sql约束攻击">
-<meta name="twitter:description" content="约束攻击，学习姿势">
-<meta name="twitter:image" content="http://images.xianyu123.club/constraint1.png?imageslim">
+<meta name="twitter:title" content="CTF中关于md5的一些总结">
+<meta name="twitter:description" content="CTF中关于md5的一些总结">
 
 
 
@@ -127,14 +121,14 @@
 
 
 
-  <link rel="canonical" href="http://0clickjacking0.github.io/2019/02/04/浅谈sql约束攻击/">
+  <link rel="canonical" href="http://0clickjacking0.github.io/2020/08/24/CTF中关于md5的一些总结/">
 
 
 
 
 
 
-  <title>浅谈sql约束攻击 | xianyu123's Blog</title>
+  <title>CTF中关于md5的一些总结 | xianyu123's Blog</title>
   
 
 
@@ -301,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2019/02/04/浅谈sql约束攻击/">
+    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2020/08/24/CTF中关于md5的一些总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="xianyu123">
@@ -318,7 +312,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈sql约束攻击</h1>
+          <h1 class="post-title" itemprop="name headline">CTF中关于md5的一些总结</h1>
         
 
         <div class="post-meta">
@@ -330,8 +324,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-04T16:13:03+08:00">
-                2019-02-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-08-24T14:54:15+08:00">
+                2020-08-24
               </time>
             
 
@@ -353,8 +347,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web-Security/" itemprop="url" rel="index">
-                    <span itemprop="name">Web Security</span>
+                  <a href="/categories/CTF/" itemprop="url" rel="index">
+                    <span itemprop="name">CTF</span>
                   </a>
                 </span>
 
@@ -371,8 +365,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/02/04/浅谈sql约束攻击/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/02/04/浅谈sql约束攻击/" itemprop="commentCount"></span>
+                <a href="/2020/08/24/CTF中关于md5的一些总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2020/08/24/CTF中关于md5的一些总结/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -380,7 +374,7 @@
 
           
           
-             <span id="/2019/02/04/浅谈sql约束攻击/" class="leancloud_visitors" data-flag-title="浅谈sql约束攻击">
+             <span id="/2020/08/24/CTF中关于md5的一些总结/" class="leancloud_visitors" data-flag-title="CTF中关于md5的一些总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -411,28 +405,16 @@
       
 
       
-        <p>约束攻击，学习姿势</p>
+        <p>CTF中关于md5的一些总结</p>
 <a id="more"></a>
-<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在bugku做ctf题目的时候，发现了约束攻击这种手法，于是上google学习了新的姿势。感谢作者Dhaval Kapil的文章<a href="https://dhavalkapil.com/blogs/SQL-Attack-Constraint-Based/" target="_blank" rel="noopener">SQL Attack (Constraint-based)</a></p>
-<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><p>数据库字符串比较：数据库在进行字符串比较是会将两个字符串长度保持一致，短的字符串增加长度。假设A字符串为<code>hello</code>，B字符串为<code>hell</code>，数据库会把字符串B变成<code>hell</code>，增加一个空格以保持两个字符串长度一致</p>
-<p><strong>INSERT截断</strong>：这是数据库的另一个特性，当设计一个字段时，我们都必须对其设定一个最大长度，比如CHAR(10)，VARCHAR(20)等等。但是当实际插入数据的长度超过限制时，数据库就会将其进行截断，只保留限定的长度。</p>
-<h1 id="具体场景"><a href="#具体场景" class="headerlink" title="具体场景"></a>具体场景</h1><p>我们来创建一个数据表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> te_constraint(</span><br><span class="line">username <span class="built_in">varchar</span>(<span class="number">10</span>),</span><br><span class="line">passwd <span class="built_in">varchar</span>(<span class="number">10</span>)</span><br><span class="line">)<span class="keyword">charset</span>=utf8;</span><br></pre></td></tr></table></figure>
-<p>然后向其中插入两组数据，第二组数据后面加入了6个空格</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> te_constraint <span class="keyword">values</span>(<span class="string">'admin'</span>,<span class="string">'123456'</span>),</span><br><span class="line">	(<span class="string">'admin           '</span>,<span class="string">'12345678'</span>);</span><br></pre></td></tr></table></figure>
-<p>然后我们发现查处了两组数据</p>
-<p><img src="http://images.xianyu123.club/constraint1.png?imageslim" alt></p>
-<h1 id="CTF中的约束攻击"><a href="#CTF中的约束攻击" class="headerlink" title="CTF中的约束攻击"></a>CTF中的约束攻击</h1><p>来自bugkuctf的<a href="http://123.206.31.85:49163/" target="_blank" rel="noopener">login1(SKCTF)</a></p>
-<p>首先我们没用账号，所以先注册一波账号。</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_1.png?imageslim" alt></p>
-<p>然后发现提示</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_2.png?imageslim" alt></p>
-<p>然后我们就去注册一个admin账户</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_3.png?imageslim" alt></p>
-<p>发现admin账户已经存在，如果是挖漏洞的话我会考虑弱口令，注入，xss，csrf等漏洞，这里的话已经知道是约束攻击，我们也不知道admin这个用户名长度是多少，就在admin后面加尽可能多的空格吧，如果不行就再多加一点空格，构造一个新的admin账户。</p>
-<p>然后注册成功，得到flag</p>
-<p><img src="http://images.xianyu123.club/bugku_skctf1_4.png?imageslim" alt></p>
-
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近打了挺多ctf，碰到挺多关于md5的一些问题，或者一些变种的题目，虽然已经是烂大街的问题了，但是还是需要总结一下，方便下次比赛可以直接用脚本</p>
+<h1 id="CTF中的一些案例"><a href="#CTF中的一些案例" class="headerlink" title="CTF中的一些案例"></a>CTF中的一些案例</h1><h2 id="案例1——ciscn2020初赛——easytrick"><a href="#案例1——ciscn2020初赛——easytrick" class="headerlink" title="案例1——ciscn2020初赛——easytrick"></a>案例1——ciscn2020初赛——easytrick</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">trick</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $trick1;</span><br><span class="line">    <span class="keyword">public</span> $trick2;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__destruct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;trick1 = (string)<span class="keyword">$this</span>-&gt;trick1;</span><br><span class="line">        <span class="keyword">if</span>(strlen(<span class="keyword">$this</span>-&gt;trick1) &gt; <span class="number">5</span> || strlen(<span class="keyword">$this</span>-&gt;trick2) &gt; <span class="number">5</span>)&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">"你太长了"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;trick1 !== <span class="keyword">$this</span>-&gt;trick2 &amp;&amp; md5(<span class="keyword">$this</span>-&gt;trick1) === md5(<span class="keyword">$this</span>-&gt;trick2) &amp;&amp; <span class="keyword">$this</span>-&gt;trick1 != <span class="keyword">$this</span>-&gt;trick2)&#123;</span><br><span class="line">            <span class="keyword">echo</span> file_get_contents(<span class="string">"/flag"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">highlight_file(<span class="keyword">__FILE__</span>);</span><br><span class="line">unserialize($_GET[<span class="string">'trick'</span>]);</span><br></pre></td></tr></table></figure>
+<p>这里我们抛开反序列化不谈，这题本质上需要我们构造<code>trick1=NAN</code>，<code>trick2=NAN</code>即可绕过。原理也很简单，NaN与所有值都不相等，包括它自己。当然也可以用INF绕过，原理类似，这里不过多赘述</p>
+<h2 id="案例2——强网杯2020——Funhash"><a href="#案例2——强网杯2020——Funhash" class="headerlink" title="案例2——强网杯2020——Funhash"></a>案例2——强网杯2020——Funhash</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">include</span> <span class="string">'conn.php'</span>;</span><br><span class="line">highlight_file(<span class="string">"index.php"</span>);</span><br><span class="line"><span class="comment">//level 1</span></span><br><span class="line"><span class="keyword">if</span> ($_GET[<span class="string">"hash1"</span>] != hash(<span class="string">"md4"</span>, $_GET[<span class="string">"hash1"</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'level 1 failed'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//level 2</span></span><br><span class="line"><span class="keyword">if</span>($_GET[<span class="string">'hash2'</span>] === $_GET[<span class="string">'hash3'</span>] || md5($_GET[<span class="string">'hash2'</span>]) !== md5($_GET[<span class="string">'hash3'</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">die</span>(<span class="string">'level 2 failed'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//level 3</span></span><br><span class="line">$query = <span class="string">"SELECT * FROM flag WHERE password = '"</span> . md5($_GET[<span class="string">"hash4"</span>],<span class="keyword">true</span>) . <span class="string">"'"</span>;</span><br><span class="line">$result = $mysqli-&gt;query($query);</span><br><span class="line">$row = $result-&gt;fetch_assoc(); </span><br><span class="line">var_dump($row);</span><br><span class="line">$result-&gt;free();</span><br><span class="line">$mysqli-&gt;close();</span><br></pre></td></tr></table></figure>
+<p>这里重点关注<code>level 1</code>，其他两关都是老生常谈的东西，无须过多赘述。这里我已经写好了脚本，下次遇到这种<code>md4</code>的题目直接爆破干它</p>
+<p><strong>exp.php</strong></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$payload = <span class="string">"0123456789"</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">calc_md4</span><span class="params">($s)</span></span>&#123;</span><br><span class="line">    $s = <span class="string">"0e"</span>.$s;</span><br><span class="line">    $md4 = hash(<span class="string">"md4"</span>, $s);</span><br><span class="line">    <span class="keyword">if</span> (substr($md4, <span class="number">0</span>, <span class="number">2</span>) === <span class="string">"0e"</span> &amp;&amp; ctype_digit(substr($md4, <span class="number">2</span>))) &#123;</span><br><span class="line">        <span class="keyword">echo</span> $s.PHP_EOL.$md4.PHP_EOL;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getstr</span><span class="params">($payload,$s,$slen)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(strlen($s) == $slen)&#123;</span><br><span class="line">        calc_md4($s);</span><br><span class="line">		<span class="keyword">return</span> $s;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>($i = <span class="number">0</span>;$i&lt;strlen($payload);$i++)&#123;</span><br><span class="line"></span><br><span class="line">        $sl = $s.$payload[$i];</span><br><span class="line">        getstr($payload, $sl, $slen);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//字符串长度从0到30，肯定找得到</span></span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">3</span>;$i&lt;<span class="number">30</span>;$i++)&#123;</span><br><span class="line">    getstr($payload,<span class="string">''</span>,$i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="案例3——"><a href="#案例3——" class="headerlink" title="案例3——"></a>案例3——</h2>
       
     </div>
     
@@ -448,12 +430,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/02/04/浅谈sql约束攻击/">浅谈sql约束攻击</a></p>
+  <p><span>本文标题:</span><a href="/2020/08/24/CTF中关于md5的一些总结/">CTF中关于md5的一些总结</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
-  <p><span>发布时间:</span>2019年02月04日 - 16:13</p>
-  <p><span>最后更新:</span>2019年05月11日 - 20:52</p>
-  <p><span>原始链接:</span><a href="/2019/02/04/浅谈sql约束攻击/" title="浅谈sql约束攻击">http://0clickjacking0.github.io/2019/02/04/浅谈sql约束攻击/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2019/02/04/浅谈sql约束攻击/" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2020年08月24日 - 14:54</p>
+  <p><span>最后更新:</span>2020年08月25日 - 22:36</p>
+  <p><span>原始链接:</span><a href="/2020/08/24/CTF中关于md5的一些总结/" title="CTF中关于md5的一些总结">http://0clickjacking0.github.io/2020/08/24/CTF中关于md5的一些总结/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/08/24/CTF中关于md5的一些总结/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
 </div>
@@ -505,8 +487,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/03/ubuntu-server彩色终端配置/" rel="next" title="ubuntu server终端内置颜色开启">
-                <i class="fa fa-chevron-left"></i> ubuntu server终端内置颜色开启
+              <a href="/2020/08/15/从零开始学习struts2漏洞———S2-001/" rel="next" title="从零开始学习struts2漏洞———S2-001">
+                <i class="fa fa-chevron-left"></i> 从零开始学习struts2漏洞———S2-001
               </a>
             
           </div>
@@ -514,10 +496,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/21/hexo-next添加代码块复制功能/" rel="prev" title="hexo next添加代码块复制功能">
-                hexo next添加代码块复制功能 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -712,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点"><span class="nav-number">2.</span> <span class="nav-text">知识点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#具体场景"><span class="nav-number">3.</span> <span class="nav-text">具体场景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTF中的约束攻击"><span class="nav-number">4.</span> <span class="nav-text">CTF中的约束攻击</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTF中的一些案例"><span class="nav-number">2.</span> <span class="nav-text">CTF中的一些案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#案例1——ciscn2020初赛——easytrick"><span class="nav-number">2.1.</span> <span class="nav-text">案例1——ciscn2020初赛——easytrick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例2——强网杯2020——Funhash"><span class="nav-number">2.2.</span> <span class="nav-text">案例2——强网杯2020——Funhash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#案例3——"><span class="nav-number">2.3.</span> <span class="nav-text">案例3——</span></a></li></ol></li></ol></div>
             
 
           </div>
