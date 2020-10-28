@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://0clickjacking0.github.io/"/>
-  <updated>2020-09-06T14:15:33.712Z</updated>
+  <updated>2020-10-04T07:31:19.904Z</updated>
   <id>http://0clickjacking0.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>oh-my-zsh隐藏用户名或者主机名</title>
+    <link href="http://0clickjacking0.github.io/2020/10/04/oh-my-zsh%E9%9A%90%E8%97%8F%E7%94%A8%E6%88%B7%E5%90%8D%E6%88%96%E8%80%85%E4%B8%BB%E6%9C%BA%E5%90%8D/"/>
+    <id>http://0clickjacking0.github.io/2020/10/04/oh-my-zsh隐藏用户名或者主机名/</id>
+    <published>2020-10-04T07:29:04.000Z</published>
+    <updated>2020-10-04T07:31:19.904Z</updated>
+    
+    <content type="html"><![CDATA[<p>oh-my-zsh隐藏用户名或者主机名</p><a id="more"></a><p>修改<code>vim ~/.zshrc</code>文件,在文件底部增加</p><h2 id="隐藏用户名和主机名"><a href="#隐藏用户名和主机名" class="headerlink" title="隐藏用户名和主机名"></a>隐藏用户名和主机名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">prompt_context() &#123;&#125;</span><br></pre></td></tr></table></figure><h2 id="只保留用户名，隐藏主机名"><a href="#只保留用户名，隐藏主机名" class="headerlink" title="只保留用户名，隐藏主机名"></a>只保留用户名，隐藏主机名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt_context() &#123;</span><br><span class="line">  if [[ &quot;$USER&quot; != &quot;$DEFAULT_USER&quot; || -n &quot;$SSH_CLIENT&quot; ]]; then</span><br><span class="line">    prompt_segment black default &quot;%(!.%&#123;%F&#123;yellow&#125;%&#125;.)$USER&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="只保留主机名，隐藏用户名"><a href="#只保留主机名，隐藏用户名" class="headerlink" title="只保留主机名，隐藏用户名"></a>只保留主机名，隐藏用户名</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">prompt_context() &#123;</span><br><span class="line">  if [[ &quot;$USER&quot; != &quot;$DEFAULT_USER&quot; || -n &quot;$SSH_CLIENT&quot; ]]; then</span><br><span class="line">    prompt_segment black default &quot;%(!.%&#123;%F&#123;yellow&#125;%&#125;.)$HOST&quot;</span><br><span class="line">  fi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>修改后执行 <code>source ~/.zshrc</code>才能生效</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;oh-my-zsh隐藏用户名或者主机名&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>CTF中关于md5的一些总结</title>
@@ -241,17 +259,13 @@
     <link href="http://0clickjacking0.github.io/2020/02/12/php%E6%97%A0%E5%8F%82%E6%95%B0RCE%E5%B0%8F%E7%BB%93/"/>
     <id>http://0clickjacking0.github.io/2020/02/12/php无参数RCE小结/</id>
     <published>2020-02-12T13:38:18.000Z</published>
-    <updated>2020-02-14T03:02:02.934Z</updated>
+    <updated>2020-09-07T08:05:19.826Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$functions = get_defined_functions();</span><br><span class="line"><span class="comment">//print_r($functions);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($functions[<span class="string">'internal'</span>] <span class="keyword">as</span> $function_name)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">'/^[a-zA-Z]+$/'</span>,$function_name,$match))</span><br><span class="line">            <span class="keyword">echo</span> $match[<span class="number">0</span>].PHP_EOL;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>php无参数RCE小结</p><a id="more"></a><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近的挺多比赛都遇到了php无参数RCE的题目，这里就直接上题目来讲解一下</p><h1 id="CTF中的题目"><a href="#CTF中的题目" class="headerlink" title="CTF中的题目"></a>CTF中的题目</h1><h2 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h2><p>来自Code Breaking的phplimit</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[^\W]+\((?R)?\)/'</span>, <span class="string">''</span>, $_GET[<span class="string">'code'</span>])) &#123;    </span><br><span class="line">    <span class="keyword">eval</span>($_GET[<span class="string">'code'</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这里就是让我们构造传入的code不带参数（空参），然后分号结尾的恶意代码</p><h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><h3 id="方法3"><a href="#方法3" class="headerlink" title="方法3"></a>方法3</h3><h2 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$functions = get_defined_functions();</span><br><span class="line"><span class="comment">//print_r($functions);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($functions[<span class="string">'internal'</span>] <span class="keyword">as</span> $function_name)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">'/^[a-zA-Z]+$/'</span>,$function_name,$match))</span><br><span class="line">            <span class="keyword">echo</span> $match[<span class="number">0</span>].PHP_EOL;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>## </p>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span
-      
+      &lt;p&gt;php无参数RCE小结&lt;/p&gt;
     
     </summary>
     
@@ -401,26 +415,6 @@
     </summary>
     
       <category term="CTF" scheme="http://0clickjacking0.github.io/categories/CTF/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>解决mac下ssh自动中断问题</title>
-    <link href="http://0clickjacking0.github.io/2020/01/14/%E8%A7%A3%E5%86%B3mac%E4%B8%8Bssh%E8%87%AA%E5%8A%A8%E4%B8%AD%E6%96%AD%E9%97%AE%E9%A2%98/"/>
-    <id>http://0clickjacking0.github.io/2020/01/14/解决mac下ssh自动中断问题/</id>
-    <published>2020-01-14T11:20:45.000Z</published>
-    <updated>2020-08-24T02:38:00.387Z</updated>
-    
-    <content type="html"><![CDATA[<p>解决mac下ssh自动中断问题</p><a id="more"></a><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>mac下ssh连接之后，如果长时间没有操作，服务器会自动断开这个连接，也就是ssh客户端会卡住，不能输入。</p><h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>在<code>~/.ssh/config</code>（如果没有<code>config</code>文件新建一个即可）中写入下面内容，保存即可</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerAliveInterval 30</span><br></pre></td></tr></table></figure><p>每隔30秒，mac客户端会主动向服务器发出一次请求。这样就可以解决这个问题了</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;解决mac下ssh自动中断问题&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="macos" scheme="http://0clickjacking0.github.io/categories/macos/"/>
     
     
   </entry>

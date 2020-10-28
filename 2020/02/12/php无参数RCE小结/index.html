@@ -81,17 +81,17 @@
 
 
 
-<meta name="description" content="12345678910111213&amp;lt;?phperror_reporting(0);$functions = get_defined_functions();//print_r($functions);try&amp;#123;    foreach ($functions[&apos;internal&apos;] as $function_name)&amp;#123;        if(preg_match(&apos;/^[a">
+<meta name="description" content="php无参数RCE小结">
 <meta property="og:type" content="article">
 <meta property="og:title" content="php无参数RCE小结">
 <meta property="og:url" content="http://0clickjacking0.github.io/2020/02/12/php无参数RCE小结/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
-<meta property="og:description" content="12345678910111213&amp;lt;?phperror_reporting(0);$functions = get_defined_functions();//print_r($functions);try&amp;#123;    foreach ($functions[&apos;internal&apos;] as $function_name)&amp;#123;        if(preg_match(&apos;/^[a">
+<meta property="og:description" content="php无参数RCE小结">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-14T03:02:02.934Z">
+<meta property="og:updated_time" content="2020-09-07T08:05:19.826Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php无参数RCE小结">
-<meta name="twitter:description" content="12345678910111213&amp;lt;?phperror_reporting(0);$functions = get_defined_functions();//print_r($functions);try&amp;#123;    foreach ($functions[&apos;internal&apos;] as $function_name)&amp;#123;        if(preg_match(&apos;/^[a">
+<meta name="twitter:description" content="php无参数RCE小结">
 
 
 
@@ -405,8 +405,14 @@
       
 
       
-        <a id="more"></a>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$functions = get_defined_functions();</span><br><span class="line"><span class="comment">//print_r($functions);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($functions[<span class="string">'internal'</span>] <span class="keyword">as</span> $function_name)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">'/^[a-zA-Z]+$/'</span>,$function_name,$match))</span><br><span class="line">            <span class="keyword">echo</span> $match[<span class="number">0</span>].PHP_EOL;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>php无参数RCE小结</p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近的挺多比赛都遇到了php无参数RCE的题目，这里就直接上题目来讲解一下</p>
+<h1 id="CTF中的题目"><a href="#CTF中的题目" class="headerlink" title="CTF中的题目"></a>CTF中的题目</h1><h2 id="题目1"><a href="#题目1" class="headerlink" title="题目1"></a>题目1</h2><p>来自Code Breaking的phplimit</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">if</span>(<span class="string">';'</span> === preg_replace(<span class="string">'/[^\W]+\((?R)?\)/'</span>, <span class="string">''</span>, $_GET[<span class="string">'code'</span>])) &#123;    </span><br><span class="line">    <span class="keyword">eval</span>($_GET[<span class="string">'code'</span>]);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    show_source(<span class="keyword">__FILE__</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里就是让我们构造传入的code不带参数（空参），然后分号结尾的恶意代码</p>
+<h3 id="方法1"><a href="#方法1" class="headerlink" title="方法1"></a>方法1</h3><h3 id="方法2"><a href="#方法2" class="headerlink" title="方法2"></a>方法2</h3><h3 id="方法3"><a href="#方法3" class="headerlink" title="方法3"></a>方法3</h3><h2 id="题目2"><a href="#题目2" class="headerlink" title="题目2"></a>题目2</h2><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line">$functions = get_defined_functions();</span><br><span class="line"><span class="comment">//print_r($functions);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">foreach</span> ($functions[<span class="string">'internal'</span>] <span class="keyword">as</span> $function_name)&#123;</span><br><span class="line">        <span class="keyword">if</span>(preg_match(<span class="string">'/^[a-zA-Z]+$/'</span>,$function_name,$match))</span><br><span class="line">            <span class="keyword">echo</span> $match[<span class="number">0</span>].PHP_EOL;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (<span class="keyword">Exception</span> $e)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>## </p>
 
       
     </div>
@@ -426,7 +432,7 @@
   <p><span>本文标题:</span><a href="/2020/02/12/php无参数RCE小结/">php无参数RCE小结</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2020年02月12日 - 21:38</p>
-  <p><span>最后更新:</span>2020年02月14日 - 11:02</p>
+  <p><span>最后更新:</span>2020年09月07日 - 16:05</p>
   <p><span>原始链接:</span><a href="/2020/02/12/php无参数RCE小结/" title="php无参数RCE小结">http://0clickjacking0.github.io/2020/02/12/php无参数RCE小结/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2020/02/12/php无参数RCE小结/" aria-label="复制成功！"></i></span>
   </p>
@@ -547,8 +553,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -563,7 +578,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,6 +683,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CTF中的题目"><span class="nav-number">2.</span> <span class="nav-text">CTF中的题目</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目1"><span class="nav-number">2.1.</span> <span class="nav-text">题目1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法1"><span class="nav-number">2.1.1.</span> <span class="nav-text">方法1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法2"><span class="nav-number">2.1.2.</span> <span class="nav-text">方法2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法3"><span class="nav-number">2.1.3.</span> <span class="nav-text">方法3</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目2"><span class="nav-number">2.2.</span> <span class="nav-text">题目2</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
