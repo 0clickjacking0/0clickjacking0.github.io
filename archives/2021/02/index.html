@@ -81,17 +81,13 @@
 
 
 
-<meta name="description" content="工作的时候遇到，这里记录一下">
-<meta property="og:type" content="article">
-<meta property="og:title" content="git创建远程分支">
-<meta property="og:url" content="http://0clickjacking0.github.io/2021/01/29/git创建远程分支/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="xianyu123&#39;s Blog">
+<meta property="og:url" content="http://0clickjacking0.github.io/archives/2021/02/index.html">
 <meta property="og:site_name" content="xianyu123&#39;s Blog">
-<meta property="og:description" content="工作的时候遇到，这里记录一下">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2021-02-03T09:57:14.424Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="git创建远程分支">
-<meta name="twitter:description" content="工作的时候遇到，这里记录一下">
+<meta name="twitter:title" content="xianyu123&#39;s Blog">
 
 
 
@@ -121,14 +117,14 @@
 
 
 
-  <link rel="canonical" href="http://0clickjacking0.github.io/2021/01/29/git创建远程分支/">
+  <link rel="canonical" href="http://0clickjacking0.github.io/archives/2021/02/">
 
 
 
 
 
 
-  <title>git创建远程分支 | xianyu123's Blog</title>
+  <title>归档 | xianyu123's Blog</title>
   
 
 
@@ -147,7 +143,7 @@
     
   
 
-  <div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-right page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -281,243 +277,71 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+         
+          
+        好! 目前共计 58 篇日志。 继续努力。
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2021">2021</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2021/01/29/git创建远程分支/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="xianyu123">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="xianyu123's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">git创建远程分支</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2021/02/04/gin绑定表单数据与结构体遇到坑的一些总结/" itemprop="url">
               
-                <span class="post-meta-item-text">发表于</span>
+                <span itemprop="name">gin绑定表单数据与结构体遇到坑的一些总结</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-01-29T11:04:24+08:00">
-                2021-01-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2021/01/29/git创建远程分支/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2021/01/29/git创建远程分支/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2021/01/29/git创建远程分支/" class="leancloud_visitors" data-flag-title="git创建远程分支">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <p>工作的时候遇到，这里记录一下</p>
-<a id="more"></a>
-<p>假设当前分支为master，需要创建的分支是hello</p>
-<h3 id="1-新建远程分支"><a href="#1-新建远程分支" class="headerlink" title="1. 新建远程分支"></a>1. 新建远程分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b hello  //在当前分支下创建hello的本地分支分支</span><br></pre></td></tr></table></figure>
-<h3 id="2-把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）"><a href="#2-把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）" class="headerlink" title="2. 把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）"></a>2. 把新建的本地分支<strong>push</strong>到远程服务器，远程分支与本地分支同名（当然可以随意起名）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin hello:hello</span><br></pre></td></tr></table></figure>
-<h3 id="3-查看远程分支"><a href="#3-查看远程分支" class="headerlink" title="3. 查看远程分支"></a>3. 查看远程分支</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -a     //查看远程分支</span><br></pre></td></tr></table></figure>
-<h3 id="4-修改本地文件后，推送到远程仓库"><a href="#4-修改本地文件后，推送到远程仓库" class="headerlink" title="4. 修改本地文件后，推送到远程仓库"></a>4. 修改本地文件后，推送到远程仓库</h3><h4 id="添加commit"><a href="#添加commit" class="headerlink" title="添加commit"></a>添加commit</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -a</span><br></pre></td></tr></table></figure>
-<h4 id="将修改推送到远程分支"><a href="#将修改推送到远程分支" class="headerlink" title="将修改推送到远程分支"></a>将修改推送到远程分支</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin hello:hello</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    
-    
-    
-
-	<div>
-      
+            </a>
         
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2021/01/29/git创建远程分支/">git创建远程分支</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
-  <p><span>发布时间:</span>2021年01月29日 - 11:04</p>
-  <p><span>最后更新:</span>2021年02月03日 - 17:57</p>
-  <p><span>原始链接:</span><a href="/2021/01/29/git创建远程分支/" title="git创建远程分支">http://0clickjacking0.github.io/2021/01/29/git创建远程分支/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2021/01/29/git创建远程分支/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
-</div>
-<script> 
-    var clipboard = new Clipboard('.fa-clipboard');
-    $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({   
-          title: "",   
-          text: '复制成功',
-          icon: "success", 
-          showConfirmButton: true
-          });
-	});
-    });  
-</script>
+      </h2>
 
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated" datetime="2021-02-04T18:55:23+08:00" content="2021-02-04">
+          02-04
+        </time>
+      </div>
 
-      
-</div>
-
-
-    
-
-    
-
-    
-
-	
-	<div>
-  
-    <div>
-    
-        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
-    
-</div>
-  
-</div>
-	
-	
-    <footer class="post-footer">
-
-    <! -- 添加微信图标 -->
-    
-    
-    <div>
-    <span>
-    
-    欢迎大家关注：Jason's微信公众号
-    
-    <br>
-    </span>
-    <br>
-    
-    <a href="http://images.xianyu123.club/20210206225521.jpg" title="Jason's微信公众号" class="fancybox" rel="article0" style="float:left;margin-left:25%;margin-right:2px;">
-    <img src="http://images.xianyu123.club/20210206225521.jpg" title="Jason's微信公众号" height="164px" width="164px">
-    </a>
-    
-    </div>
-    
-    
-
-
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2020/10/04/oh-my-zsh隐藏用户名或者主机名/" rel="next" title="oh-my-zsh隐藏用户名或者主机名">
-                <i class="fa fa-chevron-left"></i> oh-my-zsh隐藏用户名或者主机名
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2021/02/04/gin绑定表单数据与结构体遇到坑的一些总结/" rel="prev" title="gin绑定表单数据与结构体遇到坑的一些总结">
-                gin绑定表单数据与结构体遇到坑的一些总结 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
+
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -525,13 +349,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -552,17 +369,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -682,22 +490,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-新建远程分支"><span class="nav-number">1.</span> <span class="nav-text">1. 新建远程分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）"><span class="nav-number">2.</span> <span class="nav-text">2. 把新建的本地分支push到远程服务器，远程分支与本地分支同名（当然可以随意起名）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-查看远程分支"><span class="nav-number">3.</span> <span class="nav-text">3. 查看远程分支</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-修改本地文件后，推送到远程仓库"><span class="nav-number">4.</span> <span class="nav-text">4. 修改本地文件后，推送到远程仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#添加commit"><span class="nav-number">4.1.</span> <span class="nav-text">添加commit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将修改推送到远程分支"><span class="nav-number">4.2.</span> <span class="nav-text">将修改推送到远程分支</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -827,10 +619,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 
