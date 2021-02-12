@@ -90,7 +90,8 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://images.xianyu123.club/20210204190402.png">
 <meta property="og:image" content="http://images.xianyu123.club/20210204190419.png">
-<meta property="og:updated_time" content="2021-02-04T11:06:41.854Z">
+<meta property="og:image" content="http://images.xianyu123.club/20210211234658.png">
+<meta property="og:updated_time" content="2021-02-12T08:05:22.072Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="gin绑定表单数据与结构体遇到坑的一些总结">
 <meta name="twitter:description" content="Some summary of gin binding form data and structure encounter pits">
@@ -418,7 +419,13 @@
 <p>提交后的效果如下图，这里还是比较简单的。</p>
 <p><img src="http://images.xianyu123.club/20210204190402.png" alt="image-20210204190356735"></p>
 <p><img src="http://images.xianyu123.club/20210204190419.png" alt="image-20210204190419952"></p>
-<h1 id="坑2-绑定表单结构体数组"><a href="#坑2-绑定表单结构体数组" class="headerlink" title="坑2 绑定表单结构体数组"></a>坑2 绑定表单结构体数组</h1>
+<h1 id="坑2-绑定表单结构体数组"><a href="#坑2-绑定表单结构体数组" class="headerlink" title="坑2 绑定表单结构体数组"></a>坑2 绑定表单结构体数组</h1><p><code>main.go</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">	<span class="string">"fmt"</span></span><br><span class="line">	<span class="string">"github.com/gin-gonic/gin"</span></span><br><span class="line">	<span class="string">"net/http"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Student <span class="keyword">struct</span> &#123;</span><br><span class="line">	Name  <span class="keyword">string</span> <span class="string">`json:"name"`</span></span><br><span class="line">	Age   <span class="keyword">int</span>    <span class="string">`json:"age"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> myForm <span class="keyword">struct</span> &#123;</span><br><span class="line">	Students 	[]Student <span class="string">`json:"students"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	r := gin.Default()</span><br><span class="line">	r.LoadHTMLGlob(<span class="string">"views/*"</span>)</span><br><span class="line">	r.GET(<span class="string">"/"</span>, indexHandler)</span><br><span class="line">	r.POST(<span class="string">"/test"</span>, formHandler)</span><br><span class="line">	r.Run(<span class="string">":10000"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">indexHandler</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	c.HTML(<span class="number">200</span>, <span class="string">"form.html"</span>, <span class="literal">nil</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">formHandler</span><span class="params">(c *gin.Context)</span></span> &#123;</span><br><span class="line">	<span class="keyword">var</span> fakeForm myForm</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> err := c.BindJSON(&amp;fakeForm); err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="comment">//log.Fatal(err)</span></span><br><span class="line">		<span class="keyword">return</span></span><br><span class="line">	&#125;</span><br><span class="line">	fmt.Println(fakeForm.Students)</span><br><span class="line">	c.JSON(http.StatusOK, fakeForm)</span><br><span class="line"></span><br><span class="line">	fmt.Println(fakeForm)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>传入json即可</p>
+<p><img src="http://images.xianyu123.club/20210211234658.png" alt="image-20210211234658717"></p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://segmentfault.com/q/1010000021179386/a-1020000021180162#" target="_blank" rel="noopener">go binding如何绑定结构体数组</a></p>
+<p><a href="https://github.com/gin-gonic/gin/issues/715" target="_blank" rel="noopener">Question: How bind JSON array</a></p>
+
       
     </div>
     
@@ -437,7 +444,7 @@
   <p><span>本文标题:</span><a href="/2021/02/04/gin绑定表单数据与结构体遇到坑的一些总结/">gin绑定表单数据与结构体遇到坑的一些总结</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2021年02月04日 - 18:55</p>
-  <p><span>最后更新:</span>2021年02月04日 - 19:06</p>
+  <p><span>最后更新:</span>2021年02月12日 - 16:05</p>
   <p><span>原始链接:</span><a href="/2021/02/04/gin绑定表单数据与结构体遇到坑的一些总结/" title="gin绑定表单数据与结构体遇到坑的一些总结">http://0clickjacking0.github.io/2021/02/04/gin绑定表单数据与结构体遇到坑的一些总结/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2021/02/04/gin绑定表单数据与结构体遇到坑的一些总结/" aria-label="复制成功！"></i></span>
   </p>
@@ -716,7 +723,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#坑1-绑定表单字符串数组与结构体"><span class="nav-number">2.</span> <span class="nav-text">坑1 绑定表单字符串数组与结构体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#坑2-绑定表单结构体数组"><span class="nav-number">3.</span> <span class="nav-text">坑2 绑定表单结构体数组</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#坑1-绑定表单字符串数组与结构体"><span class="nav-number">2.</span> <span class="nav-text">坑1 绑定表单字符串数组与结构体</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#坑2-绑定表单结构体数组"><span class="nav-number">3.</span> <span class="nav-text">坑2 绑定表单结构体数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
