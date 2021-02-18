@@ -96,7 +96,7 @@
 <meta property="og:image" content="http://images.xianyu123.club/hash_attack6.png">
 <meta property="og:image" content="http://images.xianyu123.club/hash_attack7.png">
 <meta property="og:image" content="http://images.xianyu123.club/hash_attack8.png">
-<meta property="og:updated_time" content="2019-08-09T06:23:11.000Z">
+<meta property="og:updated_time" content="2021-02-17T15:15:55.607Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hash扩展攻击">
 <meta name="twitter:description" content="这次国赛遇到了这个漏洞，以前看过这个漏洞，但没有吃透导致这次国赛没做出来，这次准备好好研究一下，写下这篇学习笔记">
@@ -425,7 +425,7 @@
 <li><p>MD5不管怎么加密，每一块加密得到的密文作为下一次加密的初始向量IV，这一点很关键！！！</p>
 </li>
 </ol>
-<p>下面已md5算法为代表简单讲解加密过程</p>
+<p>下面以md5算法为代表简单讲解加密过程</p>
 <h1 id="MD5加密过程"><a href="#MD5加密过程" class="headerlink" title="MD5加密过程"></a>MD5加密过程</h1><p>比如计算字符串<code>xianyu123</code>，首先要把它变成十六进制，十六进制为<code>0x7869616e7975313233</code><br><img src="http://images.xianyu123.club/hash_attack1.png" alt></p>
 <h2 id="补位"><a href="#补位" class="headerlink" title="补位"></a>补位</h2><p>（1byte=8bit）消息必须进行补位，即使得其长度在对 512 取模后的值为 448。也就是说，<code>len(message) % 512 == 448</code>。当消息长度不满 448 bit 时<strong>（注意是位，而不是字符串长度）</strong>，消息长度达到 448 bit 即可。当然，如果消息长度已经达到 448 bit，也要进行补位。补位是必须的。<br>补位的方式的二进制表示是在消息的后面加上一个1，后面跟着无限个0，直到 <code>len(message) % 512 == 448</code>。在 16 进制下，我们需要在消息后补<code>80</code>，也就是 2 进制的<code>10000000</code>。我们把消息<code>xianyu123</code>进行补位到长度为56位的整数倍数</p>
 <p><img src="http://images.xianyu123.club/hash_attack2.png" alt></p>
@@ -484,7 +484,7 @@
   <p><span>本文标题:</span><a href="/2019/07/09/hash扩展攻击/">hash扩展攻击</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2019年07月09日 - 15:50</p>
-  <p><span>最后更新:</span>2019年08月09日 - 14:23</p>
+  <p><span>最后更新:</span>2021年02月17日 - 23:15</p>
   <p><span>原始链接:</span><a href="/2019/07/09/hash扩展攻击/" title="hash扩展攻击">http://0clickjacking0.github.io/2019/07/09/hash扩展攻击/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2019/07/09/hash扩展攻击/" aria-label="复制成功！"></i></span>
   </p>
@@ -652,7 +652,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -663,7 +663,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
