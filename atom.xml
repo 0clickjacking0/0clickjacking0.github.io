@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://0clickjacking0.github.io/"/>
-  <updated>2021-04-19T06:01:31.740Z</updated>
+  <updated>2021-08-18T05:18:07.695Z</updated>
   <id>http://0clickjacking0.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mac docker升级后镜像丢失修复</title>
+    <link href="http://0clickjacking0.github.io/2021/08/18/mac-docker%E5%8D%87%E7%BA%A7%E5%90%8E%E9%95%9C%E5%83%8F%E4%B8%A2%E5%A4%B1%E4%BF%AE%E5%A4%8D/"/>
+    <id>http://0clickjacking0.github.io/2021/08/18/mac-docker升级后镜像丢失修复/</id>
+    <published>2021-08-18T05:13:06.000Z</published>
+    <updated>2021-08-18T05:18:07.695Z</updated>
+    
+    <content type="html"><![CDATA[<p>mac docker升级后镜像丢失修复</p><a id="more"></a><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近升级了macos big sur 11.5.2（还是很好用的），然后docker是可以用的，然后手欠了去升级了docker，竟然不能用了，docker的界面也是大改动了，然后去网上找到了解决方法。</p><h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>执行下面命令即可</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp ~/Library/Containers/com.docker.docker/Data/vms/0/Docker.raw ~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw</span><br></pre></td></tr></table></figure><p>由于docker desktop 20.10.7版本文件默认路径改变，致使docker无法找到原来的docker.raw，所以产生了这个问题。</p><h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://www.jianshu.com/p/a019ddc7d55a" target="_blank" rel="noopener">Mac Os docker镜像文件丢失的问题记录</a></p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;mac docker升级后镜像丢失修复&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>ios应用获取ipa安装包</title>
@@ -386,26 +404,6 @@
     </summary>
     
       <category term="Web Security" scheme="http://0clickjacking0.github.io/categories/Web-Security/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>mac+phpstorm+php5.6+chrome+xdebug配置</title>
-    <link href="http://0clickjacking0.github.io/2020/02/11/mac-phpstorm-php5-6-xdebug%E9%85%8D%E7%BD%AE/"/>
-    <id>http://0clickjacking0.github.io/2020/02/11/mac-phpstorm-php5-6-xdebug配置/</id>
-    <published>2020-02-11T02:52:31.000Z</published>
-    <updated>2020-08-24T02:37:29.547Z</updated>
-    
-    <content type="html"><![CDATA[<p>mac+phpstorm+php5.6+chrome+xdebug配置</p><a id="more"></a><h2 id="0-环境说明"><a href="#0-环境说明" class="headerlink" title="0. 环境说明"></a>0. 环境说明</h2><p>macos15.2</p><p>php5.6</p><p>Phpstorm2018.2</p><p>nginx1.17</p><h2 id="1-安装xdebug"><a href="#1-安装xdebug" class="headerlink" title="1. 安装xdebug"></a>1. 安装xdebug</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pecl install xdebug-2.5.5</span><br></pre></td></tr></table></figure><h2 id="2-配置php-ini"><a href="#2-配置php-ini" class="headerlink" title="2. 配置php.ini"></a>2. 配置php.ini</h2><p>安装完成<code>xdebug</code>后会有提示语句</p><p><img src="http://images.xianyu123.club/xdebug2.png" alt></p><p>根据提示我们把下面这句话复制到<code>php.ini</code>中，因为我用的是phpbrew，所以路径可能有点不一样，大家根据自己实际<code>php.ini</code>的位置进行配置</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zend_extension=/Users/xianyu123/.phpbrew/php/php-5.6.40/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so</span><br></pre></td></tr></table></figure><p>然后我们重启一下<code>php-fpm</code>，然后创建一个文件，内容如下，在网页端打开</p><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">phpinfo();</span><br></pre></td></tr></table></figure><p>如果出现如下，则说明php端已经配置成功了</p><p><img src="http://images.xianyu123.club/xdebug1.png" alt></p><h2 id="3-配置phpstorm调试功能"><a href="#3-配置phpstorm调试功能" class="headerlink" title="3. 配置phpstorm调试功能"></a>3. 配置phpstorm调试功能</h2><p>先把下面的配置添加到<code>php.ini</code>中，然后重启php-fpm</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">xdebug.remote_enable = 1</span><br><span class="line">xdebug.remote_handler = dbgp</span><br><span class="line">xdebug.remote_host = 127.0.0.1</span><br><span class="line">xdebug.remote_port = 9001</span><br><span class="line">xdebug.idekey = PHPSTORM</span><br></pre></td></tr></table></figure><p>然后在phpstorm的菜单栏<code>Preferences</code>中找到<code>Debug</code>，填写端口为<code>9001</code></p><p><img src="http://images.xianyu123.club/xdebug3.png" alt></p><p>然后填写</p><p>IDE key：刚才写入<code>php.ini)</code>中</p><p>host：127.0.0.1</p><p>port：项目运行端口，我是用82端口搭建的，有些师傅可能是80</p><p><img src="http://images.xianyu123.club/xdebug4.png" alt></p><p>然后在servers中配置信息</p><p>Name：随便取</p><p>Host：127.0.0.1</p><p>Port：按照你的项目运行端口</p><p>Debugger：按照下图的</p><p><img src="http://images.xianyu123.club/20200522195638.png" alt="image-20200211155643870"></p><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>打好断点，然后点击这个绿色的小虫子</p><p><img src="http://images.xianyu123.club/xdebug5.png" alt></p><p>按这个一步一步调试</p><p><img src="http://images.xianyu123.club/xdebug6.png" alt></p><p>出现这样说明配置成功了</p><p><img src="http://images.xianyu123.club/xdebug7.png" alt></p><h2 id="4-chrome调试配置"><a href="#4-chrome调试配置" class="headerlink" title="4. chrome调试配置"></a>4. chrome调试配置</h2><p>先下载扩展</p><p>右键扩展选项，在IDE key中选择phpstorm，然后保存，这里名字不能被修改，只能用<code>PHPSTORM</code></p><p><img src="http://images.xianyu123.club/xdebug8.png" alt></p><p>然后在网页打开php，选择debug</p><p><img src="http://images.xianyu123.club/xdebug9.png" alt></p><p>并且在phpstorm中开启这个电话按钮，变成绿色</p><p><img src="http://images.xianyu123.club/xdebug11.png" alt></p><p>然后在phpstorm中就有弹窗，选择同意，这样就可以快乐的调试了</p><p><img src="http://images.xianyu123.club/xdebug10.png" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;mac+phpstorm+php5.6+chrome+xdebug配置&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="PHP" scheme="http://0clickjacking0.github.io/categories/PHP/"/>
     
     
   </entry>
