@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="xianyu123's Blog" type="application/atom+xml">
+
+
+
+
+
+
+<meta name="description" content="之前的老问题了，今天终于解决了，记录一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1">
+<meta property="og:url" content="http://0clickjacking0.github.io/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/index.html">
+<meta property="og:site_name" content="xianyu123&#39;s Blog">
+<meta property="og:description" content="之前的老问题了，今天终于解决了，记录一下。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://images.xianyu123.club/20210906212354.png">
+<meta property="og:image" content="http://images.xianyu123.club/20210906212524.png">
+<meta property="og:updated_time" content="2021-09-06T13:32:15.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1">
+<meta name="twitter:description" content="之前的老问题了，今天终于解决了，记录一下。">
+<meta name="twitter:image" content="http://images.xianyu123.club/20210906212354.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '3WG8LC0SCP',
+      apiKey: 'fd95735b1b343c09b1c7aada663dfa7a',
+      indexName: 'dev_xianyu123',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"输入关键字搜索","hits_empty":"没有找到与 ${query} 相关的内容","hits_stats":"搜索到 ${hits} 条相关记录，共耗时 ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://0clickjacking0.github.io/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/">
+
+
+
+
+
+
+  <title>macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1 | xianyu123's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">xianyu123's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://0clickjacking0.github.io/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="xianyu123">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="xianyu123's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2021-09-06T21:19:54+08:00">
+                2021-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/" class="leancloud_visitors" data-flag-title="macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前的老问题了，今天终于解决了，记录一下。</p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>之前从黑苹果迁移到mac后，nginx报错这个问题就没有解决过，今天终于解决了。</p>
+<p>nginx的配置文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line">user  nobody;</span><br><span class="line">worker_processes  1;</span><br><span class="line"></span><br><span class="line">#error_log  logs/error.log;</span><br><span class="line">#error_log  logs/error.log  notice;</span><br><span class="line">#error_log  logs/error.log  info;</span><br><span class="line"></span><br><span class="line">#pid        logs/nginx.pid;</span><br><span class="line">env PHPBREW_ROOT;</span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    client_max_body_size 20m;</span><br><span class="line"></span><br><span class="line">    #log_format  main  &apos;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &apos;</span><br><span class="line">    #                  &apos;$status $body_bytes_sent &quot;$http_referer&quot; &apos;</span><br><span class="line">    #                  &apos;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&apos;;</span><br><span class="line"></span><br><span class="line">    #access_log  logs/access.log  main;</span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"></span><br><span class="line">    #keepalive_timeout  0;</span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    #gzip  on;</span><br><span class="line"></span><br><span class="line">    server &#123;</span><br><span class="line">        listen       10000;</span><br><span class="line">        server_name  localhost;</span><br><span class="line">        root   /Users/xianyu123/PhpstormProjects;</span><br><span class="line">        #charset koi8-r;</span><br><span class="line"></span><br><span class="line">        #access_log  logs/host.access.log  main;</span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            index  index.php index.html index.htm;</span><br><span class="line">            autoindex on;                        </span><br><span class="line">            autoindex_exact_size off;       </span><br><span class="line">            autoindex_localtime on;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        #error_page  404              /404.html;</span><br><span class="line"></span><br><span class="line">        # redirect server error pages to the static page /50x.html</span><br><span class="line">        #</span><br><span class="line">        error_page   500 502 503 504  /50x.html;</span><br><span class="line">        location = /50x.html &#123;</span><br><span class="line">            root   html;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # proxy the PHP scripts to Apache listening on 127.0.0.1:80</span><br><span class="line">        #</span><br><span class="line">        #location ~ \.php$ &#123;</span><br><span class="line">        #    proxy_pass   http://127.0.0.1;</span><br><span class="line">        #&#125;</span><br><span class="line"></span><br><span class="line">        # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span><br><span class="line">        #</span><br><span class="line">        location ~ \.php$ &#123;</span><br><span class="line">            root           /Users/xianyu123/PhpstormProjects;</span><br><span class="line">            fastcgi_pass   unix:/Users/xianyu123/.phpbrew/php/php-7.1.29/var/run/php-fpm.sock;</span><br><span class="line">            # fastcgi_pass   unix:/Users/xianyu123/.phpbrew/php/php-5.6.40/var/run/php-fpm.sock;</span><br><span class="line">            fastcgi_index  index.php;</span><br><span class="line">            fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;</span><br><span class="line">            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;</span><br><span class="line">            fastcgi_param  PATH_INFO  $fastcgi_path_info;</span><br><span class="line">            fastcgi_param  PATH_TRANSLATED  $document_root$fastcgi_path_info;</span><br><span class="line">            include        fastcgi_params;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        # deny access to .htaccess files, if Apache&apos;s document root</span><br><span class="line">        # concurs with nginx&apos;s one</span><br><span class="line">        #</span><br><span class="line">        #location ~ /\.ht &#123;</span><br><span class="line">        #    deny  all;</span><br><span class="line">        #&#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # another virtual host using mix of IP-, name-, and port-based configuration</span><br><span class="line">    #</span><br><span class="line">    #server &#123;</span><br><span class="line">    #    listen       8000;</span><br><span class="line">    #    listen       somename:8080;</span><br><span class="line">    #    server_name  somename  alias  another.alias;</span><br><span class="line"></span><br><span class="line">    #    location / &#123;</span><br><span class="line">    #        root   html;</span><br><span class="line">    #        index  index.html index.htm;</span><br><span class="line">    #    &#125;</span><br><span class="line">    #&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    # HTTPS server</span><br><span class="line">    #</span><br><span class="line">    #server &#123;</span><br><span class="line">    #    listen       443 ssl;</span><br><span class="line">    #    server_name  localhost;</span><br><span class="line"></span><br><span class="line">    #    ssl_certificate      cert.pem;</span><br><span class="line">    #    ssl_certificate_key  cert.key;</span><br><span class="line"></span><br><span class="line">    #    ssl_session_cache    shared:SSL:1m;</span><br><span class="line">    #    ssl_session_timeout  5m;</span><br><span class="line"></span><br><span class="line">    #    ssl_ciphers  HIGH:!aNULL:!MD5;</span><br><span class="line">    #    ssl_prefer_server_ciphers  on;</span><br><span class="line"></span><br><span class="line">    #    location / &#123;</span><br><span class="line">    #        root   html;</span><br><span class="line">    #        index  index.html index.htm;</span><br><span class="line">    #    &#125;</span><br><span class="line">    #&#125;</span><br><span class="line">    include servers/*;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>nginx的错误日志：</p>
+<p><img src="http://images.xianyu123.club/20210906212354.png" alt="image-20210906212349610"></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2021/09/06 19:51:18 [crit] 74119#0: *28 connect() to unix:/Users/xianyu123/.phpbrew/php/php-7.1.29/var/run/php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /WWW/test.php HTTP/1.1", upstream: "fastcgi://unix:/Users/xianyu123/.phpbrew/php/php-7.1.29/var/run/php-fpm.sock:", host: "localhost:10000"</span><br></pre></td></tr></table></figure>
+<p>php-fpm的配置文件：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; Start a new pool named 'www'.</span></span><br><span class="line"><span class="comment">; the variable $pool can be used in any directive and will be replaced by the</span></span><br><span class="line"><span class="comment">; pool name ('www' here)</span></span><br><span class="line"><span class="section">[www]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Per pool prefix</span></span><br><span class="line"><span class="comment">; It only applies on the following directives:</span></span><br><span class="line"><span class="comment">; - 'access.log'</span></span><br><span class="line"><span class="comment">; - 'slowlog'</span></span><br><span class="line"><span class="comment">; - 'listen' (unixsocket)</span></span><br><span class="line"><span class="comment">; - 'chroot'</span></span><br><span class="line"><span class="comment">; - 'chdir'</span></span><br><span class="line"><span class="comment">; - 'php_values'</span></span><br><span class="line"><span class="comment">; - 'php_admin_values'</span></span><br><span class="line"><span class="comment">; When not set, the global prefix (or /Users/xianyu123/.phpbrew/php/php-7.1.29) applies instead.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This directive can also be relative to the global prefix.</span></span><br><span class="line"><span class="comment">; Default Value: none</span></span><br><span class="line"><span class="comment">;prefix = /path/to/pools/$pool</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Unix user/group of processes</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> The user is mandatory. If the group is not set, the default user's group</span></span><br><span class="line"><span class="comment">;       will be used.</span></span><br><span class="line"><span class="comment">;user = nobody</span></span><br><span class="line"><span class="comment">;group = nobody</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The address on which to accept FastCGI requests.</span></span><br><span class="line"><span class="comment">; Valid syntaxes are:</span></span><br><span class="line"><span class="comment">;   'ip.add.re.ss:port'    - to listen on a TCP socket to a specific IPv4 address on</span></span><br><span class="line"><span class="comment">;                            a specific port;</span></span><br><span class="line"><span class="comment">;   '[ip:6:addr:ess]:port' - to listen on a TCP socket to a specific IPv6 address on</span></span><br><span class="line"><span class="comment">;                            a specific port;</span></span><br><span class="line"><span class="comment">;   'port'                 - to listen on a TCP socket to all addresses</span></span><br><span class="line"><span class="comment">;                            (IPv6 and IPv4-mapped) on a specific port;</span></span><br><span class="line"><span class="comment">;   '/path/to/unix/socket' - to listen on a unix socket.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This value is mandatory.</span></span><br><span class="line"><span class="attr">listen</span> = /Users/xianyu123/.phpbrew/php/php-<span class="number">7.1</span>.<span class="number">29</span>/var/run/php-fpm.sock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set listen(2) backlog.</span></span><br><span class="line"><span class="comment">; Default Value: 511 (-1 on FreeBSD and OpenBSD)</span></span><br><span class="line"><span class="comment">;listen.backlog = 511</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set permissions for unix socket, if one is used. In Linux, read/write</span></span><br><span class="line"><span class="comment">; permissions must be set in order to allow connections from a web server. Many</span></span><br><span class="line"><span class="comment">; BSD-derived systems allow connections regardless of permissions.</span></span><br><span class="line"><span class="comment">; Default Values: user and group are set as the running user</span></span><br><span class="line"><span class="comment">;                 mode is set to 0660</span></span><br><span class="line">listen.owner = nobody</span><br><span class="line">listen.group = nobody</span><br><span class="line">listen.mode = 0660</span><br><span class="line"><span class="comment">; When POSIX Access Control Lists are supported you can set them using</span></span><br><span class="line"><span class="comment">; these options, value is a comma separated list of user/group names.</span></span><br><span class="line"><span class="comment">; When set, listen.owner and listen.group are ignored</span></span><br><span class="line"><span class="comment">;listen.acl_users =</span></span><br><span class="line"><span class="comment">;listen.acl_groups =</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; List of addresses (IPv4/IPv6) of FastCGI clients which are allowed to connect.</span></span><br><span class="line"><span class="comment">; Equivalent to the FCGI_WEB_SERVER_ADDRS environment variable in the original</span></span><br><span class="line"><span class="comment">; PHP FCGI (5.2.2+). Makes sense only with a tcp listening socket. Each address</span></span><br><span class="line"><span class="comment">; must be separated by a comma. If this value is left blank, connections will be</span></span><br><span class="line"><span class="comment">; accepted from any ip address.</span></span><br><span class="line"><span class="comment">; Default Value: any</span></span><br><span class="line"><span class="comment">;listen.allowed_clients = 127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Specify the nice(2) priority to apply to the pool processes (only if set)</span></span><br><span class="line"><span class="comment">; The value can vary from -19 (highest priority) to 20 (lower priority)</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> - It will only work if the FPM master process is launched as root</span></span><br><span class="line"><span class="comment">;       - The pool processes will inherit the master process priority</span></span><br><span class="line"><span class="comment">;         unless it specified otherwise</span></span><br><span class="line"><span class="comment">; Default Value: no set</span></span><br><span class="line"><span class="comment">; process.priority = -19</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set the process dumpable flag (PR_SET_DUMPABLE prctl) even if the process user</span></span><br><span class="line"><span class="comment">; or group is differrent than the master process user. It allows to create process</span></span><br><span class="line"><span class="comment">; core dump and ptrace the process for the pool user.</span></span><br><span class="line"><span class="comment">; Default Value: no</span></span><br><span class="line"><span class="comment">; process.dumpable = yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Choose how the process manager will control the number of child processes.</span></span><br><span class="line"><span class="comment">; Possible Values:</span></span><br><span class="line"><span class="comment">;   static  - a fixed number (pm.max_children) of child processes;</span></span><br><span class="line"><span class="comment">;   dynamic - the number of child processes are set dynamically based on the</span></span><br><span class="line"><span class="comment">;             following directives. With this process management, there will be</span></span><br><span class="line"><span class="comment">;             always at least 1 children.</span></span><br><span class="line"><span class="comment">;             pm.max_children      - the maximum number of children that can</span></span><br><span class="line"><span class="comment">;                                    be alive at the same time.</span></span><br><span class="line"><span class="comment">;             pm.start_servers     - the number of children created on startup.</span></span><br><span class="line"><span class="comment">;             pm.min_spare_servers - the minimum number of children in 'idle'</span></span><br><span class="line"><span class="comment">;                                    state (waiting to process). If the number</span></span><br><span class="line"><span class="comment">;                                    of 'idle' processes is less than this</span></span><br><span class="line"><span class="comment">;                                    number then some children will be created.</span></span><br><span class="line"><span class="comment">;             pm.max_spare_servers - the maximum number of children in 'idle'</span></span><br><span class="line"><span class="comment">;                                    state (waiting to process). If the number</span></span><br><span class="line"><span class="comment">;                                    of 'idle' processes is greater than this</span></span><br><span class="line"><span class="comment">;                                    number then some children will be killed.</span></span><br><span class="line"><span class="comment">;  ondemand - no children are created at startup. Children will be forked when</span></span><br><span class="line"><span class="comment">;             new requests will connect. The following parameter are used:</span></span><br><span class="line"><span class="comment">;             pm.max_children           - the maximum number of children that</span></span><br><span class="line"><span class="comment">;                                         can be alive at the same time.</span></span><br><span class="line"><span class="comment">;             pm.process_idle_timeout   - The number of seconds after which</span></span><br><span class="line"><span class="comment">;                                         an idle process will be killed.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This value is mandatory.</span></span><br><span class="line"><span class="attr">pm</span> = dynamic</span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of child processes to be created when pm is set to 'static' and the</span></span><br><span class="line"><span class="comment">; maximum number of child processes when pm is set to 'dynamic' or 'ondemand'.</span></span><br><span class="line"><span class="comment">; This value sets the limit on the number of simultaneous requests that will be</span></span><br><span class="line"><span class="comment">; served. Equivalent to the ApacheMaxClients directive with mpm_prefork.</span></span><br><span class="line"><span class="comment">; Equivalent to the PHP_FCGI_CHILDREN environment variable in the original PHP</span></span><br><span class="line"><span class="comment">; CGI. The below defaults are based on a server without much resources. Don't</span></span><br><span class="line"><span class="comment">; forget to tweak pm.* to fit your needs.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used when pm is set to 'static', 'dynamic' or 'ondemand'</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This value is mandatory.</span></span><br><span class="line">pm.max_children = 5</span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of child processes created on startup.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'dynamic'</span></span><br><span class="line"><span class="comment">; Default Value: min_spare_servers + (max_spare_servers - min_spare_servers) / 2</span></span><br><span class="line">pm.start_servers = 2</span><br><span class="line"></span><br><span class="line"><span class="comment">; The desired minimum number of idle server processes.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'dynamic'</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Mandatory when pm is set to 'dynamic'</span></span><br><span class="line">pm.min_spare_servers = 1</span><br><span class="line"></span><br><span class="line"><span class="comment">; The desired maximum number of idle server processes.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'dynamic'</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Mandatory when pm is set to 'dynamic'</span></span><br><span class="line">pm.max_spare_servers = 3</span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of seconds after which an idle process will be killed.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'ondemand'</span></span><br><span class="line"><span class="comment">; Default Value: 10s</span></span><br><span class="line"><span class="comment">;pm.process_idle_timeout = 10s;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of requests each child process should execute before respawning.</span></span><br><span class="line"><span class="comment">; This can be useful to work around memory leaks in 3rd party libraries. For</span></span><br><span class="line"><span class="comment">; endless request processing specify '0'. Equivalent to PHP_FCGI_MAX_REQUESTS.</span></span><br><span class="line"><span class="comment">; Default Value: 0</span></span><br><span class="line"><span class="comment">;pm.max_requests = 500</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The URI to view the FPM status page. If this value is not set, no URI will be</span></span><br><span class="line"><span class="comment">; recognized as a status page. It shows the following informations:</span></span><br><span class="line"><span class="comment">;   pool                 - the name of the pool;</span></span><br><span class="line"><span class="comment">;   process manager      - static, dynamic or ondemand;</span></span><br><span class="line"><span class="comment">;   start time           - the date and time FPM has started;</span></span><br><span class="line"><span class="comment">;   start since          - number of seconds since FPM has started;</span></span><br><span class="line"><span class="comment">;   accepted conn        - the number of request accepted by the pool;</span></span><br><span class="line"><span class="comment">;   listen queue         - the number of request in the queue of pending</span></span><br><span class="line"><span class="comment">;                          connections (see backlog in listen(2));</span></span><br><span class="line"><span class="comment">;   max listen queue     - the maximum number of requests in the queue</span></span><br><span class="line"><span class="comment">;                          of pending connections since FPM has started;</span></span><br><span class="line"><span class="comment">;   listen queue len     - the size of the socket queue of pending connections;</span></span><br><span class="line"><span class="comment">;   idle processes       - the number of idle processes;</span></span><br><span class="line"><span class="comment">;   active processes     - the number of active processes;</span></span><br><span class="line"><span class="comment">;   total processes      - the number of idle + active processes;</span></span><br><span class="line"><span class="comment">;   max active processes - the maximum number of active processes since FPM</span></span><br><span class="line"><span class="comment">;                          has started;</span></span><br><span class="line"><span class="comment">;   max children reached - number of times, the process limit has been reached,</span></span><br><span class="line"><span class="comment">;                          when pm tries to start more children (works only for</span></span><br><span class="line"><span class="comment">;                          pm 'dynamic' and 'ondemand');</span></span><br><span class="line"><span class="comment">; Value are updated in real time.</span></span><br><span class="line"><span class="comment">; Example output:</span></span><br><span class="line"><span class="comment">;   pool:                 www</span></span><br><span class="line"><span class="comment">;   process manager:      static</span></span><br><span class="line"><span class="comment">;   start time:           01/Jul/2011:17:53:49 +0200</span></span><br><span class="line"><span class="comment">;   start since:          62636</span></span><br><span class="line"><span class="comment">;   accepted conn:        190460</span></span><br><span class="line"><span class="comment">;   listen queue:         0</span></span><br><span class="line"><span class="comment">;   max listen queue:     1</span></span><br><span class="line"><span class="comment">;   listen queue len:     42</span></span><br><span class="line"><span class="comment">;   idle processes:       4</span></span><br><span class="line"><span class="comment">;   active processes:     11</span></span><br><span class="line"><span class="comment">;   total processes:      15</span></span><br><span class="line"><span class="comment">;   max active processes: 12</span></span><br><span class="line"><span class="comment">;   max children reached: 0</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; By default the status page output is formatted as text/plain. Passing either</span></span><br><span class="line"><span class="comment">; 'html', 'xml' or 'json' in the query string will return the corresponding</span></span><br><span class="line"><span class="comment">; output syntax. Example:</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?json</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?html</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?xml</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; By default the status page only outputs short status. Passing 'full' in the</span></span><br><span class="line"><span class="comment">; query string will also return status for each pool process.</span></span><br><span class="line"><span class="comment">; Example:</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?full</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?json&amp;full</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?html&amp;full</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?xml&amp;full</span></span><br><span class="line"><span class="comment">; The Full status returns for each process:</span></span><br><span class="line"><span class="comment">;   pid                  - the PID of the process;</span></span><br><span class="line"><span class="comment">;   state                - the state of the process (Idle, Running, ...);</span></span><br><span class="line"><span class="comment">;   start time           - the date and time the process has started;</span></span><br><span class="line"><span class="comment">;   start since          - the number of seconds since the process has started;</span></span><br><span class="line"><span class="comment">;   requests             - the number of requests the process has served;</span></span><br><span class="line"><span class="comment">;   request duration     - the duration in µs of the requests;</span></span><br><span class="line"><span class="comment">;   request method       - the request method (GET, POST, ...);</span></span><br><span class="line"><span class="comment">;   request URI          - the request URI with the query string;</span></span><br><span class="line"><span class="comment">;   content length       - the content length of the request (only with POST);</span></span><br><span class="line"><span class="comment">;   user                 - the user (PHP_AUTH_USER) (or '-' if not set);</span></span><br><span class="line"><span class="comment">;   script               - the main script called (or '-' if not set);</span></span><br><span class="line"><span class="comment">;   last request cpu     - the %cpu the last request consumed</span></span><br><span class="line"><span class="comment">;                          it's always 0 if the process is not in Idle state</span></span><br><span class="line"><span class="comment">;                          because CPU calculation is done when the request</span></span><br><span class="line"><span class="comment">;                          processing has terminated;</span></span><br><span class="line"><span class="comment">;   last request memory  - the max amount of memory the last request consumed</span></span><br><span class="line"><span class="comment">;                          it's always 0 if the process is not in Idle state</span></span><br><span class="line"><span class="comment">;                          because memory calculation is done when the request</span></span><br><span class="line"><span class="comment">;                          processing has terminated;</span></span><br><span class="line"><span class="comment">; If the process is in Idle state, then informations are related to the</span></span><br><span class="line"><span class="comment">; last request the process has served. Otherwise informations are related to</span></span><br><span class="line"><span class="comment">; the current request being served.</span></span><br><span class="line"><span class="comment">; Example output:</span></span><br><span class="line"><span class="comment">;   ************************</span></span><br><span class="line"><span class="comment">;   pid:                  31330</span></span><br><span class="line"><span class="comment">;   state:                Running</span></span><br><span class="line"><span class="comment">;   start time:           01/Jul/2011:17:53:49 +0200</span></span><br><span class="line"><span class="comment">;   start since:          63087</span></span><br><span class="line"><span class="comment">;   requests:             12808</span></span><br><span class="line"><span class="comment">;   request duration:     1250261</span></span><br><span class="line"><span class="comment">;   request method:       GET</span></span><br><span class="line"><span class="comment">;   request URI:          /test_mem.php?N=10000</span></span><br><span class="line"><span class="comment">;   content length:       0</span></span><br><span class="line"><span class="comment">;   user:                 -</span></span><br><span class="line"><span class="comment">;   script:               /home/fat/web/docs/php/test_mem.php</span></span><br><span class="line"><span class="comment">;   last request cpu:     0.00</span></span><br><span class="line"><span class="comment">;   last request memory:  0</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> There is a real-time FPM status monitoring sample web page available</span></span><br><span class="line"><span class="comment">;       It's available in: /Users/xianyu123/.phpbrew/php/php-7.1.29/share/php/fpm/status.html</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> The value must start with a leading slash (/). The value can be</span></span><br><span class="line"><span class="comment">;       anything, but it may not be a good idea to use the .php extension or it</span></span><br><span class="line"><span class="comment">;       may conflict with a real PHP file.</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">;pm.status_path = /status</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The ping URI to call the monitoring page of FPM. If this value is not set, no</span></span><br><span class="line"><span class="comment">; URI will be recognized as a ping page. This could be used to test from outside</span></span><br><span class="line"><span class="comment">; that FPM is alive and responding, or to</span></span><br><span class="line"><span class="comment">; - create a graph of FPM availability (rrd or such);</span></span><br><span class="line"><span class="comment">; - remove a server from a group if it is not responding (load balancing);</span></span><br><span class="line"><span class="comment">; - trigger alerts for the operating team (24/7).</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> The value must start with a leading slash (/). The value can be</span></span><br><span class="line"><span class="comment">;       anything, but it may not be a good idea to use the .php extension or it</span></span><br><span class="line"><span class="comment">;       may conflict with a real PHP file.</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">;ping.path = /ping</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; This directive may be used to customize the response of a ping request. The</span></span><br><span class="line"><span class="comment">; response is formatted as text/plain with a 200 response code.</span></span><br><span class="line"><span class="comment">; Default Value: pong</span></span><br><span class="line"><span class="comment">;ping.response = pong</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The access log file</span></span><br><span class="line"><span class="comment">; Default: not set</span></span><br><span class="line"><span class="comment">;access.log = log/$pool.access.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The access log format.</span></span><br><span class="line"><span class="comment">; The following syntax is allowed</span></span><br><span class="line"><span class="comment">;  %%: the '%' character</span></span><br><span class="line"><span class="comment">;  %C: %CPU used by the request</span></span><br><span class="line"><span class="comment">;      it can accept the following format:</span></span><br><span class="line"><span class="comment">;      - %&#123;user&#125;C for user CPU only</span></span><br><span class="line"><span class="comment">;      - %&#123;system&#125;C for system CPU only</span></span><br><span class="line"><span class="comment">;      - %&#123;total&#125;C  for user + system CPU (default)</span></span><br><span class="line"><span class="comment">;  %d: time taken to serve the request</span></span><br><span class="line"><span class="comment">;      it can accept the following format:</span></span><br><span class="line"><span class="comment">;      - %&#123;seconds&#125;d (default)</span></span><br><span class="line"><span class="comment">;      - %&#123;miliseconds&#125;d</span></span><br><span class="line"><span class="comment">;      - %&#123;mili&#125;d</span></span><br><span class="line"><span class="comment">;      - %&#123;microseconds&#125;d</span></span><br><span class="line"><span class="comment">;      - %&#123;micro&#125;d</span></span><br><span class="line"><span class="comment">;  %e: an environment variable (same as $_ENV or $_SERVER)</span></span><br><span class="line"><span class="comment">;      it must be associated with embraces to specify the name of the env</span></span><br><span class="line"><span class="comment">;      variable. Some exemples:</span></span><br><span class="line"><span class="comment">;      - server specifics like: %&#123;REQUEST_METHOD&#125;e or %&#123;SERVER_PROTOCOL&#125;e</span></span><br><span class="line"><span class="comment">;      - HTTP headers like: %&#123;HTTP_HOST&#125;e or %&#123;HTTP_USER_AGENT&#125;e</span></span><br><span class="line"><span class="comment">;  %f: script filename</span></span><br><span class="line"><span class="comment">;  %l: content-length of the request (for POST request only)</span></span><br><span class="line"><span class="comment">;  %m: request method</span></span><br><span class="line"><span class="comment">;  %M: peak of memory allocated by PHP</span></span><br><span class="line"><span class="comment">;      it can accept the following format:</span></span><br><span class="line"><span class="comment">;      - %&#123;bytes&#125;M (default)</span></span><br><span class="line"><span class="comment">;      - %&#123;kilobytes&#125;M</span></span><br><span class="line"><span class="comment">;      - %&#123;kilo&#125;M</span></span><br><span class="line"><span class="comment">;      - %&#123;megabytes&#125;M</span></span><br><span class="line"><span class="comment">;      - %&#123;mega&#125;M</span></span><br><span class="line"><span class="comment">;  %n: pool name</span></span><br><span class="line"><span class="comment">;  %o: output header</span></span><br><span class="line"><span class="comment">;      it must be associated with embraces to specify the name of the header:</span></span><br><span class="line"><span class="comment">;      - %&#123;Content-Type&#125;o</span></span><br><span class="line"><span class="comment">;      - %&#123;X-Powered-By&#125;o</span></span><br><span class="line"><span class="comment">;      - %&#123;Transfert-Encoding&#125;o</span></span><br><span class="line"><span class="comment">;      - ....</span></span><br><span class="line"><span class="comment">;  %p: PID of the child that serviced the request</span></span><br><span class="line"><span class="comment">;  %P: PID of the parent of the child that serviced the request</span></span><br><span class="line"><span class="comment">;  %q: the query string</span></span><br><span class="line"><span class="comment">;  %Q: the '?' character if query string exists</span></span><br><span class="line"><span class="comment">;  %r: the request URI (without the query string, see %q and %Q)</span></span><br><span class="line"><span class="comment">;  %R: remote IP address</span></span><br><span class="line"><span class="comment">;  %s: status (response code)</span></span><br><span class="line"><span class="comment">;  %t: server time the request was received</span></span><br><span class="line"><span class="comment">;      it can accept a strftime(3) format:</span></span><br><span class="line"><span class="comment">;      %d/%b/%Y:%H:%M:%S %z (default)</span></span><br><span class="line"><span class="comment">;      The strftime(3) format must be encapsuled in a %&#123;&lt;strftime_format&gt;&#125;t tag</span></span><br><span class="line"><span class="comment">;      e.g. for a ISO8601 formatted timestring, use: %&#123;%Y-%m-%dT%H:%M:%S%z&#125;t</span></span><br><span class="line"><span class="comment">;  %T: time the log has been written (the request has finished)</span></span><br><span class="line"><span class="comment">;      it can accept a strftime(3) format:</span></span><br><span class="line"><span class="comment">;      %d/%b/%Y:%H:%M:%S %z (default)</span></span><br><span class="line"><span class="comment">;      The strftime(3) format must be encapsuled in a %&#123;&lt;strftime_format&gt;&#125;t tag</span></span><br><span class="line"><span class="comment">;      e.g. for a ISO8601 formatted timestring, use: %&#123;%Y-%m-%dT%H:%M:%S%z&#125;t</span></span><br><span class="line"><span class="comment">;  %u: remote user</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; Default: "%R - %u %t \"%m %r\" %s"</span></span><br><span class="line"><span class="comment">;access.format = "%R - %u %t \"%m %r%Q%q\" %s %f %&#123;mili&#125;d %&#123;kilo&#125;M %C%%"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The log file for slow requests</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> slowlog is mandatory if request_slowlog_timeout is set</span></span><br><span class="line"><span class="comment">;slowlog = log/$pool.log.slow</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The timeout for serving a single request after which a PHP backtrace will be</span></span><br><span class="line"><span class="comment">; dumped to the 'slowlog' file. A value of '0s' means 'off'.</span></span><br><span class="line"><span class="comment">; Available units: s(econds)(default), m(inutes), h(ours), or d(ays)</span></span><br><span class="line"><span class="comment">; Default Value: 0</span></span><br><span class="line"><span class="comment">;request_slowlog_timeout = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The timeout for serving a single request after which the worker process will</span></span><br><span class="line"><span class="comment">; be killed. This option should be used when the 'max_execution_time' ini option</span></span><br><span class="line"><span class="comment">; does not stop script execution for some reason. A value of '0' means 'off'.</span></span><br><span class="line"><span class="comment">; Available units: s(econds)(default), m(inutes), h(ours), or d(ays)</span></span><br><span class="line"><span class="comment">; Default Value: 0</span></span><br><span class="line"><span class="comment">;request_terminate_timeout = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set open file descriptor rlimit.</span></span><br><span class="line"><span class="comment">; Default Value: system defined value</span></span><br><span class="line"><span class="comment">;rlimit_files = 1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set max core size rlimit.</span></span><br><span class="line"><span class="comment">; Possible Values: 'unlimited' or an integer greater or equal to 0</span></span><br><span class="line"><span class="comment">; Default Value: system defined value</span></span><br><span class="line"><span class="comment">;rlimit_core = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Chroot to this directory at the start. This value must be defined as an</span></span><br><span class="line"><span class="comment">; absolute path. When this value is not set, chroot is not used.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> you can prefix with '$prefix' to chroot to the pool prefix or one</span></span><br><span class="line"><span class="comment">; of its subdirectories. If the pool prefix is not set, the global prefix</span></span><br><span class="line"><span class="comment">; will be used instead.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> chrooting is a great security feature and should be used whenever</span></span><br><span class="line"><span class="comment">;       possible. However, all PHP paths will be relative to the chroot</span></span><br><span class="line"><span class="comment">;       (error_log, sessions.save_path, ...).</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">;chroot =</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Chdir to this directory at the start.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> relative path can be used.</span></span><br><span class="line"><span class="comment">; Default Value: current directory or / when chroot</span></span><br><span class="line"><span class="comment">;chdir = /var/www</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Redirect worker stdout and stderr into main error log. If not set, stdout and</span></span><br><span class="line"><span class="comment">; stderr will be redirected to /dev/null according to FastCGI specs.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> on highloaded environement, this can cause some delay in the page</span></span><br><span class="line"><span class="comment">; process time (several ms).</span></span><br><span class="line"><span class="comment">; Default Value: no</span></span><br><span class="line"><span class="comment">;catch_workers_output = yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Clear environment in FPM workers</span></span><br><span class="line"><span class="comment">; Prevents arbitrary environment variables from reaching FPM worker processes</span></span><br><span class="line"><span class="comment">; by clearing the environment in workers before env vars specified in this</span></span><br><span class="line"><span class="comment">; pool configuration are added.</span></span><br><span class="line"><span class="comment">; Setting to "no" will make all environment variables available to PHP code</span></span><br><span class="line"><span class="comment">; via getenv(), $_ENV and $_SERVER.</span></span><br><span class="line"><span class="comment">; Default Value: yes</span></span><br><span class="line"><span class="comment">;clear_env = no</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Limits the extensions of the main script FPM will allow to parse. This can</span></span><br><span class="line"><span class="comment">; prevent configuration mistakes on the web server side. You should only limit</span></span><br><span class="line"><span class="comment">; FPM to .php extensions to prevent malicious users to use other extensions to</span></span><br><span class="line"><span class="comment">; execute php code.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> set an empty value to allow all extensions.</span></span><br><span class="line"><span class="comment">; Default Value: .php</span></span><br><span class="line"><span class="comment">;security.limit_extensions = .php .php3 .php4 .php5 .php7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Pass environment variables like LD_LIBRARY_PATH. All $VARIABLEs are taken from</span></span><br><span class="line"><span class="comment">; the current environment.</span></span><br><span class="line"><span class="comment">; Default Value: clean env</span></span><br><span class="line"><span class="comment">;env[HOSTNAME] = $HOSTNAME</span></span><br><span class="line"><span class="comment">;env[PATH] = /usr/local/bin:/usr/bin:/bin</span></span><br><span class="line"><span class="comment">;env[TMP] = /tmp</span></span><br><span class="line"><span class="comment">;env[TMPDIR] = /tmp</span></span><br><span class="line"><span class="comment">;env[TEMP] = /tmp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Additional php.ini defines, specific to this pool of workers. These settings</span></span><br><span class="line"><span class="comment">; overwrite the values previously defined in the php.ini. The directives are the</span></span><br><span class="line"><span class="comment">; same as the PHP SAPI:</span></span><br><span class="line"><span class="comment">;   php_value/php_flag             - you can set classic ini defines which can</span></span><br><span class="line"><span class="comment">;                                    be overwritten from PHP call 'ini_set'.</span></span><br><span class="line"><span class="comment">;   php_admin_value/php_admin_flag - these directives won't be overwritten by</span></span><br><span class="line"><span class="comment">;                                     PHP call 'ini_set'</span></span><br><span class="line"><span class="comment">; For php_*flag, valid values are on, off, 1, 0, true, false, yes or no.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Defining 'extension' will load the corresponding shared extension from</span></span><br><span class="line"><span class="comment">; extension_dir. Defining 'disable_functions' or 'disable_classes' will not</span></span><br><span class="line"><span class="comment">; overwrite previously defined php.ini values, but will append the new value</span></span><br><span class="line"><span class="comment">; instead.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> path INI options can be relative and will be expanded with the prefix</span></span><br><span class="line"><span class="comment">; (pool, global or /Users/xianyu123/.phpbrew/php/php-7.1.29)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Default Value: nothing is defined by default except the values in php.ini and</span></span><br><span class="line"><span class="comment">;                specified at startup with the -d argument</span></span><br><span class="line"><span class="comment">;php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com</span></span><br><span class="line"><span class="comment">;php_flag[display_errors] = off</span></span><br><span class="line"><span class="comment">;php_admin_value[error_log] = /var/log/fpm-php.www.log</span></span><br><span class="line"><span class="comment">;php_admin_flag[log_errors] = on</span></span><br><span class="line"><span class="comment">;php_admin_value[memory_limit] = 32M</span></span><br></pre></td></tr></table></figure>
+<p>php-fpm的报错：</p>
+<p><img src="http://images.xianyu123.club/20210906212524.png" alt="image-20210906212524082"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[06-Sep-2021 19:52:53] ERROR: [pool www] failed to chown() the socket &apos;/Users/xianyu123/.phpbrew/php/php-7.1.29/var/run/php-fpm.sock&apos;: Operation not permitted (1)</span><br><span class="line">[06-Sep-2021 19:52:53] ERROR: FPM initialization failed</span><br><span class="line">php-fpm start failed.</span><br></pre></td></tr></table></figure>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>macos用户执行如下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dseditgroup -o edit -a 你的当前用户 -t user nobody</span><br></pre></td></tr></table></figure>
+<p>比如我的当前用户为<code>xianyu123</code>，那么我的命令如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo dseditgroup -o edit -a xianyu123 -t user nobody</span><br></pre></td></tr></table></figure>
+<p>然后在php-fpm的配置文件中设置如下：</p>
+<blockquote>
+<ol>
+<li>注释group、user、listen.owner行</li>
+<li>设置listen.group为nobody</li>
+<li>设置listen.mode为0660</li>
+</ol>
+</blockquote>
+<p>最终php-fpm配置文件如下</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br><span class="line">349</span><br><span class="line">350</span><br><span class="line">351</span><br><span class="line">352</span><br><span class="line">353</span><br><span class="line">354</span><br><span class="line">355</span><br><span class="line">356</span><br><span class="line">357</span><br><span class="line">358</span><br><span class="line">359</span><br><span class="line">360</span><br><span class="line">361</span><br><span class="line">362</span><br><span class="line">363</span><br><span class="line">364</span><br><span class="line">365</span><br><span class="line">366</span><br><span class="line">367</span><br><span class="line">368</span><br><span class="line">369</span><br><span class="line">370</span><br><span class="line">371</span><br><span class="line">372</span><br><span class="line">373</span><br><span class="line">374</span><br><span class="line">375</span><br><span class="line">376</span><br><span class="line">377</span><br><span class="line">378</span><br><span class="line">379</span><br><span class="line">380</span><br><span class="line">381</span><br><span class="line">382</span><br><span class="line">383</span><br><span class="line">384</span><br><span class="line">385</span><br><span class="line">386</span><br><span class="line">387</span><br><span class="line">388</span><br><span class="line">389</span><br><span class="line">390</span><br><span class="line">391</span><br><span class="line">392</span><br><span class="line">393</span><br><span class="line">394</span><br><span class="line">395</span><br><span class="line">396</span><br><span class="line">397</span><br><span class="line">398</span><br><span class="line">399</span><br><span class="line">400</span><br><span class="line">401</span><br><span class="line">402</span><br><span class="line">403</span><br><span class="line">404</span><br><span class="line">405</span><br><span class="line">406</span><br><span class="line">407</span><br><span class="line">408</span><br><span class="line">409</span><br><span class="line">410</span><br><span class="line">411</span><br><span class="line">412</span><br><span class="line">413</span><br><span class="line">414</span><br><span class="line">415</span><br><span class="line">416</span><br><span class="line">417</span><br><span class="line">418</span><br><span class="line">419</span><br><span class="line">420</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">; Start a new pool named 'www'.</span></span><br><span class="line"><span class="comment">; the variable $pool can be used in any directive and will be replaced by the</span></span><br><span class="line"><span class="comment">; pool name ('www' here)</span></span><br><span class="line"><span class="section">[www]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Per pool prefix</span></span><br><span class="line"><span class="comment">; It only applies on the following directives:</span></span><br><span class="line"><span class="comment">; - 'access.log'</span></span><br><span class="line"><span class="comment">; - 'slowlog'</span></span><br><span class="line"><span class="comment">; - 'listen' (unixsocket)</span></span><br><span class="line"><span class="comment">; - 'chroot'</span></span><br><span class="line"><span class="comment">; - 'chdir'</span></span><br><span class="line"><span class="comment">; - 'php_values'</span></span><br><span class="line"><span class="comment">; - 'php_admin_values'</span></span><br><span class="line"><span class="comment">; When not set, the global prefix (or /Users/xianyu123/.phpbrew/php/php-7.1.29) applies instead.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This directive can also be relative to the global prefix.</span></span><br><span class="line"><span class="comment">; Default Value: none</span></span><br><span class="line"><span class="comment">;prefix = /path/to/pools/$pool</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Unix user/group of processes</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> The user is mandatory. If the group is not set, the default user's group</span></span><br><span class="line"><span class="comment">;       will be used.</span></span><br><span class="line"><span class="comment">;user = nobody</span></span><br><span class="line"><span class="comment">;group = nobody</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The address on which to accept FastCGI requests.</span></span><br><span class="line"><span class="comment">; Valid syntaxes are:</span></span><br><span class="line"><span class="comment">;   'ip.add.re.ss:port'    - to listen on a TCP socket to a specific IPv4 address on</span></span><br><span class="line"><span class="comment">;                            a specific port;</span></span><br><span class="line"><span class="comment">;   '[ip:6:addr:ess]:port' - to listen on a TCP socket to a specific IPv6 address on</span></span><br><span class="line"><span class="comment">;                            a specific port;</span></span><br><span class="line"><span class="comment">;   'port'                 - to listen on a TCP socket to all addresses</span></span><br><span class="line"><span class="comment">;                            (IPv6 and IPv4-mapped) on a specific port;</span></span><br><span class="line"><span class="comment">;   '/path/to/unix/socket' - to listen on a unix socket.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This value is mandatory.</span></span><br><span class="line"><span class="attr">listen</span> = /Users/xianyu123/.phpbrew/php/php-<span class="number">7.1</span>.<span class="number">29</span>/var/run/php-fpm.sock</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set listen(2) backlog.</span></span><br><span class="line"><span class="comment">; Default Value: 511 (-1 on FreeBSD and OpenBSD)</span></span><br><span class="line"><span class="comment">;listen.backlog = 511</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set permissions for unix socket, if one is used. In Linux, read/write</span></span><br><span class="line"><span class="comment">; permissions must be set in order to allow connections from a web server. Many</span></span><br><span class="line"><span class="comment">; BSD-derived systems allow connections regardless of permissions.</span></span><br><span class="line"><span class="comment">; Default Values: user and group are set as the running user</span></span><br><span class="line"><span class="comment">;                 mode is set to 0660</span></span><br><span class="line"><span class="comment">;listen.owner = xianyu123</span></span><br><span class="line">listen.group = nobody</span><br><span class="line">listen.mode = 0660</span><br><span class="line"><span class="comment">; When POSIX Access Control Lists are supported you can set them using</span></span><br><span class="line"><span class="comment">; these options, value is a comma separated list of user/group names.</span></span><br><span class="line"><span class="comment">; When set, listen.owner and listen.group are ignored</span></span><br><span class="line"><span class="comment">;listen.acl_users =</span></span><br><span class="line"><span class="comment">;listen.acl_groups =</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; List of addresses (IPv4/IPv6) of FastCGI clients which are allowed to connect.</span></span><br><span class="line"><span class="comment">; Equivalent to the FCGI_WEB_SERVER_ADDRS environment variable in the original</span></span><br><span class="line"><span class="comment">; PHP FCGI (5.2.2+). Makes sense only with a tcp listening socket. Each address</span></span><br><span class="line"><span class="comment">; must be separated by a comma. If this value is left blank, connections will be</span></span><br><span class="line"><span class="comment">; accepted from any ip address.</span></span><br><span class="line"><span class="comment">; Default Value: any</span></span><br><span class="line"><span class="comment">;listen.allowed_clients = 127.0.0.1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Specify the nice(2) priority to apply to the pool processes (only if set)</span></span><br><span class="line"><span class="comment">; The value can vary from -19 (highest priority) to 20 (lower priority)</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> - It will only work if the FPM master process is launched as root</span></span><br><span class="line"><span class="comment">;       - The pool processes will inherit the master process priority</span></span><br><span class="line"><span class="comment">;         unless it specified otherwise</span></span><br><span class="line"><span class="comment">; Default Value: no set</span></span><br><span class="line"><span class="comment">; process.priority = -19</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set the process dumpable flag (PR_SET_DUMPABLE prctl) even if the process user</span></span><br><span class="line"><span class="comment">; or group is differrent than the master process user. It allows to create process</span></span><br><span class="line"><span class="comment">; core dump and ptrace the process for the pool user.</span></span><br><span class="line"><span class="comment">; Default Value: no</span></span><br><span class="line"><span class="comment">; process.dumpable = yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Choose how the process manager will control the number of child processes.</span></span><br><span class="line"><span class="comment">; Possible Values:</span></span><br><span class="line"><span class="comment">;   static  - a fixed number (pm.max_children) of child processes;</span></span><br><span class="line"><span class="comment">;   dynamic - the number of child processes are set dynamically based on the</span></span><br><span class="line"><span class="comment">;             following directives. With this process management, there will be</span></span><br><span class="line"><span class="comment">;             always at least 1 children.</span></span><br><span class="line"><span class="comment">;             pm.max_children      - the maximum number of children that can</span></span><br><span class="line"><span class="comment">;                                    be alive at the same time.</span></span><br><span class="line"><span class="comment">;             pm.start_servers     - the number of children created on startup.</span></span><br><span class="line"><span class="comment">;             pm.min_spare_servers - the minimum number of children in 'idle'</span></span><br><span class="line"><span class="comment">;                                    state (waiting to process). If the number</span></span><br><span class="line"><span class="comment">;                                    of 'idle' processes is less than this</span></span><br><span class="line"><span class="comment">;                                    number then some children will be created.</span></span><br><span class="line"><span class="comment">;             pm.max_spare_servers - the maximum number of children in 'idle'</span></span><br><span class="line"><span class="comment">;                                    state (waiting to process). If the number</span></span><br><span class="line"><span class="comment">;                                    of 'idle' processes is greater than this</span></span><br><span class="line"><span class="comment">;                                    number then some children will be killed.</span></span><br><span class="line"><span class="comment">;  ondemand - no children are created at startup. Children will be forked when</span></span><br><span class="line"><span class="comment">;             new requests will connect. The following parameter are used:</span></span><br><span class="line"><span class="comment">;             pm.max_children           - the maximum number of children that</span></span><br><span class="line"><span class="comment">;                                         can be alive at the same time.</span></span><br><span class="line"><span class="comment">;             pm.process_idle_timeout   - The number of seconds after which</span></span><br><span class="line"><span class="comment">;                                         an idle process will be killed.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This value is mandatory.</span></span><br><span class="line"><span class="attr">pm</span> = dynamic</span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of child processes to be created when pm is set to 'static' and the</span></span><br><span class="line"><span class="comment">; maximum number of child processes when pm is set to 'dynamic' or 'ondemand'.</span></span><br><span class="line"><span class="comment">; This value sets the limit on the number of simultaneous requests that will be</span></span><br><span class="line"><span class="comment">; served. Equivalent to the ApacheMaxClients directive with mpm_prefork.</span></span><br><span class="line"><span class="comment">; Equivalent to the PHP_FCGI_CHILDREN environment variable in the original PHP</span></span><br><span class="line"><span class="comment">; CGI. The below defaults are based on a server without much resources. Don't</span></span><br><span class="line"><span class="comment">; forget to tweak pm.* to fit your needs.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used when pm is set to 'static', 'dynamic' or 'ondemand'</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> This value is mandatory.</span></span><br><span class="line">pm.max_children = 5</span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of child processes created on startup.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'dynamic'</span></span><br><span class="line"><span class="comment">; Default Value: min_spare_servers + (max_spare_servers - min_spare_servers) / 2</span></span><br><span class="line">pm.start_servers = 2</span><br><span class="line"></span><br><span class="line"><span class="comment">; The desired minimum number of idle server processes.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'dynamic'</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Mandatory when pm is set to 'dynamic'</span></span><br><span class="line">pm.min_spare_servers = 1</span><br><span class="line"></span><br><span class="line"><span class="comment">; The desired maximum number of idle server processes.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'dynamic'</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Mandatory when pm is set to 'dynamic'</span></span><br><span class="line">pm.max_spare_servers = 3</span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of seconds after which an idle process will be killed.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> Used only when pm is set to 'ondemand'</span></span><br><span class="line"><span class="comment">; Default Value: 10s</span></span><br><span class="line"><span class="comment">;pm.process_idle_timeout = 10s;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The number of requests each child process should execute before respawning.</span></span><br><span class="line"><span class="comment">; This can be useful to work around memory leaks in 3rd party libraries. For</span></span><br><span class="line"><span class="comment">; endless request processing specify '0'. Equivalent to PHP_FCGI_MAX_REQUESTS.</span></span><br><span class="line"><span class="comment">; Default Value: 0</span></span><br><span class="line"><span class="comment">;pm.max_requests = 500</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The URI to view the FPM status page. If this value is not set, no URI will be</span></span><br><span class="line"><span class="comment">; recognized as a status page. It shows the following informations:</span></span><br><span class="line"><span class="comment">;   pool                 - the name of the pool;</span></span><br><span class="line"><span class="comment">;   process manager      - static, dynamic or ondemand;</span></span><br><span class="line"><span class="comment">;   start time           - the date and time FPM has started;</span></span><br><span class="line"><span class="comment">;   start since          - number of seconds since FPM has started;</span></span><br><span class="line"><span class="comment">;   accepted conn        - the number of request accepted by the pool;</span></span><br><span class="line"><span class="comment">;   listen queue         - the number of request in the queue of pending</span></span><br><span class="line"><span class="comment">;                          connections (see backlog in listen(2));</span></span><br><span class="line"><span class="comment">;   max listen queue     - the maximum number of requests in the queue</span></span><br><span class="line"><span class="comment">;                          of pending connections since FPM has started;</span></span><br><span class="line"><span class="comment">;   listen queue len     - the size of the socket queue of pending connections;</span></span><br><span class="line"><span class="comment">;   idle processes       - the number of idle processes;</span></span><br><span class="line"><span class="comment">;   active processes     - the number of active processes;</span></span><br><span class="line"><span class="comment">;   total processes      - the number of idle + active processes;</span></span><br><span class="line"><span class="comment">;   max active processes - the maximum number of active processes since FPM</span></span><br><span class="line"><span class="comment">;                          has started;</span></span><br><span class="line"><span class="comment">;   max children reached - number of times, the process limit has been reached,</span></span><br><span class="line"><span class="comment">;                          when pm tries to start more children (works only for</span></span><br><span class="line"><span class="comment">;                          pm 'dynamic' and 'ondemand');</span></span><br><span class="line"><span class="comment">; Value are updated in real time.</span></span><br><span class="line"><span class="comment">; Example output:</span></span><br><span class="line"><span class="comment">;   pool:                 www</span></span><br><span class="line"><span class="comment">;   process manager:      static</span></span><br><span class="line"><span class="comment">;   start time:           01/Jul/2011:17:53:49 +0200</span></span><br><span class="line"><span class="comment">;   start since:          62636</span></span><br><span class="line"><span class="comment">;   accepted conn:        190460</span></span><br><span class="line"><span class="comment">;   listen queue:         0</span></span><br><span class="line"><span class="comment">;   max listen queue:     1</span></span><br><span class="line"><span class="comment">;   listen queue len:     42</span></span><br><span class="line"><span class="comment">;   idle processes:       4</span></span><br><span class="line"><span class="comment">;   active processes:     11</span></span><br><span class="line"><span class="comment">;   total processes:      15</span></span><br><span class="line"><span class="comment">;   max active processes: 12</span></span><br><span class="line"><span class="comment">;   max children reached: 0</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; By default the status page output is formatted as text/plain. Passing either</span></span><br><span class="line"><span class="comment">; 'html', 'xml' or 'json' in the query string will return the corresponding</span></span><br><span class="line"><span class="comment">; output syntax. Example:</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?json</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?html</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?xml</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; By default the status page only outputs short status. Passing 'full' in the</span></span><br><span class="line"><span class="comment">; query string will also return status for each pool process.</span></span><br><span class="line"><span class="comment">; Example:</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?full</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?json&amp;full</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?html&amp;full</span></span><br><span class="line"><span class="comment">;   http://www.foo.bar/status?xml&amp;full</span></span><br><span class="line"><span class="comment">; The Full status returns for each process:</span></span><br><span class="line"><span class="comment">;   pid                  - the PID of the process;</span></span><br><span class="line"><span class="comment">;   state                - the state of the process (Idle, Running, ...);</span></span><br><span class="line"><span class="comment">;   start time           - the date and time the process has started;</span></span><br><span class="line"><span class="comment">;   start since          - the number of seconds since the process has started;</span></span><br><span class="line"><span class="comment">;   requests             - the number of requests the process has served;</span></span><br><span class="line"><span class="comment">;   request duration     - the duration in µs of the requests;</span></span><br><span class="line"><span class="comment">;   request method       - the request method (GET, POST, ...);</span></span><br><span class="line"><span class="comment">;   request URI          - the request URI with the query string;</span></span><br><span class="line"><span class="comment">;   content length       - the content length of the request (only with POST);</span></span><br><span class="line"><span class="comment">;   user                 - the user (PHP_AUTH_USER) (or '-' if not set);</span></span><br><span class="line"><span class="comment">;   script               - the main script called (or '-' if not set);</span></span><br><span class="line"><span class="comment">;   last request cpu     - the %cpu the last request consumed</span></span><br><span class="line"><span class="comment">;                          it's always 0 if the process is not in Idle state</span></span><br><span class="line"><span class="comment">;                          because CPU calculation is done when the request</span></span><br><span class="line"><span class="comment">;                          processing has terminated;</span></span><br><span class="line"><span class="comment">;   last request memory  - the max amount of memory the last request consumed</span></span><br><span class="line"><span class="comment">;                          it's always 0 if the process is not in Idle state</span></span><br><span class="line"><span class="comment">;                          because memory calculation is done when the request</span></span><br><span class="line"><span class="comment">;                          processing has terminated;</span></span><br><span class="line"><span class="comment">; If the process is in Idle state, then informations are related to the</span></span><br><span class="line"><span class="comment">; last request the process has served. Otherwise informations are related to</span></span><br><span class="line"><span class="comment">; the current request being served.</span></span><br><span class="line"><span class="comment">; Example output:</span></span><br><span class="line"><span class="comment">;   ************************</span></span><br><span class="line"><span class="comment">;   pid:                  31330</span></span><br><span class="line"><span class="comment">;   state:                Running</span></span><br><span class="line"><span class="comment">;   start time:           01/Jul/2011:17:53:49 +0200</span></span><br><span class="line"><span class="comment">;   start since:          63087</span></span><br><span class="line"><span class="comment">;   requests:             12808</span></span><br><span class="line"><span class="comment">;   request duration:     1250261</span></span><br><span class="line"><span class="comment">;   request method:       GET</span></span><br><span class="line"><span class="comment">;   request URI:          /test_mem.php?N=10000</span></span><br><span class="line"><span class="comment">;   content length:       0</span></span><br><span class="line"><span class="comment">;   user:                 -</span></span><br><span class="line"><span class="comment">;   script:               /home/fat/web/docs/php/test_mem.php</span></span><br><span class="line"><span class="comment">;   last request cpu:     0.00</span></span><br><span class="line"><span class="comment">;   last request memory:  0</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> There is a real-time FPM status monitoring sample web page available</span></span><br><span class="line"><span class="comment">;       It's available in: /Users/xianyu123/.phpbrew/php/php-7.1.29/share/php/fpm/status.html</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> The value must start with a leading slash (/). The value can be</span></span><br><span class="line"><span class="comment">;       anything, but it may not be a good idea to use the .php extension or it</span></span><br><span class="line"><span class="comment">;       may conflict with a real PHP file.</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">;pm.status_path = /status</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The ping URI to call the monitoring page of FPM. If this value is not set, no</span></span><br><span class="line"><span class="comment">; URI will be recognized as a ping page. This could be used to test from outside</span></span><br><span class="line"><span class="comment">; that FPM is alive and responding, or to</span></span><br><span class="line"><span class="comment">; - create a graph of FPM availability (rrd or such);</span></span><br><span class="line"><span class="comment">; - remove a server from a group if it is not responding (load balancing);</span></span><br><span class="line"><span class="comment">; - trigger alerts for the operating team (24/7).</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> The value must start with a leading slash (/). The value can be</span></span><br><span class="line"><span class="comment">;       anything, but it may not be a good idea to use the .php extension or it</span></span><br><span class="line"><span class="comment">;       may conflict with a real PHP file.</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">;ping.path = /ping</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; This directive may be used to customize the response of a ping request. The</span></span><br><span class="line"><span class="comment">; response is formatted as text/plain with a 200 response code.</span></span><br><span class="line"><span class="comment">; Default Value: pong</span></span><br><span class="line"><span class="comment">;ping.response = pong</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The access log file</span></span><br><span class="line"><span class="comment">; Default: not set</span></span><br><span class="line"><span class="comment">;access.log = log/$pool.access.log</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The access log format.</span></span><br><span class="line"><span class="comment">; The following syntax is allowed</span></span><br><span class="line"><span class="comment">;  %%: the '%' character</span></span><br><span class="line"><span class="comment">;  %C: %CPU used by the request</span></span><br><span class="line"><span class="comment">;      it can accept the following format:</span></span><br><span class="line"><span class="comment">;      - %&#123;user&#125;C for user CPU only</span></span><br><span class="line"><span class="comment">;      - %&#123;system&#125;C for system CPU only</span></span><br><span class="line"><span class="comment">;      - %&#123;total&#125;C  for user + system CPU (default)</span></span><br><span class="line"><span class="comment">;  %d: time taken to serve the request</span></span><br><span class="line"><span class="comment">;      it can accept the following format:</span></span><br><span class="line"><span class="comment">;      - %&#123;seconds&#125;d (default)</span></span><br><span class="line"><span class="comment">;      - %&#123;miliseconds&#125;d</span></span><br><span class="line"><span class="comment">;      - %&#123;mili&#125;d</span></span><br><span class="line"><span class="comment">;      - %&#123;microseconds&#125;d</span></span><br><span class="line"><span class="comment">;      - %&#123;micro&#125;d</span></span><br><span class="line"><span class="comment">;  %e: an environment variable (same as $_ENV or $_SERVER)</span></span><br><span class="line"><span class="comment">;      it must be associated with embraces to specify the name of the env</span></span><br><span class="line"><span class="comment">;      variable. Some exemples:</span></span><br><span class="line"><span class="comment">;      - server specifics like: %&#123;REQUEST_METHOD&#125;e or %&#123;SERVER_PROTOCOL&#125;e</span></span><br><span class="line"><span class="comment">;      - HTTP headers like: %&#123;HTTP_HOST&#125;e or %&#123;HTTP_USER_AGENT&#125;e</span></span><br><span class="line"><span class="comment">;  %f: script filename</span></span><br><span class="line"><span class="comment">;  %l: content-length of the request (for POST request only)</span></span><br><span class="line"><span class="comment">;  %m: request method</span></span><br><span class="line"><span class="comment">;  %M: peak of memory allocated by PHP</span></span><br><span class="line"><span class="comment">;      it can accept the following format:</span></span><br><span class="line"><span class="comment">;      - %&#123;bytes&#125;M (default)</span></span><br><span class="line"><span class="comment">;      - %&#123;kilobytes&#125;M</span></span><br><span class="line"><span class="comment">;      - %&#123;kilo&#125;M</span></span><br><span class="line"><span class="comment">;      - %&#123;megabytes&#125;M</span></span><br><span class="line"><span class="comment">;      - %&#123;mega&#125;M</span></span><br><span class="line"><span class="comment">;  %n: pool name</span></span><br><span class="line"><span class="comment">;  %o: output header</span></span><br><span class="line"><span class="comment">;      it must be associated with embraces to specify the name of the header:</span></span><br><span class="line"><span class="comment">;      - %&#123;Content-Type&#125;o</span></span><br><span class="line"><span class="comment">;      - %&#123;X-Powered-By&#125;o</span></span><br><span class="line"><span class="comment">;      - %&#123;Transfert-Encoding&#125;o</span></span><br><span class="line"><span class="comment">;      - ....</span></span><br><span class="line"><span class="comment">;  %p: PID of the child that serviced the request</span></span><br><span class="line"><span class="comment">;  %P: PID of the parent of the child that serviced the request</span></span><br><span class="line"><span class="comment">;  %q: the query string</span></span><br><span class="line"><span class="comment">;  %Q: the '?' character if query string exists</span></span><br><span class="line"><span class="comment">;  %r: the request URI (without the query string, see %q and %Q)</span></span><br><span class="line"><span class="comment">;  %R: remote IP address</span></span><br><span class="line"><span class="comment">;  %s: status (response code)</span></span><br><span class="line"><span class="comment">;  %t: server time the request was received</span></span><br><span class="line"><span class="comment">;      it can accept a strftime(3) format:</span></span><br><span class="line"><span class="comment">;      %d/%b/%Y:%H:%M:%S %z (default)</span></span><br><span class="line"><span class="comment">;      The strftime(3) format must be encapsuled in a %&#123;&lt;strftime_format&gt;&#125;t tag</span></span><br><span class="line"><span class="comment">;      e.g. for a ISO8601 formatted timestring, use: %&#123;%Y-%m-%dT%H:%M:%S%z&#125;t</span></span><br><span class="line"><span class="comment">;  %T: time the log has been written (the request has finished)</span></span><br><span class="line"><span class="comment">;      it can accept a strftime(3) format:</span></span><br><span class="line"><span class="comment">;      %d/%b/%Y:%H:%M:%S %z (default)</span></span><br><span class="line"><span class="comment">;      The strftime(3) format must be encapsuled in a %&#123;&lt;strftime_format&gt;&#125;t tag</span></span><br><span class="line"><span class="comment">;      e.g. for a ISO8601 formatted timestring, use: %&#123;%Y-%m-%dT%H:%M:%S%z&#125;t</span></span><br><span class="line"><span class="comment">;  %u: remote user</span></span><br><span class="line"><span class="comment">;</span></span><br><span class="line"><span class="comment">; Default: "%R - %u %t \"%m %r\" %s"</span></span><br><span class="line"><span class="comment">;access.format = "%R - %u %t \"%m %r%Q%q\" %s %f %&#123;mili&#125;d %&#123;kilo&#125;M %C%%"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The log file for slow requests</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> slowlog is mandatory if request_slowlog_timeout is set</span></span><br><span class="line"><span class="comment">;slowlog = log/$pool.log.slow</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The timeout for serving a single request after which a PHP backtrace will be</span></span><br><span class="line"><span class="comment">; dumped to the 'slowlog' file. A value of '0s' means 'off'.</span></span><br><span class="line"><span class="comment">; Available units: s(econds)(default), m(inutes), h(ours), or d(ays)</span></span><br><span class="line"><span class="comment">; Default Value: 0</span></span><br><span class="line"><span class="comment">;request_slowlog_timeout = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; The timeout for serving a single request after which the worker process will</span></span><br><span class="line"><span class="comment">; be killed. This option should be used when the 'max_execution_time' ini option</span></span><br><span class="line"><span class="comment">; does not stop script execution for some reason. A value of '0' means 'off'.</span></span><br><span class="line"><span class="comment">; Available units: s(econds)(default), m(inutes), h(ours), or d(ays)</span></span><br><span class="line"><span class="comment">; Default Value: 0</span></span><br><span class="line"><span class="comment">;request_terminate_timeout = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set open file descriptor rlimit.</span></span><br><span class="line"><span class="comment">; Default Value: system defined value</span></span><br><span class="line"><span class="comment">;rlimit_files = 1024</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Set max core size rlimit.</span></span><br><span class="line"><span class="comment">; Possible Values: 'unlimited' or an integer greater or equal to 0</span></span><br><span class="line"><span class="comment">; Default Value: system defined value</span></span><br><span class="line"><span class="comment">;rlimit_core = 0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Chroot to this directory at the start. This value must be defined as an</span></span><br><span class="line"><span class="comment">; absolute path. When this value is not set, chroot is not used.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> you can prefix with '$prefix' to chroot to the pool prefix or one</span></span><br><span class="line"><span class="comment">; of its subdirectories. If the pool prefix is not set, the global prefix</span></span><br><span class="line"><span class="comment">; will be used instead.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> chrooting is a great security feature and should be used whenever</span></span><br><span class="line"><span class="comment">;       possible. However, all PHP paths will be relative to the chroot</span></span><br><span class="line"><span class="comment">;       (error_log, sessions.save_path, ...).</span></span><br><span class="line"><span class="comment">; Default Value: not set</span></span><br><span class="line"><span class="comment">;chroot =</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Chdir to this directory at the start.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> relative path can be used.</span></span><br><span class="line"><span class="comment">; Default Value: current directory or / when chroot</span></span><br><span class="line"><span class="comment">;chdir = /var/www</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Redirect worker stdout and stderr into main error log. If not set, stdout and</span></span><br><span class="line"><span class="comment">; stderr will be redirected to /dev/null according to FastCGI specs.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> on highloaded environement, this can cause some delay in the page</span></span><br><span class="line"><span class="comment">; process time (several ms).</span></span><br><span class="line"><span class="comment">; Default Value: no</span></span><br><span class="line"><span class="comment">;catch_workers_output = yes</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Clear environment in FPM workers</span></span><br><span class="line"><span class="comment">; Prevents arbitrary environment variables from reaching FPM worker processes</span></span><br><span class="line"><span class="comment">; by clearing the environment in workers before env vars specified in this</span></span><br><span class="line"><span class="comment">; pool configuration are added.</span></span><br><span class="line"><span class="comment">; Setting to "no" will make all environment variables available to PHP code</span></span><br><span class="line"><span class="comment">; via getenv(), $_ENV and $_SERVER.</span></span><br><span class="line"><span class="comment">; Default Value: yes</span></span><br><span class="line"><span class="comment">;clear_env = no</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Limits the extensions of the main script FPM will allow to parse. This can</span></span><br><span class="line"><span class="comment">; prevent configuration mistakes on the web server side. You should only limit</span></span><br><span class="line"><span class="comment">; FPM to .php extensions to prevent malicious users to use other extensions to</span></span><br><span class="line"><span class="comment">; execute php code.</span></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> set an empty value to allow all extensions.</span></span><br><span class="line"><span class="comment">; Default Value: .php</span></span><br><span class="line"><span class="comment">;security.limit_extensions = .php .php3 .php4 .php5 .php7</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Pass environment variables like LD_LIBRARY_PATH. All $VARIABLEs are taken from</span></span><br><span class="line"><span class="comment">; the current environment.</span></span><br><span class="line"><span class="comment">; Default Value: clean env</span></span><br><span class="line"><span class="comment">;env[HOSTNAME] = $HOSTNAME</span></span><br><span class="line"><span class="comment">;env[PATH] = /usr/local/bin:/usr/bin:/bin</span></span><br><span class="line"><span class="comment">;env[TMP] = /tmp</span></span><br><span class="line"><span class="comment">;env[TMPDIR] = /tmp</span></span><br><span class="line"><span class="comment">;env[TEMP] = /tmp</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Additional php.ini defines, specific to this pool of workers. These settings</span></span><br><span class="line"><span class="comment">; overwrite the values previously defined in the php.ini. The directives are the</span></span><br><span class="line"><span class="comment">; same as the PHP SAPI:</span></span><br><span class="line"><span class="comment">;   php_value/php_flag             - you can set classic ini defines which can</span></span><br><span class="line"><span class="comment">;                                    be overwritten from PHP call 'ini_set'.</span></span><br><span class="line"><span class="comment">;   php_admin_value/php_admin_flag - these directives won't be overwritten by</span></span><br><span class="line"><span class="comment">;                                     PHP call 'ini_set'</span></span><br><span class="line"><span class="comment">; For php_*flag, valid values are on, off, 1, 0, true, false, yes or no.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Defining 'extension' will load the corresponding shared extension from</span></span><br><span class="line"><span class="comment">; extension_dir. Defining 'disable_functions' or 'disable_classes' will not</span></span><br><span class="line"><span class="comment">; overwrite previously defined php.ini values, but will append the new value</span></span><br><span class="line"><span class="comment">; instead.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; <span class="doctag">Note:</span> path INI options can be relative and will be expanded with the prefix</span></span><br><span class="line"><span class="comment">; (pool, global or /Users/xianyu123/.phpbrew/php/php-7.1.29)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">; Default Value: nothing is defined by default except the values in php.ini and</span></span><br><span class="line"><span class="comment">;                specified at startup with the -d argument</span></span><br><span class="line"><span class="comment">;php_admin_value[sendmail_path] = /usr/sbin/sendmail -t -i -f www@my.domain.com</span></span><br><span class="line"><span class="comment">;php_flag[display_errors] = off</span></span><br><span class="line"><span class="comment">;php_admin_value[error_log] = /var/log/fpm-php.www.log</span></span><br><span class="line"><span class="comment">;php_admin_flag[log_errors] = on</span></span><br><span class="line"><span class="comment">;php_admin_value[memory_limit] = 32M</span></span><br></pre></td></tr></table></figure>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://github.com/phpbrew/phpbrew/issues/459" target="_blank" rel="noopener">https://github.com/phpbrew/phpbrew/issues/459</a></p>
+
+      
+    </div>
+    
+    
+    
+
+	<div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/">macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 xianyu123 的个人博客">xianyu123</a></p>
+  <p><span>发布时间:</span>2021年09月06日 - 21:19</p>
+  <p><span>最后更新:</span>2021年09月06日 - 21:32</p>
+  <p><span>原始链接:</span><a href="/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/" title="macos下nginx环境中php-fpm报错php-fpm.sock failed (13: Permission denied) while connecting to upstream, client: 127.0.0.1">http://0clickjacking0.github.io/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://0clickjacking0.github.io/2021/09/06/macos下nginx环境中php-fpm报错php-fpm-sock-failed-13-Permission-denied-while-connecting-to-upstream-client-127-0-0-1/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+	});
+    });  
+</script>
+
+
+      
+</div>
+
+
+    
+
+    
+
+    
+
+	
+	<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------　　　　本文结束　<i class="fa fa-heart"></i>　感谢您的阅读　　　　-------------</div>
+    
+</div>
+  
+</div>
+	
+	
+    <footer class="post-footer">
+
+    <! -- 添加微信图标 -->
+    
+    
+    <div>
+    <span>
+    
+    欢迎大家关注：xianyu123's微信公众号
+    
+    <br>
+    </span>
+    <br>
+    
+    <a href="http://images.xianyu123.club/20210206225521.jpg" title="xianyu123's微信公众号" class="fancybox" rel="article0" style="float:left;margin-left:25%;margin-right:2px;">
+    <img src="http://images.xianyu123.club/20210206225521.jpg" title="xianyu123's微信公众号" height="164px" width="164px">
+    </a>
+    
+    </div>
+    
+    
+
+
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/08/18/mac-docker升级后镜像丢失修复/" rel="next" title="mac docker升级后镜像丢失修复">
+                <i class="fa fa-chevron-left"></i> mac docker升级后镜像丢失修复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">xianyu123</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://only-free.github.io/" title="小彪" target="_blank">小彪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kr1sten.cn/" title="K神" target="_blank">K神</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://charon.xin/" title="Char0n" target="_blank">Char0n</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://tgaout.github.io/categories/" title="TGAO" target="_blank">TGAO</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://brownfly.github.io/" title="Insomnia" target="_blank">Insomnia</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://r0co.top/" title="r0co" target="_blank">r0co</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://blog.ragdoll.work/" title="南梦师傅" target="_blank">南梦师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.hyluz.cn/" title="luz" target="_blank">luz</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://liotree.github.io/" title="LionTree师傅" target="_blank">LionTree师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://cnblogs.com/klsfct" title="圆周师傅" target="_blank">圆周师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/zz_Caleb/" title="Sea_Sand息禅师傅" target="_blank">Sea_Sand息禅师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://flag0.com/" title="flag0师傅" target="_blank">flag0师傅</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://jiang-niao.github.io/" title="JiangNiao" target="_blank">JiangNiao</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-number">3.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+   
+  </span>
+  <span class="author" itemprop="copyrightHolder">xianyu123</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: '9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz',
+        appKey: 'jL5QGkWKt6bpnKpTNwkA5c9n',
+        placeholder: '有想说的欢迎留言，留下你的邮箱，有回复就会提醒你~（邮箱不会被公开）',
+        avatar:'',
+        guest_info:guest,
+        pageSize:'10' || 10,
+		avatar_cdn:'https://www.gravatar.com/avatar/',
+    });
+  </script>
+
+
+
+  
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("9NfSKiv9nK43bHqe0PASB6LJ-gzGzoHsz", "jL5QGkWKt6bpnKpTNwkA5c9n");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  <script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>	
+<script type="text/javascript" src="/js/src/custom.js"></script>
+
+</body>
+</html>
